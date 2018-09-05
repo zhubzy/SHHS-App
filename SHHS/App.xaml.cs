@@ -1,18 +1,15 @@
 ﻿using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
-using SHHS.Views;
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 namespace SHHS
 {
     public partial class App : Application
     {
-
         public App()
         {
             InitializeComponent();
-
 
             MainPage = new MainPage();
         }
