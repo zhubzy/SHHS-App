@@ -157,4 +157,11 @@
       <Name>SHHS</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\arrowLeft.png" />
+    <BundleResource Include="Resources\background.jpg" />
+    <BundleResource Include="Resources\OpenSans-Bold.ttf" />
+    <BundleResource Include="Resources\OpenSans-Light.ttf" />
+    <BundleResource Include="Resources\OpenSans-Regular.ttf" />
+  </ItemGroup>
 </Project>
