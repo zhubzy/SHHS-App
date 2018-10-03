@@ -6,7 +6,7 @@
         <!-- Place new controls here -->
 
         
-            <RelativeLayout BackgroundColor="Silver">
+            <RelativeLayout x:Name="RelativeView" BackgroundColor="Silver">
               <Image Source="background.jpg" Opacity="0.90" Aspect="Fill"
                      RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent,Property=Width}"
                      RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent,Property=Height}"/>
@@ -17,27 +17,28 @@
             
                   <Button Image="arrowLeft.png" BackgroundColor="Transparent"/>
          
-                <Label Text="SEPTEMBER" TextColor="White" FontSize="30">
-                    <Label.FontFamily>
+            
+            <Label Text="SEPTEMBER" TextColor="White" FontSize="20">
+            <!--        <Label.FontFamily>
                         <OnPlatform x:TypeArguments="x:String">
-                        <On Platform="iOS" Value="OpenSans-Bold" />
-                        <On Platform="Android" Value="OpenSans-Bold.ttf#OpenSans-Bold" />
+                            <On Platform="iOS" Value="OpenSans-Bold" />
+                            <On Platform="Android" Value="OpenSans-Bold.ttf#OpenSans-Bold" />
                         </OnPlatform>
-                    </Label.FontFamily> 
-                </Label>
+                    </Label.FontFamily>-->
+            </Label>
                 
                   <Button Image="arrowLeft.png"  BackgroundColor="Transparent" Rotation="180"/>   
                 
             </StackLayout>
             
           
-               <Grid RowSpacing="40" ColumnSpacing="1" Padding="0,0,0,0" 
+               <Grid x:Name="Calendar" RowSpacing="40" ColumnSpacing="1" Padding="0,0,0,0" 
                      RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor= 1 }" 
                      RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToView, Property= Y,ElementName= monthLabel,Factor=1, Constant= 70}"
                      >
                      
                 
-            <Label Grid.Column="0" Text="Mon" TextColor="White" HorizontalOptions="Center"/>
+     <!--       <Label Grid.Column="0" Text="Mon" TextColor="White" HorizontalOptions="Center"/>
             <Label Grid.Column="1" Text="Tue" TextColor="White" HorizontalOptions="Center"/>
             <Label Grid.Column="2" Text="Wed" TextColor="White" HorizontalOptions="Center"/>
             <Label Grid.Column="3" Text="Thu" TextColor="White" HorizontalOptions="Center"/>
@@ -70,15 +71,19 @@
             <Label Grid.Row="3" Grid.Column="3" Text="18" TextColor="White" HorizontalOptions="Center"/>
             <Label Grid.Row="3" Grid.Column="4" Text="19" TextColor="White" HorizontalOptions="Center"/>
             <Label Grid.Row="3" Grid.Column="5" Text="20" TextColor="White" HorizontalOptions="Center"/>
-            <Label Grid.Row="3" Grid.Column="6" Text="21" TextColor="White" HorizontalOptions="Center"/>
+            <Label Grid.Row="3" Grid.Column="6" Text="21" TextColor="White" HorizontalOptions="Center"/> -->
             
         </Grid>
-        
+            
+
+
         </RelativeLayout>
-              
-                
- 
-     
+
         
+
+
+
+
+
     </StackLayout>
 </ContentPage>
