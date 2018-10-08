@@ -15,16 +15,16 @@
                          RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property=Y, Constant= 25}"
                          RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property= Width, Factor=1 }">
             
-                  <Button Image="arrowLeft.png" BackgroundColor="Transparent"/>
+                  <Button Image="arrowLeft.png"  BackgroundColor="Transparent"/>
          
             
-            <Label Text="SEPTEMBER" TextColor="White" FontSize="20">
-            <!--        <Label.FontFamily>
+            <Label Text="SEPTEMBER" VerticalTextAlignment="Center" TextColor="White" FontSize="20">
+                   <Label.FontFamily>
                         <OnPlatform x:TypeArguments="x:String">
                             <On Platform="iOS" Value="OpenSans-Bold" />
                             <On Platform="Android" Value="OpenSans-Bold.ttf#OpenSans-Bold" />
                         </OnPlatform>
-                    </Label.FontFamily>-->
+                    </Label.FontFamily>
             </Label>
                 
                   <Button Image="arrowLeft.png"  BackgroundColor="Transparent" Rotation="180"/>   
@@ -34,11 +34,11 @@
           
                <Grid x:Name="Calendar" RowSpacing="40" ColumnSpacing="1" Padding="0,0,0,0" 
                      RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor= 1 }" 
-                     RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToView, Property= Y,ElementName= monthLabel,Factor=1, Constant= 70}"
+                     RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToView, Property= Y,ElementName= monthLabel,Factor=1, Constant= 75}"
                      >
                      
                 
-     <!--       <Label Grid.Column="0" Text="Mon" TextColor="White" HorizontalOptions="Center"/>
+        <Label Grid.Column="0" Text="Mon" TextColor="White" HorizontalOptions="Center"/>
             <Label Grid.Column="1" Text="Tue" TextColor="White" HorizontalOptions="Center"/>
             <Label Grid.Column="2" Text="Wed" TextColor="White" HorizontalOptions="Center"/>
             <Label Grid.Column="3" Text="Thu" TextColor="White" HorizontalOptions="Center"/>
@@ -46,32 +46,7 @@
             <Label Grid.Column="5" Text="Sat" TextColor="White" HorizontalOptions="Center"/>
             <Label Grid.Column="6" Text="Sun" TextColor="White" HorizontalOptions="Center"/>
             
-            
-            <Label Grid.Row="1" Grid.Column="0" Text="1" TextColor="White" HorizontalOptions="Center"/>
-            <Label Grid.Row="1" Grid.Column="1" Text="2" TextColor="White" HorizontalOptions="Center"/>
-            <Label Grid.Row="1" Grid.Column="2" Text="3" TextColor="White" HorizontalOptions="Center"/>
-            <Label Grid.Row="1" Grid.Column="3" Text="4" TextColor="White" HorizontalOptions="Center"/>
-            <Label Grid.Row="1" Grid.Column="4" Text="5" TextColor="White" HorizontalOptions="Center"/>
-            <Label Grid.Row="1" Grid.Column="5" Text="6" TextColor="White" HorizontalOptions="Center"/>
-            <Label Grid.Row="1" Grid.Column="6" Text="7" TextColor="White" HorizontalOptions="Center"/>
 
-            <Label Grid.Row="2" Grid.Column="0" Text="8" TextColor="White" HorizontalOptions="Center"/>
-            <Label Grid.Row="2" Grid.Column="1" Text="9" TextColor="White" HorizontalOptions="Center"/>
-            <Label Grid.Row="2" Grid.Column="2" Text="10" TextColor="White" HorizontalOptions="Center"/>
-            <Label Grid.Row="2" Grid.Column="3" Text="11" TextColor="White" HorizontalOptions="Center"/>
-            <Label Grid.Row="2" Grid.Column="4" Text="12" TextColor="White" HorizontalOptions="Center"/>
-            <Label Grid.Row="2" Grid.Column="5" Text="13" TextColor="White" HorizontalOptions="Center"/>
-            <Label Grid.Row="2" Grid.Column="6" Text="14" TextColor="White" HorizontalOptions="Center"/>
-            
-            
-            
-            <Label Grid.Row="3" Grid.Column="0" Text="15" TextColor="White" HorizontalOptions="Center"/>
-            <Label Grid.Row="3" Grid.Column="1" Text="16" TextColor="White" HorizontalOptions="Center"/>
-            <Label Grid.Row="3" Grid.Column="2" Text="17" TextColor="White" HorizontalOptions="Center"/>
-            <Label Grid.Row="3" Grid.Column="3" Text="18" TextColor="White" HorizontalOptions="Center"/>
-            <Label Grid.Row="3" Grid.Column="4" Text="19" TextColor="White" HorizontalOptions="Center"/>
-            <Label Grid.Row="3" Grid.Column="5" Text="20" TextColor="White" HorizontalOptions="Center"/>
-            <Label Grid.Row="3" Grid.Column="6" Text="21" TextColor="White" HorizontalOptions="Center"/> -->
             
         </Grid>
             
