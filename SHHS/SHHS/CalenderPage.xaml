@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:local="clr-namespace:SHHS" x:Class="SHHS.MainPage">
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:local="clr-namespace:SHHS" x:Class="SHHS.CalenderPage">
    
     
     <StackLayout Orientation="Vertical" Padding="0,0,0,0">
@@ -11,7 +11,7 @@
                      RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent,Property=Width}"
                      RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent,Property=Height}"/>
                                  
-            <StackLayout x:Name="monthLabel" Orientation="Horizontal" Spacing=" 25" HorizontalOptions="Center"
+            <StackLayout x:Name="monthLabel" Orientation="Horizontal" Spacing="10" HorizontalOptions="Center"
                          RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property=Y, Constant= 25}"
                          RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property= Width, Factor=1 }">
             

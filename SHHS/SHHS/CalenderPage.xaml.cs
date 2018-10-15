@@ -7,9 +7,9 @@ using Xamarin.Forms;
 
 namespace SHHS
 {
-    public partial class MainPage : ContentPage
+    public partial class CalenderPage : ContentPage
     {
-        public MainPage()
+        public CalenderPage()
         {    
             InitializeComponent();
 

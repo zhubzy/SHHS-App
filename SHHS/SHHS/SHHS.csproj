@@ -16,8 +16,16 @@
     <Folder Include="Image\" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Update="Schedule.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
+    <EmbeddedResource Remove="Schedule.xaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Remove="MyView.xaml.cs" />
+    <Compile Remove="Schedule.xaml.cs" />
+    <Compile Remove="MainPage.xaml.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="CalenderPage.xaml.cs">
+      <DependentUpon>CalenderPage.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
 </Project>
