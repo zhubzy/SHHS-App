@@ -18,7 +18,7 @@
                   <Button Image="arrowLeft.png"  BackgroundColor="Transparent"/>
          
             
-            <Label Text="SEPTEMBER" VerticalTextAlignment="Center" TextColor="White" FontSize="20">
+            <Label x:Name = "MonthLabel" Text="SEPTEMBER" VerticalTextAlignment="Center" TextColor="White" FontSize="20">
                    <Label.FontFamily>
                         <OnPlatform x:TypeArguments="x:String">
                             <On Platform="iOS" Value="OpenSans-Bold" />
