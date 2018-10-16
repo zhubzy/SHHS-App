@@ -21,7 +21,6 @@
   <ItemGroup>
     <Compile Remove="MyView.xaml.cs" />
     <Compile Remove="Schedule.xaml.cs" />
-    <Compile Remove="MainPage.xaml.cs" />
   </ItemGroup>
   <ItemGroup>
     <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="CalenderPage.xaml.cs">
