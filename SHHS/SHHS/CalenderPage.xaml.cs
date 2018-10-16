@@ -47,18 +47,20 @@ namespace SHHS
             int daysInMonth = DateTime.DaysInMonth(currentYear, currentMonth);
             int daysNeedToBeDisplayFromPreviousMonth = (int)new DateTime(currentYear, currentMonth, 1).DayOfWeek - 1;
 
-            DateTime lastDayOfpreviousMonth = currentMonth == 1 
+            DateTime lastDayOfpreviousMonth = currentMonth == 1
                 ? new DateTime(currentYear - 1, 12, DateTime.DaysInMonth(currentYear - 1, 12))
                           : new DateTime(currentYear, currentMonth - 1, DateTime.DaysInMonth(currentYear, currentMonth - 1));
 
-            int daysInPreviousMonth = DateTime.DaysInMonth(lastDayOfpreviousMonth.Year,lastDayOfpreviousMonth.Month);
+            int daysInPreviousMonth = DateTime.DaysInMonth(lastDayOfpreviousMonth.Year, lastDayOfpreviousMonth.Month);
 
 
-            int column = 0 ;
+            int column = 0;
             int row = 0;
 
             MonthLabel.Text = CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(currentMonth);
 
+
+            //Delete all labels
             for (int i = 0; i < Calendar.Children.Count; i++)
             {
 
@@ -68,11 +70,11 @@ namespace SHHS
 
             }
 
-            Console.WriteLine($"month {currentMonth} days in month {daysInMonth}");
 
 
             //Display Dates From Previous Month
-            for (int i = daysInPreviousMonth - daysNeedToBeDisplayFromPreviousMonth; i < daysInPreviousMonth; i++ ){
+            for (int i = daysInPreviousMonth - daysNeedToBeDisplayFromPreviousMonth; i < daysInPreviousMonth; i++)
+            {
                 var label = new Label { Text = $"{i}", HorizontalTextAlignment = TextAlignment.Center, TextColor = Color.Black };
                 Calendar.Children.Add(label, column, row);
                 column++;
@@ -86,34 +88,35 @@ namespace SHHS
 
                 var label = new Label { Text = $"{i}", HorizontalTextAlignment = TextAlignment.Center, TextColor = Color.White };
                 Calendar.Children.Add(label, column, row);
-
-                if (column != 0 && column % 6 == 0)
+                column++;
+                if (column != 0 && column % 7 == 0)
                 {
                     column = 0;
                     row++;
                 }
-                else
-                {
-
-                    column ++ ;
-
-                }
+            
 
 
             }
 
 
             //Displays Dates From Next Month
-            for (int i = 1; column <= 6; i++){
+            for (int i = 1; row < 6; i++)
+            {
                 var label = new Label { Text = $"{i}", HorizontalTextAlignment = TextAlignment.Center, TextColor = Color.Black };
                 Calendar.Children.Add(label, column, row);
                 column++;
+                if (column != 0 && column % 7 == 0)
+                {
+                    column = 0;
+                    row++;
+
+
+                }
+
 
 
             }
-
-
-
         }
 
 
