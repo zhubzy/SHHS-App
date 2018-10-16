@@ -16,12 +16,11 @@ namespace SHHS
 
 
 
+
         public CalenderPage()
         {
             InitializeComponent();
-
             RefreshDate();
-            Console.WriteLine($"Count is {Calendar.Children.Count}");
 
 
 
@@ -43,10 +42,21 @@ namespace SHHS
 
         void RefreshDate()
         {
-            var firstDay = new DateTime(currentYear, currentMonth, 1);
-            var daysInMonth = DateTime.DaysInMonth(currentYear, currentMonth);
-            int column = ((int)firstDay.DayOfWeek + 6) % 7 ;
+
+
+            int daysInMonth = DateTime.DaysInMonth(currentYear, currentMonth);
+            int daysNeedToBeDisplayFromPreviousMonth = (int)new DateTime(currentYear, currentMonth, 1).DayOfWeek - 1;
+
+            DateTime lastDayOfpreviousMonth = currentMonth == 1 
+                ? new DateTime(currentYear - 1, 12, DateTime.DaysInMonth(currentYear - 1, 12))
+                          : new DateTime(currentYear, currentMonth - 1, DateTime.DaysInMonth(currentYear, currentMonth - 1));
+
+            int daysInPreviousMonth = DateTime.DaysInMonth(lastDayOfpreviousMonth.Year,lastDayOfpreviousMonth.Month);
+
+
+            int column = 0 ;
             int row = 0;
+
             MonthLabel.Text = CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(currentMonth);
 
             for (int i = 0; i < Calendar.Children.Count; i++)
@@ -60,12 +70,24 @@ namespace SHHS
 
             Console.WriteLine($"month {currentMonth} days in month {daysInMonth}");
 
+
+            //Display Dates From Previous Month
+            for (int i = daysInPreviousMonth - daysNeedToBeDisplayFromPreviousMonth; i < daysInPreviousMonth; i++ ){
+                var label = new Label { Text = $"{i}", HorizontalTextAlignment = TextAlignment.Center, TextColor = Color.Black };
+                Calendar.Children.Add(label, column, row);
+                column++;
+
+
+            }
+
+            //Displays Dates From Current Month
             for (int i = 1; i <= daysInMonth; i++)
             {
+
                 var label = new Label { Text = $"{i}", HorizontalTextAlignment = TextAlignment.Center, TextColor = Color.White };
                 Calendar.Children.Add(label, column, row);
 
-                if (i % 7 == 0)
+                if (column != 0 && column % 6 == 0)
                 {
                     column = 0;
                     row++;
@@ -79,7 +101,27 @@ namespace SHHS
 
 
             }
+
+
+            //Displays Dates From Next Month
+            for (int i = 1; column <= 6; i++){
+                var label = new Label { Text = $"{i}", HorizontalTextAlignment = TextAlignment.Center, TextColor = Color.Black };
+                Calendar.Children.Add(label, column, row);
+                column++;
+
+
+            }
+
+
+
         }
+
+
+
+
+
+
+
 
         //backend programmer: start here
         void PreviousMonth(object sender, System.EventArgs e)
