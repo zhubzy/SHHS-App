@@ -7,24 +7,36 @@
 
         
             <RelativeLayout x:Name="RelativeView" BackgroundColor="Silver">
-              <Image Source="background.jpg" Opacity="0.90" Aspect="Fill"
+              <Image Source="background.jpg" Opacity="0.9" Aspect="Fill"
                      RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent,Property=Width}"
                      RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent,Property=Height}"/>
-                                 
-            <StackLayout x:Name="monthLabel" Orientation="Horizontal" Spacing=" 25" HorizontalOptions="Center"
+                  
+              <Label x:Name="YearLabel" Text = "2018" TextColor="White" FontSize="20" HorizontalOptions="Center" WidthRequest="50"
                          RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property=Y, Constant= 25}"
+                         RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property= Width, Factor=1 }">
+                       <Label.FontFamily>
+                        <OnPlatform x:TypeArguments="x:String">
+                            <On Platform="iOS" Value="OpenSans-Bold" />
+                            <On Platform="Android" Value="OpenSans-Bold.ttf#OpenSans-Bold" />
+                        </OnPlatform>
+                    </Label.FontFamily> 
+                </Label>
+                
+                
+            <StackLayout x:Name="DateStack" Orientation="Horizontal" Spacing=" 25" HorizontalOptions="Center"
+                         RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToView, ElementName=YearLabel, Property=Y, Constant= 25}"
                          RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property= Width, Factor=1 }">
             
                   <Button Clicked="PreviousMonth" Image="arrowLeft.png"  BackgroundColor="Transparent"/>
          
             
-            <Label x:Name="MonthLabel" Text="SEPTEMBER" VerticalTextAlignment="Center" TextColor="White" FontSize="20">
-    <!--               <Label.FontFamily>
+            <Label x:Name="MonthLabel" Text="SEPTEMBER" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" TextColor="White" FontSize="20" WidthRequest="120">
+                  <Label.FontFamily>
                         <OnPlatform x:TypeArguments="x:String">
                             <On Platform="iOS" Value="OpenSans-Bold" />
                             <On Platform="Android" Value="OpenSans-Bold.ttf#OpenSans-Bold" />
                         </OnPlatform>
-                    </Label.FontFamily> -->
+                    </Label.FontFamily> 
             </Label>
                 
                   <Button Clicked="NextMonth" Image="arrowLeft.png"  BackgroundColor="Transparent" Rotation="180"/>   
@@ -35,7 +47,7 @@
             
                <Grid x:Name="week" RowSpacing="40" ColumnSpacing="1" Padding="0,0,0,0" 
                      RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor= 1 }" 
-                     RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToView, Property= Y,ElementName= monthLabel,Factor=1, Constant= 75}"
+                     RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToView, Property= Y,ElementName= DateStack,Factor=1, Constant= 50}"
                      >
                      
                 
@@ -51,7 +63,7 @@
             
         </Grid>            
           
-               <Grid x:Name="Calendar" RowSpacing="40" ColumnSpacing="1" Padding="0,0,0,0" 
+               <Grid x:Name="Calendar" RowSpacing="10" ColumnSpacing="1" Padding="0,0,0,0" 
                      RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor= 1 }" 
                      RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToView, Property= Y,ElementName= week,Factor=1, Constant= 50}"
                      >
@@ -60,9 +72,47 @@
             
         </Grid>
             
-
+            
+            
+            <RelativeLayout x:Name="Annoucement1Stack" RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToView, ElementName=Calendar, Property= Y, Constant=300}"
+                RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor= 1}" >
+                
+                
+                                            
+                        
+                       <Button RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property= Width, Factor=1}" x:Name = "Announcement1" BorderColor="White" BorderRadius="25" BorderWidth="2" HeightRequest="100"/>
+                       
+                        
+                        <StackLayout BackgroundColor="Gray" RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property= Y, Factor= 0, Constant=0}"
+                              RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent, Property= X, Factor= 0}"
+                                     RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property= Width, Factor= 0}"
+                                     > 
+                
+                
+                
+                
+                       </StackLayout>
+                        
+                       <Label Text="Annoucement 1" 
+                              RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property= Y, Factor= 0, Constant=12}"
+                              RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent, Property= Width, Factor= 0.35}"/>
+                       <Label Text="Date: " 
+                              RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property= Y, Factor= 0, Constant=24}"
+                              RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent, Property= Width, Factor= 0.35}"/>                    
+                    
+                   
+                
+            
+                
+            </RelativeLayout>
+                     
+               
+        
 
         </RelativeLayout>
+        
+
+        
 
         
 

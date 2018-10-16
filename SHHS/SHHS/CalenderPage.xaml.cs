@@ -40,8 +40,11 @@ namespace SHHS
         //Constraint.RelativeToParent(parent => monthLabel.Height * 2));
 
 
-        void RefreshDate()
+         void RefreshDate()
         {
+
+
+        
 
 
             int daysInMonth = DateTime.DaysInMonth(currentYear, currentMonth);
@@ -58,8 +61,7 @@ namespace SHHS
             int row = 0;
 
             MonthLabel.Text = CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(currentMonth);
-
-
+            YearLabel.Text = currentYear.ToString();
             //Delete all labels
             for (int i = 0; i < Calendar.Children.Count; i++)
             {
@@ -75,7 +77,7 @@ namespace SHHS
             //Display Dates From Previous Month
             for (int i = daysInPreviousMonth - daysNeedToBeDisplayFromPreviousMonth; i < daysInPreviousMonth; i++)
             {
-                var label = new Label { Text = $"{i}", HorizontalTextAlignment = TextAlignment.Center, TextColor = Color.Black };
+                var label = new Button { Text = $"{i}", HorizontalOptions = LayoutOptions.Center, TextColor = Color.White, CornerRadius = 20, WidthRequest = 40, HeightRequest = 40 ,BackgroundColor = Color.Transparent, Opacity = 0.5 };
                 Calendar.Children.Add(label, column, row);
                 column++;
 
@@ -85,8 +87,8 @@ namespace SHHS
             //Displays Dates From Current Month
             for (int i = 1; i <= daysInMonth; i++)
             {
-
-                var label = new Label { Text = $"{i}", HorizontalTextAlignment = TextAlignment.Center, TextColor = Color.White };
+                var label = new Button { Text = $"{i}", HorizontalOptions = LayoutOptions.Center, TextColor = Color.White, CornerRadius = 20, WidthRequest = 40, HeightRequest = 40 ,BackgroundColor = Color.Transparent, Opacity = 1};
+                label.Clicked += DateClicked;
                 Calendar.Children.Add(label, column, row);
                 column++;
                 if (column != 0 && column % 7 == 0)
@@ -103,7 +105,7 @@ namespace SHHS
             //Displays Dates From Next Month
             for (int i = 1; row < 6; i++)
             {
-                var label = new Label { Text = $"{i}", HorizontalTextAlignment = TextAlignment.Center, TextColor = Color.Black };
+                var label = new Button { Text = $"{i}", HorizontalOptions = LayoutOptions.Center, TextColor = Color.White, CornerRadius = 20, WidthRequest =40, HeightRequest = 40 ,BackgroundColor = Color.Transparent,  Opacity = 0.5 };
                 Calendar.Children.Add(label, column, row);
                 column++;
                 if (column != 0 && column % 7 == 0)
@@ -117,6 +119,15 @@ namespace SHHS
 
 
             }
+            if (currentMonth == DateTime.Today.Month && currentYear == DateTime.Today.Year)
+            {
+
+                var button = ((Button)Calendar.Children[DateTime.Today.Day + daysNeedToBeDisplayFromPreviousMonth - 1]);
+                button.BackgroundColor = Color.Red;
+                button.Opacity = 0.3;
+
+
+            }
         }
 
 
@@ -124,19 +135,22 @@ namespace SHHS
 
 
 
+        void DateClicked(object sender, System.EventArgs e){
+
+            var button = (Button)sender;
+            button.BackgroundColor = Color.Green;
+            button.Opacity = 0.2;
 
 
-        //backend programmer: start here
+
+        }
+
+
         void PreviousMonth(object sender, System.EventArgs e)
         {
 
 
-            /*To Get Information about date*/
-            /*To Get Information about date*
-            //DateTime.DaysInMonth(2018,11)
-
-            /*To Create date object*/
-            //new DateTime(2018, 11, 2);
+            StartAnimation((Button)sender);
 
             if (currentMonth == 1)
             {
@@ -153,8 +167,9 @@ namespace SHHS
 
         }
 
-        void NextMonth(object sender, System.EventArgs e)
+         void NextMonth(object sender, System.EventArgs e)
         {
+            StartAnimation((Button)sender);
             if (currentMonth == 12)
             {
 
@@ -166,7 +181,15 @@ namespace SHHS
                 currentMonth++;
             }
 
-            RefreshDate();
+             RefreshDate();
+        }
+
+        private async void StartAnimation(Button button)
+        {
+            await Task.Delay(20);
+            await button.FadeTo(0, 250);
+            await Task.Delay(20);
+            await button.FadeTo(1, 250);
         }
 
 
