@@ -1,13 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-
 using Xamarin.Forms;
 
-namespace SHHS
+namespace Application
 {
-    public partial class SchedulePage : ContentPage
+    public partial class MyView : ContentView
     {
-        public SchedulePage()
+        public MyView()
         {
             InitializeComponent();
         }

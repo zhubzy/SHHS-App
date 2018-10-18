@@ -11,20 +11,36 @@
 
   <ItemGroup>
     <PackageReference Include="Xamarin.Forms" Version="3.1.0.697729" />
+    <PackageReference Include="SkiaSharp.Views.Forms" Version="1.60.3" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Image\" />
+    <Folder Include="View\" />
+    <Folder Include="Model\" />
+    <Folder Include="Controller\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Remove="Schedule.xaml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Remove="MyView.xaml.cs" />
     <Compile Remove="Schedule.xaml.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="CalenderPage.xaml.cs">
+    <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="Controller\CalenderPage.xaml.cs">
       <DependentUpon>CalenderPage.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="Controller\MainPage.xaml.cs">
+      <DependentUpon>MainPage.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="Controller\SchedulePage.xaml.cs">
+      <DependentUpon>SchedulePage.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
 </Project>

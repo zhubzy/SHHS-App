@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:local="clr-namespace:SHHS" x:Class="SHHS.CalenderPage">
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:local="clr-namespace:SHHS" x:Class="SHHS.Controller.CalenderPage">
    
     
     <StackLayout Orientation="Vertical" Padding="0,0,0,0">
@@ -74,34 +74,28 @@
             
             
             
-            <RelativeLayout x:Name="Annoucement1Stack" RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToView, ElementName=Calendar, Property= Y, Constant=300}"
-                RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor= 1}" >
+            <RelativeLayout BackgroundColor="Blue" x:Name="Annoucement1Stack" RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToView, ElementName=Calendar, Property= Y, Constant=300}"
+                RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor= 1}"  >
                 
                 
                                             
                         
-                       <Button RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property= Width, Factor=1}" x:Name = "Announcement1" BorderColor="White" BorderRadius="25" BorderWidth="2" HeightRequest="100"/>
+                       <Button x:Name ="Button" RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property= Width, Factor=1}"  BorderColor="White" BorderRadius="25" BorderWidth="2" HeightRequest="100"/>
                        
                         
-                        <StackLayout BackgroundColor="Gray" RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property= Y, Factor= 0, Constant=0}"
-                              RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent, Property= X, Factor= 0}"
-                                     RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property= Width, Factor= 0}"
+                        <StackLayout BackgroundColor="Purple"  RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property= Y, Factor= 0, Constant=0}"
+                              RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToView, ElementName= Annoucement1Stack, Property= X, Factor=0 , Constant=0}"
+                                     RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property= Width, Factor= 1}"
+                                     RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToView, ElementName=Button, Property=Height, Factor=1}"
+                                     
                                      > 
-                
-                
-                
+                            
+                                        <Button Text="dssds"/> 
+                                        
                 
                        </StackLayout>
                         
-                       <Label Text="Annoucement 1" 
-                              RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property= Y, Factor= 0, Constant=12}"
-                              RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent, Property= Width, Factor= 0.35}"/>
-                       <Label Text="Date: " 
-                              RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property= Y, Factor= 0, Constant=24}"
-                              RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent, Property= Width, Factor= 0.35}"/>                    
                     
-                   
-                
             
                 
             </RelativeLayout>

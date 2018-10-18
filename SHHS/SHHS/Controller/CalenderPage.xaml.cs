@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using System.Globalization;
 
-namespace SHHS
+namespace SHHS.Controller
 {
     public partial class CalenderPage : ContentPage
     {
@@ -40,7 +40,7 @@ namespace SHHS
         //Constraint.RelativeToParent(parent => monthLabel.Height * 2));
 
 
-         void RefreshDate()
+          void RefreshDate()
         {
 
 

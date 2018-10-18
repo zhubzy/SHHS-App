@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             x:Class="SHHS.View.SHHSTimer"
+             xmlns:skia = "clr-namespace:SkiaSharp.Views.Forms;assembly=SkiaSharp.Views.Forms"
+             >
+    
+    <StackLayout x:Name="Stack">
+        
+        
+                <Slider Minimum="-360" Maximum="360"  x:Name="startAngleSlider"
+                Grid.Row="0"
+                ValueChanged="SliderValueChanged" />
+
+        <Label Text="{Binding Source={x:Reference startAngleSlider},
+                              Path=Value,
+                              StringFormat='Start Angle = {0:F0}'}"
+               Grid.Row="1" />
+
+        <Slider  Minimum="-360" Maximum="360" x:Name="sweepAngleSlider"
+                Grid.Row="2"
+                ValueChanged="SliderValueChanged" />
+
+        <Label Text="{Binding Source={x:Reference sweepAngleSlider},
+                              Path=Value,
+                              StringFormat='Sweep Angle = {0:F0}'}"
+               Grid.Row="3" />
+        
+        
+        <Slider  Maximum="500" x:Name="first"
+                Grid.Row="2"
+                ValueChanged="SliderValueChanged" />
+
+        <Label Text="{Binding Source={x:Reference first},
+                              Path=Value,
+                              StringFormat='first= {0:F0}'}"
+               Grid.Row="3" />
+        
+        
+        <Slider   Maximum="500" x:Name="second"
+                Grid.Row="2"
+                ValueChanged="SliderValueChanged" />
+
+        <Label Text="{Binding Source={x:Reference second},
+                              Path=Value,
+                              StringFormat='second = {0:F0}'}"
+               Grid.Row="3" />
+        
+        
+                 
+    </StackLayout>
+</ContentView>

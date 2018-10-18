@@ -1,7 +1,7 @@
 ﻿using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
-
+using SHHS.Controller;
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 namespace SHHS
 {

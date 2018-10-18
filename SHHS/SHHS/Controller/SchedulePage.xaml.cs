@@ -3,14 +3,13 @@ using System.Collections.Generic;
 
 using Xamarin.Forms;
 
-namespace SHHS
+namespace SHHS.Controller
 {
-    public partial class MainPage : TabbedPage
+    public partial class SchedulePage : ContentPage
     {
-        public MainPage()
+        public SchedulePage()
         {
             InitializeComponent();
-         
         }
     }
 }
