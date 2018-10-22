@@ -11,7 +11,10 @@
             x:Class="SHHS.Controller.MainPage">
   <ContentPage Title="Home">
         <RelativeLayout x:Name="HomePage" BackgroundColor="Purple">
-            
+            <Button BorderRadius="50" BorderWidth="2" 
+                    RelativeLayout.WidthConstraint="{ConstraintExpression Type=Constant,Property=Width,Constant=100}"
+                    RelativeLayout.HeightConstraint="{ConstraintExpression Type=Constant, Property=Height,Constant=100}"
+                    />
             
         </RelativeLayout>
         

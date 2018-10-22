@@ -73,35 +73,74 @@
         </Grid>
             
             
-            
-            <RelativeLayout BackgroundColor="Blue" x:Name="Annoucement1Stack" RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToView, ElementName=Calendar, Property= Y, Constant=300}"
-                RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor= 1}"  >
+                   <!-- Annoucementbar 1 -->
+
+            <RelativeLayout x:Name="Annoucement1Stack" RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToView, ElementName=Calendar, Property= Y, Constant=300}"
+                RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor= 1}" Margin="10">
+                
                 
                 
                                             
                         
-                       <Button x:Name ="Button" RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property= Width, Factor=1}"  BorderColor="White" BorderRadius="25" BorderWidth="2" HeightRequest="100"/>
-                       
+                       <Button x:Name ="Button" RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property= Width, Factor=1}"  BorderColor="White" BorderWidth="2" HeightRequest="100"
+                                                                                                                                                          BackgroundColor="Purple"/>
+                       <BoxView BackgroundColor="Gold" HeightRequest="100" WidthRequest="10"/>
                         
-                        <StackLayout BackgroundColor="Purple"  RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property= Y, Factor= 0, Constant=0}"
-                              RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToView, ElementName= Annoucement1Stack, Property= X, Factor=0 , Constant=0}"
+                        <StackLayout  RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property= Y, Factor= 0, Constant=0}"
+                              RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToView, ElementName= Annoucement1Stack, Property= X, Factor=1 , Constant=0}"
                                      RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property= Width, Factor= 1}"
-                                     RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToView, ElementName=Button, Property=Height, Factor=1}"
+                                     RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToView, ElementName=Button, Property=Height, Factor=1}">
                                      
-                                     > 
+                                     
+                                      
                             
-                                        <Button Text="dssds"/> 
+                                        <Button Text="Announcement" TextColor="Gray"/> 
+                                        <Label Text=" Event Name "/>
+                                        <Label Text=" Location "/>
+                                        
                                         
                 
                        </StackLayout>
                         
                     
+                
+                
             
                 
             </RelativeLayout>
-                     
-               
+            
+            
+            
+                   <!-- Annoucementbar 2 -->
         
+             <RelativeLayout x:Name="Annoucement2Stack" BackgroundColor="Black" RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToView, ElementName=Calendar, Property= Y, Constant=405}"
+                RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor= 1}" Margin="10">
+            
+                
+                       <Button x:Name ="Button2" RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property= Width, Factor=1}"  BorderColor="White" BorderWidth="2" HeightRequest="100"
+                                                                                                                                                          BackgroundColor="Purple"/>
+                       <BoxView BackgroundColor="Gold" HeightRequest="100" WidthRequest="10"/>
+                
+                         <StackLayout  RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property= Y, Factor= 0, Constant=0}"
+                              RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToView, ElementName= Annoucement2Stack, Property= X, Factor=1 , Constant=0}"
+                                     RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property= Width, Factor= 1}"
+                                     RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToView, ElementName=Button2, Property=Height, Factor=1}">
+                                     
+                                     
+                                      
+                            
+                                        <Button Text="Announcement" TextColor="Gray"/> 
+                                        <Label Text=" Event Name "/>
+                                        <Label Text=" Location "/>
+                                        
+                                        
+                
+                       </StackLayout>
+                
+                
+              </RelativeLayout>
+            
+       
 
         </RelativeLayout>
         

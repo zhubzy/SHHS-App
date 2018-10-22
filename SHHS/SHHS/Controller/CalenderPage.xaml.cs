@@ -23,7 +23,6 @@ namespace SHHS.Controller
             RefreshDate();
 
 
-
         }
 
 
@@ -142,10 +141,9 @@ namespace SHHS.Controller
             button.Opacity = 0.2;
 
 
-
         }
 
-
+        /// Display and refesh the calander in previous month.
         void PreviousMonth(object sender, System.EventArgs e)
         {
 
