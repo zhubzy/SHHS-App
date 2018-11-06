@@ -3,23 +3,28 @@
             xmlns="http://xamarin.com/schemas/2014/forms" 
             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
             xmlns:android="clr-namespace:Xamarin.Forms.PlatformConfiguration.AndroidSpecific;assembly=Xamarin.Forms.Core"
+            xmlns:skia = "clr-namespace:SkiaSharp.Views.Forms;assembly=SkiaSharp.Views.Forms"       
             android:TabbedPage.ToolbarPlacement="Bottom" 
             android:TabbedPage.BarItemColor="#66FFFFFF"
-            android:TabbedPage.BarSelectedItemColor="White"
-            BarBackgroundColor="#2196F3"   
-            BarTextColor="White"        
+            android:TabbedPage.BarSelectedItemColor="#EFFACB"
+            BarBackgroundColor="#2B7251"   
+            
+               
             x:Class="SHHS.Controller.MainPage">
-  <ContentPage Title="Home">
-        <RelativeLayout x:Name="HomePage" BackgroundColor="Purple">
-            <Button BorderRadius="50" BorderWidth="2" 
-                    RelativeLayout.WidthConstraint="{ConstraintExpression Type=Constant,Property=Width,Constant=100}"
-                    RelativeLayout.HeightConstraint="{ConstraintExpression Type=Constant, Property=Height,Constant=100}"
-                    />
+  <ContentPage Title="Home" Icon="home.png" BackgroundColor="#2B7251">
+        <ContentPage.Padding>
+            <OnPlatform x:TypeArguments="Thickness">
+                
+            </OnPlatform>
+        </ContentPage.Padding>
+        <RelativeLayout x:Name="HomePage">
+      
+            
             
         </RelativeLayout>
         
  </ContentPage>
 
-    <local:CalenderPage Title="Calender" />
+    <local:CalenderPage Title="Calender" Icon="calendar.png" BackgroundColor="#2B7251"/>
         
 </TabbedPage>

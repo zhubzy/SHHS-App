@@ -4,12 +4,9 @@
     
     <StackLayout Orientation="Vertical" Padding="0,0,0,0">
         <!-- Place new controls here -->
-
+        <ScrollView VerticalScrollBarVisibility="Default">
         
-            <RelativeLayout x:Name="RelativeView" BackgroundColor="Silver">
-              <Image Source="background.jpg" Opacity="0.9" Aspect="Fill"
-                     RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent,Property=Width}"
-                     RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent,Property=Height}"/>
+            <RelativeLayout x:Name="RelativeView" >
                   
               <Label x:Name="YearLabel" Text = "2018" TextColor="White" FontSize="20" HorizontalOptions="Center" WidthRequest="50"
                          RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property=Y, Constant= 25}"
@@ -152,6 +149,6 @@
 
 
 
-
+        </ScrollView>
     </StackLayout>
 </ContentPage>

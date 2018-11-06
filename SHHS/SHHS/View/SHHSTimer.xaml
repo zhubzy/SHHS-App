@@ -5,10 +5,13 @@
              xmlns:skia = "clr-namespace:SkiaSharp.Views.Forms;assembly=SkiaSharp.Views.Forms"
              >
     
-    <StackLayout x:Name="Stack">
+   
+        
+            <!--<StackLayout x:Name="Stack" RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent, Property= Width, Factor=0.5}" 
+                                        RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property = Height, Factor=0}">
         
         
-                <Slider Minimum="-360" Maximum="360"  x:Name="startAngleSlider"
+            <Slider Minimum="-360" Maximum="360"  x:Name="startAngleSlider"
                 Grid.Row="0"
                 ValueChanged="SliderValueChanged" />
 
@@ -48,5 +51,11 @@
         
         
                  
-    </StackLayout>
+    </StackLayout>-->
+        
+        
+    
+    
+    
+    
 </ContentView>

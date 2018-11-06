@@ -24,6 +24,8 @@ namespace SHHS.iOS
         {
             global::Xamarin.Forms.Forms.Init();
             LoadApplication(new App());
+            UITabBar.Appearance.TintColor = UIColor.White;
+
 
             return base.FinishedLaunching(app, options);
         }

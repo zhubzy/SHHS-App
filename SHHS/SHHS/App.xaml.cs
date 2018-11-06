@@ -7,11 +7,16 @@ namespace SHHS
 {
     public partial class App : Application
     {
+
+        MainPage shhsMain;
+        
         public App()
         {
             InitializeComponent();
+            shhsMain = new MainPage();
+            MainPage = shhsMain;
+            
 
-            MainPage = new MainPage();
         }
 
         protected override void OnStart()
@@ -26,7 +31,9 @@ namespace SHHS
 
         protected override void OnResume()
         {
+
             // Handle when your app resumes
+            shhsMain.RefreshSchedule();
         }
     }
 }

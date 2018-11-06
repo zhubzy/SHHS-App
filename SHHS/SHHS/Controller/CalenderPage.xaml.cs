@@ -22,7 +22,7 @@ namespace SHHS.Controller
             InitializeComponent();
             RefreshDate();
 
-
+            
         }
 
 

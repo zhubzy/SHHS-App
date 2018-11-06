@@ -12,9 +12,10 @@
   <ItemGroup>
     <PackageReference Include="Xamarin.Forms" Version="3.1.0.697729" />
     <PackageReference Include="SkiaSharp.Views.Forms" Version="1.60.3" />
+    <PackageReference Include="FirebaseDatabase.net" Version="3.3.3" />
+    <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Image\" />
     <Folder Include="View\" />
     <Folder Include="Model\" />
     <Folder Include="Controller\" />
@@ -42,5 +43,11 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="shhsdata.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="shhsdata.json" />
   </ItemGroup>
 </Project>

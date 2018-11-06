@@ -10,6 +10,7 @@ namespace SHHS.Controller
         public SchedulePage()
         {
             InitializeComponent();
+
         }
     }
 }

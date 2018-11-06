@@ -1,0 +1,157 @@
+{
+  "South Hills Schedule" : {
+    "Regular Schedule" : {
+      "Schedule" : [ 
+
+      {
+        "PeriodName" : "Period 1",
+        "StartTime" : "07:45",
+        "EndTime" : "08:37"
+      }, 
+      {
+
+        "PeriodName" : "Period 2",
+        "StartTime" : "08:42",
+        "EndTime" : "09:34"
+
+      }, 
+      {
+
+        "PeriodName" : "Period 3",
+        "StartTime" : "09:39",
+        "EndTime" : "10:31"
+
+      }, 
+      {
+
+        "PeriodName" : "Break",
+        "StartTime" : "10:31",
+        "EndTime" : "10:41"
+
+      }, 
+      {
+
+        "PeriodName" : "Period 4",
+        "StartTime" : "10:46",
+        "EndTime" : "11:38"
+
+      }, 
+      {
+
+        "PeriodName" : "Period 5",
+        "StartTime" : "11:43",
+        "EndTime" : "12:35"
+
+      }, 
+      {
+
+        "PeriodName" : "Lunch",
+        "StartTime" : "12:35",
+        "EndTime" : "13:10"
+
+      }, 
+      {
+
+        "PeriodName" : "Period 6",
+        "StartTime" : "1:15",
+        "EndTime" : "2:07"
+
+      }, 
+      {
+
+        "PeriodName" : "Period 7",
+        "StartTime" : "14:12",
+        "EndTime" : "15:04"
+
+      }
+
+      ],
+
+
+      "ScheduleName" : "Regular Schedule"
+    },
+
+        "Late Start Schedule" : {
+      "Schedule" : [ 
+
+      {
+        "PeriodName" : "Period 1",
+        "StartTime" : "07:45",
+        "EndTime" : "08:37"
+      }, 
+      {
+
+        "PeriodName" : "Period 2",
+        "StartTime" : "08:42",
+        "EndTime" : "09:34"
+
+      }, 
+      {
+
+        "PeriodName" : "Period 3",
+        "StartTime" : "09:39",
+        "EndTime" : "10:31"
+
+      }, 
+      {
+
+        "PeriodName" : "Break",
+        "StartTime" : "10:31",
+        "EndTime" : "10:41"
+
+      }, 
+      {
+
+        "PeriodName" : "Period 4",
+        "StartTime" : "10:46",
+        "EndTime" : "11:38"
+
+      }, 
+      {
+
+        "PeriodName" : "Period 5",
+        "StartTime" : "11:43",
+        "EndTime" : "12:35"
+
+      }, 
+      {
+
+        "PeriodName" : "Lunch",
+        "StartTime" : "12:35",
+        "EndTime" : "13:10"
+
+      }, 
+      {
+
+        "PeriodName" : "Period 6",
+        "StartTime" : "1:15",
+        "EndTime" : "2:07"
+
+      }, 
+      {
+
+        "PeriodName" : "Period 7",
+        "StartTime" : "14:12",
+        "EndTime" : "15:04"
+
+      }, 
+      {
+
+        "PeriodName" : "Dinner",
+        "StartTime" : "17:25",
+        "EndTime" : "17:30"
+
+      }
+
+      ],
+
+
+      "ScheduleName" : "Late Start Schedule"
+    }
+
+
+
+
+
+  }
+}
