@@ -125,8 +125,8 @@ namespace SHHS.Model
             DateTime closestPeriodEnd = schedule.Schedule[CurrentSchedule].EndDateTime;
             DateTime closestPeriodStart = schedule.Schedule[CurrentSchedule].StartDateTime;
 
-
-            if (DateTime.Compare(now, closestPeriodStart) <= 0 )
+            //IF the peiord occurs after the current time
+            if (closestPeriodStart.Hour * 60 + closestPeriodStart.Minute > now.Hour * 60 + now.Minute)
             {
                 MinutesLeft = CalcTime(now, closestPeriodStart) / 60;
                 SecondsLeft = CalcTime(now, closestPeriodStart) % 60;
@@ -139,7 +139,7 @@ namespace SHHS.Model
                 IsActive = true;
                 CurrentMessage = "Before " + schedule.Schedule[CurrentSchedule].PeriodName + " Starts";
 
-            } else if (DateTime.Compare(now, closestPeriodEnd) <= 0) {
+            } else if (closestPeriodEnd.Hour * 60 + closestPeriodEnd.Minute >= now.Hour * 60 + now.Minute) {
 
                 MinutesLeft = CalcTime(now, closestPeriodEnd) / 60;
                 SecondsLeft = CalcTime(now, closestPeriodEnd) % 60;

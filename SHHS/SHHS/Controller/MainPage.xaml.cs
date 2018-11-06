@@ -11,6 +11,7 @@ namespace SHHS.Controller
 
         public SHHSScheduleManager scheduleManager;
         SHHSTimer timer;
+        Boolean isAnimating;
 
         public MainPage()
         {
@@ -48,15 +49,22 @@ namespace SHHS.Controller
             timer.TimeLeft = "Loading";
             timer.PeriodInfo = scheduleManager.CurrentMessage;
             timer.length = scheduleManager.PeriodLength;
- 
+
+
             if (timer.minutes == 0 && timer.seconds == 0){
 
                 timer.TimeLeft = "0:00";
+                timer.isActive = false;
 
+                //First time starting
             } else if (!timer.isActive) {
 
                 StartTime();
-                timer.isActive = true;
+
+
+                //Resuming from app
+            } else {
+
 
 
             }
@@ -66,6 +74,8 @@ namespace SHHS.Controller
 
         void StartTime()
         {
+            timer.isActive = true;
+
             Device.StartTimer(TimeSpan.FromSeconds(1), () =>
             {
 
@@ -75,9 +85,9 @@ namespace SHHS.Controller
 
                     if (timer.minutes == 0)
                     {
-                        timer.isActive = false;
+                        isAnimating = true;
+                        playAnimation(360);
                         RefreshSchedule();
-                        playAnimation();
                         return false;
                     }
 
@@ -89,22 +99,37 @@ namespace SHHS.Controller
                     timer.seconds--;
                     timer.TimeLeft = timer.minutes.ToString("00") + ":" + timer.seconds.ToString("00");
                     int remainingsecs = (timer.minutes * 60 + timer.seconds);
-                    timer.SweepAngleSlider = (float)(360.0 * (remainingsecs * 1.0 / timer.length));
+                    float newAngle = (360.0F * (remainingsecs * 1.0F / timer.length));
+                if(Math.Abs(timer.SweepAngleSlider - newAngle) > 5 && isAnimating == false){
+                    isAnimating = true;
+                    playAnimation(newAngle);
+                } else {
+                    timer.SweepAngleSlider = newAngle;
+                }
 
                 return true; // True = Repeat again, False = Stop the timer
             });
 
         }
 
-        void playAnimation(){
+        void playAnimation(float dgr){
 
 
-            Device.StartTimer(TimeSpan.FromTicks(1), () =>
+            Device.StartTimer(TimeSpan.FromMilliseconds(0.1), () =>
             {
-                timer.SweepAngleSlider += 5;
 
-                if(timer.SweepAngleSlider >= 360){
-                    timer.SweepAngleSlider = 360;
+                if (timer.SweepAngleSlider > dgr)
+                {
+                    timer.SweepAngleSlider -= 3;
+                } else {
+
+                    timer.SweepAngleSlider += 3;
+
+                }
+
+                if (Math.Abs(timer.SweepAngleSlider - dgr)  <= 5){
+                    timer.SweepAngleSlider = dgr;
+                    isAnimating = false;
                     return false;
 
                 }
