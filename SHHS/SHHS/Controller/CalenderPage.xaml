@@ -6,7 +6,7 @@
         <!-- Place new controls here -->
         <ScrollView VerticalScrollBarVisibility="Default">
         
-            <RelativeLayout x:Name="RelativeView" >
+            <RelativeLayout x:Name="RelativeView" BackgroundColor="#2B7251" >
                   
               <Label x:Name="YearLabel" Text = "2018" TextColor="White" FontSize="20" HorizontalOptions="Center" WidthRequest="50"
                          RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property=Y, Constant= 25}"
@@ -79,26 +79,11 @@
                 
                                             
                         
-                       <Button x:Name ="Button" RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property= Width, Factor=1}"  BorderColor="White" BorderWidth="2" HeightRequest="100"
-                                                                                                                                                          BackgroundColor="Purple"/>
-                       <BoxView BackgroundColor="Gold" HeightRequest="100" WidthRequest="10"/>
+                   <ListView x:Name="AnnoucementList">
                         
-                        <StackLayout  RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property= Y, Factor= 0, Constant=0}"
-                              RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToView, ElementName= Annoucement1Stack, Property= X, Factor=1 , Constant=0}"
-                                     RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property= Width, Factor= 1}"
-                                     RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToView, ElementName=Button, Property=Height, Factor=1}">
-                                     
-                                     
-                                      
-                            
-                                        <Button Text="Announcement" TextColor="Gray"/> 
-                                        <Label Text=" Event Name "/>
-                                        <Label Text=" Location "/>
-                                        
-                                        
-                
-                       </StackLayout>
                         
+                        
+                    </ListView>
                     
                 
                 

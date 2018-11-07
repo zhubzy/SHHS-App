@@ -3,6 +3,7 @@ using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using SHHS.Controller;
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
+
 namespace SHHS
 {
     public partial class App : Application
@@ -15,8 +16,6 @@ namespace SHHS
             InitializeComponent();
             shhsMain = new MainPage();
             MainPage = shhsMain;
-            
-
         }
 
         protected override void OnStart()

@@ -28,8 +28,8 @@
     <MtouchArch>x86_64</MtouchArch>
     <MtouchLink>None</MtouchLink>
     <MtouchDebug>true</MtouchDebug>
-    <CodesignProvision>iOS Team Provisioning Profile: com.southhillscodeclub.SHHSTest</CodesignProvision>
-    <CodesignKey>iPhone Developer: Xiaolan Wu (R79LC6SZBL)</CodesignKey>
+    <CodesignProvision>iOS Team Provisioning Profile: com.southhillscodeclub.SHHS</CodesignProvision>
+    <CodesignKey>iPhone Developer: zzyzsy0516321@yahoo.com (4X4XQBB7YT)</CodesignKey>
     <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhoneSimulator' ">
@@ -52,10 +52,10 @@
     <WarningLevel>4</WarningLevel>
     <ConsolePause>false</ConsolePause>
     <MtouchArch>ARM64</MtouchArch>
-    <CodesignKey>iPhone Developer: Xiaolan Wu (R79LC6SZBL)</CodesignKey>
+    <CodesignKey>iPhone Developer: zzyzsy0516321@yahoo.com (4X4XQBB7YT)</CodesignKey>
     <MtouchDebug>true</MtouchDebug>
     <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
-    <CodesignProvision>iOS Team Provisioning Profile: com.southhillscodeclub.SHHSTest</CodesignProvision>
+    <CodesignProvision>iOS Team Provisioning Profile: com.southhillscodeclub.SHHS</CodesignProvision>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhone' ">
     <DebugType>none</DebugType>
@@ -152,7 +152,7 @@
     <Reference Include="Xamarin.iOS" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Xamarin.Forms" Version="3.1.0.697729" />
+    <PackageReference Include="Xamarin.Forms" Version="3.3.0.967583" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <ItemGroup>

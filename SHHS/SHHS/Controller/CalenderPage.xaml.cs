@@ -20,6 +20,13 @@ namespace SHHS.Controller
         public CalenderPage()
         {
             InitializeComponent();
+            for (int row = 0; row < 6; row++)
+                for (int col = 0; col < 7; col++){
+
+                    var label = new Button { Text = $"{row*7 + col}", HorizontalOptions = LayoutOptions.Center, TextColor = Color.White, CornerRadius = 20, WidthRequest = 40, HeightRequest = 40, BackgroundColor = Color.Transparent, Opacity = 1 };
+                    Calendar.Children.Add(label, col, row);
+                }
+
             RefreshDate();
 
             
@@ -61,23 +68,16 @@ namespace SHHS.Controller
 
             MonthLabel.Text = CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(currentMonth);
             YearLabel.Text = currentYear.ToString();
-            //Delete all labels
-            for (int i = 0; i < Calendar.Children.Count; i++)
-            {
-
-                Calendar.Children.RemoveAt(i);
-                i--;
-
-
-            }
-
+         
 
 
             //Display Dates From Previous Month
             for (int i = daysInPreviousMonth - daysNeedToBeDisplayFromPreviousMonth; i < daysInPreviousMonth; i++)
             {
-                var label = new Button { Text = $"{i}", HorizontalOptions = LayoutOptions.Center, TextColor = Color.White, CornerRadius = 20, WidthRequest = 40, HeightRequest = 40 ,BackgroundColor = Color.Transparent, Opacity = 0.5 };
-                Calendar.Children.Add(label, column, row);
+                Button lb = ((Button)(Calendar.Children[row * 7 + column]));
+                lb.Opacity = 0.5;
+                lb.Text = $"{i}";
+
                 column++;
 
 
@@ -86,9 +86,10 @@ namespace SHHS.Controller
             //Displays Dates From Current Month
             for (int i = 1; i <= daysInMonth; i++)
             {
-                var label = new Button { Text = $"{i}", HorizontalOptions = LayoutOptions.Center, TextColor = Color.White, CornerRadius = 20, WidthRequest = 40, HeightRequest = 40 ,BackgroundColor = Color.Transparent, Opacity = 1};
-                label.Clicked += DateClicked;
-                Calendar.Children.Add(label, column, row);
+                Button lb = ((Button)(Calendar.Children[row * 7 + column]));
+                lb.Text = $"{i}";
+                lb.Clicked += DateClicked;
+
                 column++;
                 if (column != 0 && column % 7 == 0)
                 {
@@ -104,8 +105,9 @@ namespace SHHS.Controller
             //Displays Dates From Next Month
             for (int i = 1; row < 6; i++)
             {
-                var label = new Button { Text = $"{i}", HorizontalOptions = LayoutOptions.Center, TextColor = Color.White, CornerRadius = 20, WidthRequest =40, HeightRequest = 40 ,BackgroundColor = Color.Transparent,  Opacity = 0.5 };
-                Calendar.Children.Add(label, column, row);
+                Button lb = ((Button)(Calendar.Children[row * 7 + column]));
+                lb.Text = $"{i}";
+                lb.Opacity = 0.5;
                 column++;
                 if (column != 0 && column % 7 == 0)
                 {
@@ -118,6 +120,8 @@ namespace SHHS.Controller
 
 
             }
+
+            //Highlight the current date
             if (currentMonth == DateTime.Today.Month && currentYear == DateTime.Today.Year)
             {
 

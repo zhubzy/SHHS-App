@@ -3,6 +3,7 @@
 using SHHS.View;
 using SHHS.Model;
 using Xamarin.Forms;
+
 namespace SHHS.Controller
 {
     public partial class MainPage : TabbedPage
@@ -16,16 +17,30 @@ namespace SHHS.Controller
         public MainPage()
         {
             InitializeComponent();
-            timer = new SHHSTimer();
-            HomePage.Children.Add(timer,  
-            widthConstraint:Constraint.RelativeToParent(parent=>parent.Width),
-            heightConstraint:Constraint.RelativeToParent(parent=>parent.Height / 3));
+            //timer = new SHHSTimer();
+            //HomePage.Children.Add(timer,null,null,
+            //Constraint.RelativeToParent((parent) => {
+            //    if(parent.Width > parent.Height){
+
+                    
+            //        return parent.Width;
+            //    }
+            //    return parent.Width ;
+            //}),
+            //Constraint.RelativeToParent((parent) => {
+            //    if (parent.Width > parent.Height)
+            //    {
+
+            //        return parent.Height;
+            //    }
+            //    return parent.Height /3;
+            //}));
+
             scheduleManager = new SHHSScheduleManager();
             scheduleManager.LocalJson();
 
 
-
-    }
+        }
         protected override void OnAppearing()
         {
             base.OnAppearing();
@@ -33,6 +48,15 @@ namespace SHHS.Controller
             //Tells the the timer that schedule has benn loaded
             RefreshSchedule();
             Console.WriteLine( scheduleManager.MinutesLeft +  " Minutes " + scheduleManager.SecondsLeft + " Seconds.");
+
+        }
+
+        protected override void OnSizeAllocated(double width, double height)
+        {
+            base.OnSizeAllocated(width, height);
+            if(width > height && HomePage.Children.Count > 0){
+                timer.canvasView.InvalidateSurface();
+            }
 
         }
 
@@ -87,6 +111,7 @@ namespace SHHS.Controller
                     {
                         isAnimating = true;
                         playAnimation(360);
+                        timer.isActive = false;           
                         RefreshSchedule();
                         return false;
                     }

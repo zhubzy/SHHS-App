@@ -24,6 +24,7 @@ namespace SHHS.View
                 textPaint.TextSize = 12;
                 textWidth = textPaint.MeasureText(_timeLeft);
                 canvasView.InvalidateSurface();
+
             }
         }
         public string PeriodInfo
@@ -76,7 +77,7 @@ namespace SHHS.View
 
         };
 
-        SKCanvasView canvasView;
+        public SKCanvasView canvasView;
 
         public SHHSTimer()
         {
@@ -90,7 +91,7 @@ namespace SHHS.View
             infoWidth = infoPaint.MeasureText(PeriodInfo);
             textWidth = textPaint.MeasureText(TimeLeft);
             if(Device.RuntimePlatform == Device.iOS)
-            Padding = new Thickness(0, 20, 0, 0);
+            Padding = new Thickness(20, 20, 0, 20);
             Content = canvasView;
 
         }
@@ -136,7 +137,7 @@ namespace SHHS.View
             infoPaint.TextSize = 0.7f * (info.Width - rect.Width) * 12 / scheduleWidth;
             SKRect scheduleBound = new SKRect();
             infoPaint.MeasureText("Regular", ref scheduleBound);
-            canvas.DrawText("Regular", rect.Width + (info.Width - rect.Width) / 2 - scheduleBound.MidX, info.Height / 2F - scheduleBound.MidY, infoPaint);
+            canvas.DrawText("Regular", rect.Width + (info.Width - rect.Width) / 2 - scheduleBound.MidX, info.Height / 2F , infoPaint);
 
             infoPaint.TextSize = 12;
             scheduleWidth = infoPaint.MeasureText("Schedule");
