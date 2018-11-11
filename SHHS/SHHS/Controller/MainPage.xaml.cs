@@ -17,38 +17,38 @@ namespace SHHS.Controller
         public MainPage()
         {
             InitializeComponent();
-            //timer = new SHHSTimer();
-            //HomePage.Children.Add(timer,null,null,
-            //Constraint.RelativeToParent((parent) => {
-            //    if(parent.Width > parent.Height){
+            timer = new SHHSTimer();
+            HomePage.Children.Add(timer,null,null,
+            Constraint.RelativeToParent((parent) => {
+                if(parent.Width > parent.Height){
 
                     
-            //        return parent.Width;
-            //    }
-            //    return parent.Width ;
-            //}),
-            //Constraint.RelativeToParent((parent) => {
-            //    if (parent.Width > parent.Height)
-            //    {
+                    return parent.Width;
+                }
+                return parent.Width ;
+            }),
+            Constraint.RelativeToParent((parent) => {
+                if (parent.Width > parent.Height)
+                {
 
-            //        return parent.Height;
-            //    }
-            //    return parent.Height /3;
-            //}));
+                    return parent.Height;
+                }
+                return parent.Height /3;
+            }));
 
             scheduleManager = new SHHSScheduleManager();
+
             scheduleManager.LocalJson();
 
 
         }
-        protected override void OnAppearing()
+        protected override async void OnAppearing()
         {
             base.OnAppearing();
-            //await scheduleManager.RefreshData();
+            await scheduleManager.GetScheduleException();
             //Tells the the timer that schedule has benn loaded
             RefreshSchedule();
             Console.WriteLine( scheduleManager.MinutesLeft +  " Minutes " + scheduleManager.SecondsLeft + " Seconds.");
-
         }
 
         protected override void OnSizeAllocated(double width, double height)
@@ -73,9 +73,10 @@ namespace SHHS.Controller
             timer.TimeLeft = "Loading";
             timer.PeriodInfo = scheduleManager.CurrentMessage;
             timer.length = scheduleManager.PeriodLength;
-
-
-            if (timer.minutes == 0 && timer.seconds == 0){
+            string scheduleName = scheduleManager.ScheduleName;
+            timer.line1 = scheduleName.Substring(0, scheduleName.IndexOf(" ", StringComparison.CurrentCulture) );
+            timer.line2 = scheduleName.Substring(scheduleName.IndexOf(" ", StringComparison.CurrentCulture) + 1);
+                if (timer.minutes == 0 && timer.seconds == 0){
 
                 timer.TimeLeft = "0:00";
                 timer.isActive = false;

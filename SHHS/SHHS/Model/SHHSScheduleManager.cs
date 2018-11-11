@@ -13,20 +13,53 @@ namespace SHHS.Model
     {
 
 
-        List<SHHSSchedule> ScheduleList { get; set; }
+        public List<SHHSSchedule> ScheduleList { get; set; }
         int CurrentSchedule { get; set; }
+        public int ScheduleOfTheDay { get; set; }
         public int MinutesLeft { get; set; }
         public int SecondsLeft { get; set; }
         public int PeriodLength { get; set; }
-        public string PeriodNumber { get; set; }
+        public string ScheduleName { get ; set;}
         public string CurrentMessage { get; set; }
         public Boolean IsActive { get; set; }
+
+        Dictionary<string, string> scheduleExceptions;
+
+
 
         public SHHSScheduleManager()
         {
 
             ScheduleList = new List<SHHSSchedule>();
+            scheduleExceptions = new Dictionary<string, string>();
+            
+        }
 
+
+        public async Task GetScheduleException(){
+
+            var firebase = new FirebaseClient("https://shhs-45632.firebaseio.com/");
+
+            try{
+
+                var exceptions = await firebase.Child("South Hills Schedule Exception").OnceAsync<SHHSScheduleExceptionManager>();
+                foreach (var e in exceptions)
+                {
+
+                    scheduleExceptions = e.Object.ScheduleExceptionLists;
+
+
+                }
+
+            }
+            catch (FirebaseException e){
+                
+
+                
+                Console.WriteLine(e.StackTrace);
+
+
+            }
 
         }
 
@@ -65,10 +98,11 @@ namespace SHHS.Model
 
 
             }
-            catch (FirebaseException e){
+            catch (FirebaseException e)
+            {
 
 
-                Console.WriteLine(e.Message);
+                Console.WriteLine(e.StackTrace);
 
             }
             // add new item to list of data and let the client generate new key for you (done offline)
@@ -163,14 +197,73 @@ namespace SHHS.Model
 
         public void GetTimeUntilEndOfPeriod(){
 
+            ScheduleOfTheDay = FindScheduleType();
 
-            CurrentSchedule = FindCurrentSchedule(DateTime.Now, ScheduleList[0].Schedule);
-            TimeTilEndOfPeriod(DateTime.Now, ScheduleList[0]);
+            if(ScheduleOfTheDay == -1){
+                    IsActive = false;
+                    MinutesLeft = 0;
+                    SecondsLeft = 0;
+                    CurrentMessage = "Class is Over";
+                    ScheduleName = "No School";
+            } else {
+            CurrentSchedule = FindCurrentSchedule(DateTime.Now, ScheduleList[ScheduleOfTheDay].Schedule);
+            TimeTilEndOfPeriod(DateTime.Now, ScheduleList[ScheduleOfTheDay]);
+                 ScheduleName = ScheduleList[ScheduleOfTheDay].ScheduleName ;
+
+            }
         }
+
+
+
+        public int FindScheduleType(){
+
+     
+
+            String[] scheduleName = new String[scheduleExceptions.Count];
+            scheduleExceptions.Keys.CopyTo(scheduleName, 0);
+
+            String[] time = new String[scheduleExceptions.Count];
+            scheduleExceptions.Values.CopyTo(time, 0);
+
+            for (int i = 0; i < scheduleExceptions.Count; i++)
+            {
+
+                bool isFound = DateTime.Equals(DateTime.Today, DateTime.Parse(scheduleName[i]));
+
+                        if (string.Equals(time[i], "Late Start") && isFound)              
+                            return 1;
+                        if (string.Equals(time[i], "Extended Break") && isFound)  
+                            return 2;
+                        if (string.Equals(time[i], "Minimum") && isFound)
+                            return 3;
+                        if (string.Equals(time[i], "Rally") && isFound)     
+                            return 4;
+                        if (string.Equals(time[i], "Extended Lunch") && isFound)
+                            return 5;
+                        if (string.Equals(time[i], "Final Exam") && isFound)
+                            return 6;
+            }
+
+
+                if ( ((int)DateTime.Today.DayOfWeek == 6 || (int)DateTime.Today.DayOfWeek == 0))
+                    
+                            return -1;
+            
+  
+                            return 0;
+
+
+
+                }
+
+
+
+
         public void LocalJson()
         {
 
 
+            ScheduleList.RemoveRange(0, ScheduleList.Count);
 
             var assembly = IntrospectionExtensions.GetTypeInfo(typeof(SHHSScheduleManager)).Assembly;
             Stream stream = assembly.GetManifestResourceStream("SHHS.shhsdata.json");
@@ -183,12 +276,13 @@ namespace SHHS.Model
                 foreach (var schedule in root["South Hills Schedule"].Children().Children()){
 
                     SHHSSchedule s = JsonConvert.DeserializeObject<SHHSSchedule>(schedule.ToString());
+                    ScheduleList.Add(s);
+
                     for (int i = 0; i < s.Schedule.Count; i++)
                     {
                         s.Schedule[i].StartDateTime = DateTime.Parse(s.Schedule[i].StartTime);
                         s.Schedule[i].EndDateTime = DateTime.Parse(s.Schedule[i].EndTime);
                         s.Schedule[i].Length = CalcTime(s.Schedule[i].StartDateTime, s.Schedule[i].EndDateTime);
-                        ScheduleList.Add(s);
                     }
 
                 }

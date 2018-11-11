@@ -7,7 +7,7 @@ namespace SHHS.Model
     {
 
 
-        public List<SHHSPeriod> Schedule{ get; set; }
+        public List<SHHSPeriod> Schedule { get; set; }
         public string ScheduleName { get; set; }
 
         public SHHSSchedule()
@@ -22,9 +22,9 @@ namespace SHHS.Model
     public class SHHSPeriod
     {
 
-        public string PeriodName  { get; set; }
-         public string StartTime { get; set; }
-         public string EndTime { get; set; }
+        public string PeriodName { get; set; }
+        public string StartTime { get; set; }
+        public string EndTime { get; set; }
         public DateTime StartDateTime { get; set; }
         public DateTime EndDateTime { get; set; }
         public int Length { get; set; }

@@ -11,6 +11,8 @@ namespace SHHS.View
         float _startingAngleSlider;
         string _timeLeft = "Loading";
         string _periodInfo = "";
+        public string line1 = "";
+        public string line2 = "";
         public Boolean isActive;
 
         public float SweepAngleSlider { get { return _sweepingAngleSlider; } set { _sweepingAngleSlider = value; canvasView.InvalidateSurface(); } }
@@ -90,8 +92,6 @@ namespace SHHS.View
             canvasView.PaintSurface += Handle_PaintSurface;
             infoWidth = infoPaint.MeasureText(PeriodInfo);
             textWidth = textPaint.MeasureText(TimeLeft);
-            if(Device.RuntimePlatform == Device.iOS)
-            Padding = new Thickness(20, 20, 0, 20);
             Content = canvasView;
 
         }
@@ -131,20 +131,29 @@ namespace SHHS.View
 
             infoPaint.Color = SKColors.White;
 
-
+            float scheduleWidth;
             infoPaint.TextSize = 12;
-            float scheduleWidth = infoPaint.MeasureText("Regular");
-            infoPaint.TextSize = 0.7f * (info.Width - rect.Width) * 12 / scheduleWidth;
+
+            if (line1.Length > line2.Length){
+
+                scheduleWidth = infoPaint.MeasureText(line1);
+                infoPaint.TextSize = 0.7f * (info.Width - rect.Width) * 12 / scheduleWidth;
+
+            } else {
+
+                scheduleWidth = infoPaint.MeasureText(line2);
+                infoPaint.TextSize = 0.7f * (info.Width - rect.Width) * 12 / scheduleWidth;
+
+            }
+
+
             SKRect scheduleBound = new SKRect();
-            infoPaint.MeasureText("Regular", ref scheduleBound);
-            canvas.DrawText("Regular", rect.Width + (info.Width - rect.Width) / 2 - scheduleBound.MidX, info.Height / 2F , infoPaint);
+            infoPaint.MeasureText(line1, ref scheduleBound);
+            canvas.DrawText(line1, rect.Width + (info.Width - rect.Width) / 2 - scheduleBound.MidX, info.Height / 2F , infoPaint);
 
-            infoPaint.TextSize = 12;
-            scheduleWidth = infoPaint.MeasureText("Schedule");
-            infoPaint.TextSize = 0.7f * (info.Width - rect.Width) * 12 / scheduleWidth;
             scheduleBound = new SKRect();
-            infoPaint.MeasureText("Schedule", ref scheduleBound);
-            canvas.DrawText("Schedule", rect.Width + (info.Width - rect.Width) / 2 - scheduleBound.MidX, info.Height / 2F - scheduleBound.MidY + scheduleBound.Height, infoPaint);
+            infoPaint.MeasureText(line2, ref scheduleBound);
+            canvas.DrawText(line2, rect.Width + (info.Width - rect.Width) / 2 - scheduleBound.MidX, info.Height / 2F - scheduleBound.MidY + scheduleBound.Height, infoPaint);
 
         }
 

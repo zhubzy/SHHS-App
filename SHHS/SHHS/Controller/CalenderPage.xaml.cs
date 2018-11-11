@@ -1,49 +1,54 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 using System.Globalization;
+using SHHS.Model;
+using System.Collections.Generic;
 
 namespace SHHS.Controller
 {
     public partial class CalenderPage : ContentPage
     {
 
-        private int currentYear = DateTime.Today.Date.Year;
-        private int currentMonth = DateTime.Today.Date.Month;
-
+         int currentYear = DateTime.Today.Date.Year;
+         int currentMonth = DateTime.Today.Date.Month;
+         List<SHHSAnnoucement> annoucements;
 
 
 
         public CalenderPage()
         {
             InitializeComponent();
+
+            //Calender Initalization
             for (int row = 0; row < 6; row++)
                 for (int col = 0; col < 7; col++){
 
                     var label = new Button { Text = $"{row*7 + col}", HorizontalOptions = LayoutOptions.Center, TextColor = Color.White, CornerRadius = 20, WidthRequest = 40, HeightRequest = 40, BackgroundColor = Color.Transparent, Opacity = 1 };
                     Calendar.Children.Add(label, col, row);
                 }
-
             RefreshDate();
+
+
+            //Annoucement List View Initalization
+            annoucements = new List<SHHSAnnoucement>
+            {
+                new SHHSAnnoucement{Title = "Light Up The Night", Time = "5:30PM - 7:30PM", DaysLeft = "In 2 days", Location = "South Hills High School"},
+                new SHHSAnnoucement{Title = "Light Up The Night", Time = "5:30PM - 7:30PM", DaysLeft = "In 2 days", Location = "South Hills High School"},
+                new SHHSAnnoucement{Title = "Light Up The Night", Time = "5:30PM - 7:30PM", DaysLeft = "In 2 days", Location = "South Hills High School"},
+                new SHHSAnnoucement{Title = "Light Up The Night", Time = "5:30PM - 7:30PM", DaysLeft = "In 2 days", Location = "South Hills High School"},
+                new SHHSAnnoucement{Title = "Light Up The Night", Time = "5:30PM - 7:30PM", DaysLeft = "In 2 days", Location = "South Hills High School"},
+                new SHHSAnnoucement{Title = "Light Up The Night", Time = "5:30PM - 7:30PM", DaysLeft = "In 2 days", Location = "South Hills High School"},
+                new SHHSAnnoucement{Title = "Light Up The Night", Time = "5:30PM - 7:30PM", DaysLeft = "In 2 days", Location = "South Hills High School"},
+                new SHHSAnnoucement{Title = "Light Up The Night", Time = "5:30PM - 7:30PM", DaysLeft = "In 2 days", Location = "South Hills High School"}
+
+            };
+
+            AnnoucementList.ItemsSource = annoucements;
 
             
         }
 
-
-
-        //RelativeView.Children.Add(new Button { Text = "Announcement1", BorderColor = Color.White, IsEnabled = false, CornerRadius = 35, BorderWidth = 2 },
-        //                                                                Constraint.RelativeToParent(parent=>parent.X+35),
-        //                                                                Constraint.RelativeToParent(parent=>parent.Width*0.8),
-        //                                                                Constraint.RelativeToParent(parent=>monthLabel.Y+350),
-        //                                                                Constraint.RelativeToParent(parent=>monthLabel.Height*2));
-        //RelativeView.Children.Add(new Button { Text = "Announcement2", BorderColor = Color.White, CornerRadius = 35, BorderWidth = 2, IsEnabled = false },
-        //Constraint.RelativeToParent(parent => parent.X + 35),
-        //Constraint.RelativeToParent(parent => parent.Width * 0.8),
-        //Constraint.RelativeToParent(parent => monthLabel.Y + 500),
-        //Constraint.RelativeToParent(parent => monthLabel.Height * 2));
 
 
           void RefreshDate()
@@ -186,7 +191,7 @@ namespace SHHS.Controller
              RefreshDate();
         }
 
-        private async void StartAnimation(Button button)
+         async void StartAnimation(Button button)
         {
             await Task.Delay(20);
             await button.FadeTo(0, 250);

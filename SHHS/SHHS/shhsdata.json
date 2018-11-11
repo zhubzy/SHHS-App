@@ -1,74 +1,74 @@
 {
   "South Hills Schedule" : {
-    "Regular Schedule" : {
-      "Schedule" : [ 
+    "Regular Schedule": {
+      "Schedule": [
 
-      {
-        "PeriodName" : "Period 1",
-        "StartTime" : "07:45",
-        "EndTime" : "08:37"
-      }, 
-      {
+        {
+          "PeriodName": "Period 1",
+          "StartTime": "07:45",
+          "EndTime": "08:37"
+        },
+        {
 
-        "PeriodName" : "Period 2",
-        "StartTime" : "08:42",
-        "EndTime" : "09:34"
+          "PeriodName": "Period 2",
+          "StartTime": "08:42",
+          "EndTime": "09:34"
 
-      }, 
-      {
+        },
+        {
 
-        "PeriodName" : "Period 3",
-        "StartTime" : "09:39",
-        "EndTime" : "10:31"
+          "PeriodName": "Period 3",
+          "StartTime": "09:39",
+          "EndTime": "10:31"
 
-      }, 
-      {
+        },
+        {
 
-        "PeriodName" : "Break",
-        "StartTime" : "10:31",
-        "EndTime" : "10:41"
+          "PeriodName": "Break",
+          "StartTime": "10:31",
+          "EndTime": "10:41"
 
-      }, 
-      {
+        },
+        {
 
-        "PeriodName" : "Period 4",
-        "StartTime" : "10:46",
-        "EndTime" : "11:38"
+          "PeriodName": "Period 4",
+          "StartTime": "10:46",
+          "EndTime": "11:38"
 
-      }, 
-      {
+        },
+        {
 
-        "PeriodName" : "Period 5",
-        "StartTime" : "11:43",
-        "EndTime" : "12:35"
+          "PeriodName": "Period 5",
+          "StartTime": "11:43",
+          "EndTime": "12:35"
 
-      }, 
-      {
+        },
+        {
 
-        "PeriodName" : "Lunch",
-        "StartTime" : "12:35",
-        "EndTime" : "13:10"
+          "PeriodName": "Lunch",
+          "StartTime": "12:35",
+          "EndTime": "13:10"
 
-      }, 
-      {
+        },
+        {
 
-        "PeriodName" : "Period 6",
-        "StartTime" : "13:15",
-        "EndTime" : "14:07"
+          "PeriodName": "Period 6",
+          "StartTime": "13:15",
+          "EndTime": "14:07"
 
-      }, 
-      {
+        },
+        {
 
-        "PeriodName" : "Period 7",
-        "StartTime" : "14:12",
-        "EndTime" : "15:04"
+          "PeriodName": "Period 7",
+          "StartTime": "14:12",
+          "EndTime": "15:04"
 
-      }
+        }
 
       ],
 
 
-      "ScheduleName" : "Regular Schedule"
+      "ScheduleName": "Regular Schedule"
     },
 
         "Late Start Schedule" : {
@@ -134,19 +134,293 @@
         "StartTime" : "14:12",
         "EndTime" : "15:04"
 
-      }, 
-      {
-
-        "PeriodName" : "Dinner",
-        "StartTime" : "17:25",
-        "EndTime" : "17:30"
-
       }
+    
 
       ],
 
 
-      "ScheduleName" : "Late Start Schedule"
+      "ScheduleName" : "Late Start"
+    },
+    "Extended Break": {
+      "Schedule": [
+
+        {
+          "PeriodName": "Period 1",
+          "StartTime": "07:45",
+          "EndTime": "08:35"
+        },
+        {
+
+          "PeriodName": "Period 2",
+          "StartTime": "08:40",
+          "EndTime": "09:30"
+
+        },
+        {
+
+          "PeriodName": "Period 3",
+          "StartTime": "09:35",
+          "EndTime": "10:25"
+
+        },
+        {
+
+          "PeriodName": "Break",
+          "StartTime": "10:25",
+          "EndTime": "10:49"
+
+        },
+        {
+
+          "PeriodName": "Period 4",
+          "StartTime": "10:54",
+          "EndTime": "11:44"
+
+        },
+        {
+
+          "PeriodName": "Period 5",
+          "StartTime": "11:49",
+          "EndTime": "12:39"
+
+        },
+        {
+
+          "PeriodName": "Lunch",
+          "StartTime": "12:39",
+          "EndTime": "13:14"
+
+        },
+        {
+
+          "PeriodName": "Period 6",
+          "StartTime": "13:19",
+          "EndTime": "14:09"
+
+        },
+        {
+
+          "PeriodName": "Period 7",
+          "StartTime": "14:14",
+          "EndTime": "15:04"
+
+        }
+
+      ],
+
+
+      "ScheduleName": "Extended Break"
+    },
+    "Minimum": {
+    "Schedule": [
+
+        {
+          "PeriodName": "Period 1",
+          "StartTime": "07:45",
+          "EndTime": "08:15"
+        },
+        {
+
+          "PeriodName": "Period 2",
+          "StartTime": "08:20",
+          "EndTime": "08:50"
+
+        },
+        {
+
+          "PeriodName": "Period 3",
+          "StartTime": "08:55",
+          "EndTime": "09:25"
+
+        },
+        {
+
+          "PeriodName": "Period 4",
+          "StartTime": "09:30",
+          "EndTime": "10:00"
+
+        },
+        {
+
+          "PeriodName": "Break",
+          "StartTime": "10:00",
+          "EndTime": "10:10"
+
+        },
+        {
+
+          "PeriodName": "Period 5",
+          "StartTime": "10:15",
+          "EndTime": "10:45"
+
+        },
+        {
+
+          "PeriodName": "Period 6",
+          "StartTime": "10:50",
+          "EndTime": "11:20"
+
+        },
+        {
+
+          "PeriodName": "Period 7",
+          "StartTime": "11:25",
+          "EndTime": "11:55"
+
+        }
+
+      ],
+
+
+      "ScheduleName": "Minimum"
+    },
+    "Rally": {
+      "Schedule": [
+
+        {
+          "PeriodName": "Period 1",
+          "StartTime": "07:45",
+          "EndTime": "08:29"
+        },
+        {
+
+          "PeriodName": "Period 2",
+          "StartTime": "08:34",
+          "EndTime": "09:18"
+
+        },
+        {
+
+          "PeriodName": "Period 3",
+          "StartTime": "09:23",
+          "EndTime": "10:07"
+
+        },
+        {
+
+          "PeriodName": "Rally",
+          "StartTime": "10:07",
+          "EndTime": "11:03"
+
+        },
+        {
+
+          "PeriodName": "Break",
+          "StartTime": "11:03",
+          "EndTime": "11:13"
+
+        },
+        {
+
+          "PeriodName": "Period 4",
+          "StartTime": "11:18",
+          "EndTime": "12:02"
+
+        },
+        {
+
+          "PeriodName": "Period 5",
+          "StartTime": "12:07",
+          "EndTime": "12:51"
+
+        },
+        {
+
+          "PeriodName": "Lunch",
+          "StartTime": "12:51",
+          "EndTime": "13:26"
+
+        },
+        {
+
+          "PeriodName": "Period 6",
+          "StartTime": "13:31",
+          "EndTime": "14:15"
+
+        },
+        {
+
+          "PeriodName": "Period 7",
+          "StartTime": "14:20",
+          "EndTime": "15:04"
+
+        }
+
+      ],
+
+
+      "ScheduleName": "Rally"
+    },
+    "Extended Lunch": {
+      "Schedule": [
+
+        {
+          "PeriodName": "Period 1",
+          "StartTime": "07:45",
+          "EndTime": "08:35"
+        },
+        {
+
+          "PeriodName": "Period 2",
+          "StartTime": "08:40",
+          "EndTime": "09:30"
+
+        },
+        {
+
+          "PeriodName": "Period 3",
+          "StartTime": "09:35",
+          "EndTime": "10:25"
+
+        },
+        {
+
+          "PeriodName": "Break",
+          "StartTime": "10:25",
+          "EndTime": "10:49"
+
+        },
+        {
+
+          "PeriodName": "Period 4",
+          "StartTime": "10:54",
+          "EndTime": "11:44"
+
+        },
+        {
+
+          "PeriodName": "Period 5",
+          "StartTime": "11:49",
+          "EndTime": "12:39"
+
+        },
+        {
+
+          "PeriodName": "Lunch",
+          "StartTime": "12:39",
+          "EndTime": "13:14"
+
+        },
+        {
+
+          "PeriodName": "Period 6",
+          "StartTime": "13:19",
+          "EndTime": "14:09"
+
+        },
+        {
+
+          "PeriodName": "Period 7",
+          "StartTime": "14:14",
+          "EndTime": "15:04"
+
+        }
+
+      ],
+
+
+      "ScheduleName": "Extended Lunch"
     }
 
 
