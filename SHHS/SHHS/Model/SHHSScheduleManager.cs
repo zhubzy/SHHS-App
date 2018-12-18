@@ -18,6 +18,7 @@ namespace SHHS.Model
         public int ScheduleOfTheDay { get; set; }
         public int MinutesLeft { get; set; }
         public int SecondsLeft { get; set; }
+        public int Offset { get; set; }
         public int PeriodLength { get; set; }
         public string ScheduleName { get ; set;}
         public string CurrentMessage { get; set; }
@@ -47,7 +48,7 @@ namespace SHHS.Model
                 {
 
                     scheduleExceptions = e.Object.ScheduleExceptionLists;
-
+                    Offset = e.Object.Offset;
 
                 }
 
@@ -227,34 +228,15 @@ namespace SHHS.Model
 
             for (int i = 0; i < scheduleExceptions.Count; i++)
             {
-
                 bool isFound = DateTime.Equals(DateTime.Today, DateTime.Parse(scheduleName[i]));
-
-                        if (string.Equals(time[i], "Late Start") && isFound)              
-                            return 1;
-                        if (string.Equals(time[i], "Extended Break") && isFound)  
-                            return 2;
-                        if (string.Equals(time[i], "Minimum") && isFound)
-                            return 3;
-                        if (string.Equals(time[i], "Rally") && isFound)     
-                            return 4;
-                        if (string.Equals(time[i], "Extended Lunch") && isFound)
-                            return 5;
-                        if (string.Equals(time[i], "Final Exam") && isFound)
-                            return 6;
+                for (int s = 0; s < ScheduleList.Count; s++)
+                    if(string.Equals(time[i],ScheduleList[s].ScheduleName) && isFound)
+                        return s;
             }
 
 
-                if ( ((int)DateTime.Today.DayOfWeek == 6 || (int)DateTime.Today.DayOfWeek == 0))
-                    
-                            return -1;
-            
-  
-                            return 0;
-
-
-
-                }
+            return (int)DateTime.Today.DayOfWeek == 6 || (int)DateTime.Today.DayOfWeek == 0 ? -1 : 0;
+        }
 
 
 
@@ -280,8 +262,8 @@ namespace SHHS.Model
 
                     for (int i = 0; i < s.Schedule.Count; i++)
                     {
-                        s.Schedule[i].StartDateTime = DateTime.Parse(s.Schedule[i].StartTime);
-                        s.Schedule[i].EndDateTime = DateTime.Parse(s.Schedule[i].EndTime);
+                        s.Schedule[i].StartDateTime = DateTime.Parse(s.Schedule[i].StartTime).AddSeconds(Offset);
+                        s.Schedule[i].EndDateTime = DateTime.Parse(s.Schedule[i].EndTime).AddSeconds(Offset);
                         s.Schedule[i].Length = CalcTime(s.Schedule[i].StartDateTime, s.Schedule[i].EndDateTime);
                     }
 

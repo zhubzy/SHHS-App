@@ -6,6 +6,6 @@ namespace SHHS.Model
     public class SHHSScheduleExceptionManager
     {
         public Dictionary<string, string> ScheduleExceptionLists { get; set; }
-
+        public int Offset { get; set; }
     }
 }

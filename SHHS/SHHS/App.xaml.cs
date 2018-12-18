@@ -2,6 +2,9 @@
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using SHHS.Controller;
+using System.Globalization;
+using System.Threading;
+
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 
 namespace SHHS
@@ -14,6 +17,9 @@ namespace SHHS
         public App()
         {
             InitializeComponent();
+            var userSelectedCulture = new CultureInfo("en-US");
+
+            Thread.CurrentThread.CurrentCulture = userSelectedCulture;
             shhsMain = new MainPage();
             MainPage = shhsMain;
         }

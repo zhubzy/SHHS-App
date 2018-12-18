@@ -22,6 +22,7 @@ namespace SHHS.View
             get { return _timeLeft; }
             set
             {
+                
                 _timeLeft = value;
                 textPaint.TextSize = 12;
                 textWidth = textPaint.MeasureText(_timeLeft);

@@ -1,7 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-
+﻿
+using CarouselView.FormsPlugin.iOS;
+using FFImageLoading.Forms.Touch;
 using Foundation;
 using UIKit;
 
@@ -25,7 +24,9 @@ namespace SHHS.iOS
             global::Xamarin.Forms.Forms.Init();
             LoadApplication(new App());
             UITabBar.Appearance.TintColor = UIColor.White;
-            
+            CarouselViewRenderer.Init();
+            FFImageLoading.Forms.Platform.CachedImageRenderer.Init();
+
 
             return base.FinishedLaunching(app, options);
         }

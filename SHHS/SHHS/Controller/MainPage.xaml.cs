@@ -3,6 +3,7 @@
 using SHHS.View;
 using SHHS.Model;
 using Xamarin.Forms;
+using CarouselView.FormsPlugin.Abstractions;
 
 namespace SHHS.Controller
 {
@@ -12,49 +13,135 @@ namespace SHHS.Controller
 
         public SHHSScheduleManager scheduleManager;
         SHHSTimer timer;
+        CarouselViewControl myCarousel;
+        SHHSAnnouncementManager announcementManager;
+
         Boolean isAnimating;
 
         public MainPage()
         {
             InitializeComponent();
             timer = new SHHSTimer();
-            HomePage.Children.Add(timer,null,null,
-            Constraint.RelativeToParent((parent) => {
-                if(parent.Width > parent.Height){
+            announcementManager = new SHHSAnnouncementManager();
+            myCarousel = new CarouselViewControl
+            {
+                ItemsSource = announcementManager.MyItemsSource,  // ADD/REMOVE PAGES FROM CAROUSEL ADDING/REMOVING ELEMENTS FROM THE COLLECTION
+                Position = 0, //default
+                InterPageSpacing = 10,
+                Orientation = CarouselViewOrientation.Horizontal,
+                PositionSelectedCommand = announcementManager.MyCommand,
+                ShowArrows = false,
+                ShowIndicators = false,
+                BackgroundColor = Color.FromHex("#E5EDCD")
+            };
+            myCarousel.PositionSelected += Handle_PositionSelected;
+            myCarousel.Scrolled += Handle_Scrolled;
+         
+  
+            
 
-                    
+            //x,y,w,h
+            //Adding timer
+            HomePage.Children.Add(timer, null, null,
+            Constraint.RelativeToParent((parent) =>
+            {
+                if (parent.Width > parent.Height)
+                {
+
+
                     return parent.Width;
                 }
-                return parent.Width ;
+                return parent.Width;
             }),
-            Constraint.RelativeToParent((parent) => {
+            Constraint.RelativeToParent((parent) =>
+            {
                 if (parent.Width > parent.Height)
                 {
 
                     return parent.Height;
                 }
-                return parent.Height /3;
+                return parent.Height / 3;
             }));
+
+
+
+            //Adding news scroll
+            HomePage.Children.Add(myCarousel, null,Constraint.RelativeToParent((parent) =>
+            {
+                if (parent.Width > parent.Height)
+                {
+                    return 0;
+                }
+                return timer.Height + 30;
+            }),
+            Constraint.RelativeToParent((parent) =>
+            {
+                if (parent.Width > parent.Height)
+                {
+
+
+                    return 0;
+                }
+                return parent.Width;
+            }),
+            Constraint.RelativeToParent((parent) =>
+            {
+                if (parent.Width > parent.Height)
+                {
+
+                    return 0;
+                }
+                return parent.Height / 3;
+            }));
+
+
+
+
 
             scheduleManager = new SHHSScheduleManager();
 
-            scheduleManager.LocalJson();
 
+            Device.StartTimer(TimeSpan.FromSeconds(5), () =>
+            {
+                if (myCarousel.ItemsSource.GetCount() == 0)
+                {
+                    return false;
+                }
+
+                if (myCarousel.Position == myCarousel.ItemsSource.GetCount() - 1)
+                {
+
+                    myCarousel.Position = 0;
+                }
+                else
+                {
+                    myCarousel.Position += 1;
+
+
+                }
+                return true; // True = Repeat again, False = Stop the timer
+            });
 
         }
         protected override async void OnAppearing()
         {
             base.OnAppearing();
             await scheduleManager.GetScheduleException();
+            await scheduleManager.RefreshData();
+            await announcementManager.GetAnnoucements();
+            myCarousel.ItemsSource = announcementManager.MyItemsSource;
+
             //Tells the the timer that schedule has benn loaded
             RefreshSchedule();
-            Console.WriteLine( scheduleManager.MinutesLeft +  " Minutes " + scheduleManager.SecondsLeft + " Seconds.");
+         
+            Console.WriteLine(scheduleManager.MinutesLeft + " Minutes " + scheduleManager.SecondsLeft + " Seconds.");
         }
 
         protected override void OnSizeAllocated(double width, double height)
         {
             base.OnSizeAllocated(width, height);
-            if(width > height && HomePage.Children.Count > 0){
+            if (width > height && HomePage.Children.Count > 0)
+            {
                 timer.canvasView.InvalidateSurface();
             }
 
@@ -74,21 +161,27 @@ namespace SHHS.Controller
             timer.PeriodInfo = scheduleManager.CurrentMessage;
             timer.length = scheduleManager.PeriodLength;
             string scheduleName = scheduleManager.ScheduleName;
-            timer.line1 = scheduleName.Substring(0, scheduleName.IndexOf(" ", StringComparison.CurrentCulture) );
+            timer.line1 = scheduleName.Substring(0, scheduleName.IndexOf(" ", StringComparison.CurrentCulture));
             timer.line2 = scheduleName.Substring(scheduleName.IndexOf(" ", StringComparison.CurrentCulture) + 1);
-                if (timer.minutes == 0 && timer.seconds == 0){
+
+            if (timer.minutes == 0 && timer.seconds == 0)
+            {
 
                 timer.TimeLeft = "0:00";
                 timer.isActive = false;
 
                 //First time starting
-            } else if (!timer.isActive) {
+            }
+            else if (!timer.isActive)
+            {
 
                 StartTime();
 
 
                 //Resuming from app
-            } else {
+            }
+            else
+            {
 
 
 
@@ -112,7 +205,7 @@ namespace SHHS.Controller
                     {
                         isAnimating = true;
                         playAnimation(360);
-                        timer.isActive = false;           
+                        timer.isActive = false;
                         RefreshSchedule();
                         return false;
                     }
@@ -122,14 +215,17 @@ namespace SHHS.Controller
 
                 }
 
-                    timer.seconds--;
-                    timer.TimeLeft = timer.minutes.ToString("00") + ":" + timer.seconds.ToString("00");
-                    int remainingsecs = (timer.minutes * 60 + timer.seconds);
-                    float newAngle = (360.0F * (remainingsecs * 1.0F / timer.length));
-                if(Math.Abs(timer.SweepAngleSlider - newAngle) > 5 && isAnimating == false){
+                timer.seconds--;
+                timer.TimeLeft = timer.minutes.ToString("00") + ":" + timer.seconds.ToString("00");
+                int remainingsecs = (timer.minutes * 60 + timer.seconds);
+                float newAngle = (360.0F * (remainingsecs * 1.0F / timer.length));
+                if (Math.Abs(timer.SweepAngleSlider - newAngle) > 5 && isAnimating == false)
+                {
                     isAnimating = true;
                     playAnimation(newAngle);
-                } else {
+                }
+                else
+                {
                     timer.SweepAngleSlider = newAngle;
                 }
 
@@ -138,7 +234,8 @@ namespace SHHS.Controller
 
         }
 
-        void playAnimation(float dgr){
+        void playAnimation(float dgr)
+        {
 
 
             Device.StartTimer(TimeSpan.FromMilliseconds(0.1), () =>
@@ -147,13 +244,16 @@ namespace SHHS.Controller
                 if (timer.SweepAngleSlider > dgr)
                 {
                     timer.SweepAngleSlider -= 3;
-                } else {
+                }
+                else
+                {
 
                     timer.SweepAngleSlider += 3;
 
                 }
 
-                if (Math.Abs(timer.SweepAngleSlider - dgr)  <= 5){
+                if (Math.Abs(timer.SweepAngleSlider - dgr) <= 5)
+                {
                     timer.SweepAngleSlider = dgr;
                     isAnimating = false;
                     return false;
@@ -168,7 +268,18 @@ namespace SHHS.Controller
 
 
 
+        void Handle_PositionSelected(object sender, CarouselView.FormsPlugin.Abstractions.PositionSelectedEventArgs e)
+        {
 
+            Console.WriteLine("Position " + e.NewValue + " selected.");
+
+        }
+
+        void Handle_Scrolled(object sender, CarouselView.FormsPlugin.Abstractions.ScrolledEventArgs e)
+        {
+            Console.WriteLine("Scrolled to " + e.NewValue + " percent.");
+            Console.WriteLine("Direction = " + e.Direction);
+        }
 
 
     }

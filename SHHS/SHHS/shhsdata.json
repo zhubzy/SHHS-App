@@ -76,63 +76,56 @@
 
       {
         "PeriodName" : "Period 1",
-        "StartTime" : "07:45",
-        "EndTime" : "08:37"
+        "StartTime" : "09:50",
+        "EndTime" : "10:24"
       }, 
       {
 
         "PeriodName" : "Period 2",
-        "StartTime" : "08:42",
-        "EndTime" : "09:34"
+        "StartTime" : "10:29",
+        "EndTime" : "11:03"
 
       }, 
       {
 
         "PeriodName" : "Period 3",
-        "StartTime" : "09:39",
-        "EndTime" : "10:31"
+        "StartTime" : "11:08",
+        "EndTime" : "11:42"
 
-      }, 
+      },
       {
 
-        "PeriodName" : "Break",
-        "StartTime" : "10:31",
-        "EndTime" : "10:41"
+          "PeriodName": "Period 4",
+          "StartTime": "11:47",
+          "EndTime": "12:21"
 
-      }, 
+      },
       {
 
-        "PeriodName" : "Period 4",
-        "StartTime" : "10:46",
-        "EndTime" : "11:38"
+        "PeriodName" : "Lunch",
+        "StartTime" : "12:21",
+        "EndTime" : "13:00"
 
       }, 
       {
 
         "PeriodName" : "Period 5",
-        "StartTime" : "11:43",
-        "EndTime" : "12:35"
-
-      }, 
-      {
-
-        "PeriodName" : "Lunch",
-        "StartTime" : "12:35",
-        "EndTime" : "13:10"
+        "StartTime" : "13:05",
+        "EndTime" : "13:39"
 
       }, 
       {
 
         "PeriodName" : "Period 6",
-        "StartTime" : "1:15",
-        "EndTime" : "2:07"
+        "StartTime" : "13:44",
+        "EndTime" : "14:18"
 
       }, 
       {
 
         "PeriodName" : "Period 7",
-        "StartTime" : "14:12",
-        "EndTime" : "15:04"
+        "StartTime" : "14:23",
+        "EndTime" : "14:57"
 
       }
     

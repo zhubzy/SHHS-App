@@ -12,7 +12,7 @@ namespace SHHS.Controller
 
          int currentYear = DateTime.Today.Date.Year;
          int currentMonth = DateTime.Today.Date.Month;
-         List<SHHSAnnoucement> annoucements;
+         List<SHHSEvent> annoucements;
 
 
 
@@ -31,16 +31,16 @@ namespace SHHS.Controller
 
 
             //Annoucement List View Initalization
-            annoucements = new List<SHHSAnnoucement>
+            annoucements = new List<SHHSEvent>
             {
-                new SHHSAnnoucement{Title = "Light Up The Night", Time = "5:30PM - 7:30PM", DaysLeft = "In 2 days", Location = "South Hills High School"},
-                new SHHSAnnoucement{Title = "Light Up The Night", Time = "5:30PM - 7:30PM", DaysLeft = "In 2 days", Location = "South Hills High School"},
-                new SHHSAnnoucement{Title = "Light Up The Night", Time = "5:30PM - 7:30PM", DaysLeft = "In 2 days", Location = "South Hills High School"},
-                new SHHSAnnoucement{Title = "Light Up The Night", Time = "5:30PM - 7:30PM", DaysLeft = "In 2 days", Location = "South Hills High School"},
-                new SHHSAnnoucement{Title = "Light Up The Night", Time = "5:30PM - 7:30PM", DaysLeft = "In 2 days", Location = "South Hills High School"},
-                new SHHSAnnoucement{Title = "Light Up The Night", Time = "5:30PM - 7:30PM", DaysLeft = "In 2 days", Location = "South Hills High School"},
-                new SHHSAnnoucement{Title = "Light Up The Night", Time = "5:30PM - 7:30PM", DaysLeft = "In 2 days", Location = "South Hills High School"},
-                new SHHSAnnoucement{Title = "Light Up The Night", Time = "5:30PM - 7:30PM", DaysLeft = "In 2 days", Location = "South Hills High School"}
+                new SHHSEvent{Title = "Light Up The Night", Time = "5:30PM - 7:30PM", DaysLeft = "In 2 days", Location = "South Hills High School"},
+                new SHHSEvent{Title = "Light Up The Night", Time = "5:30PM - 7:30PM", DaysLeft = "In 2 days", Location = "South Hills High School"},
+                new SHHSEvent{Title = "Light Up The Night", Time = "5:30PM - 7:30PM", DaysLeft = "In 2 days", Location = "South Hills High School"},
+                new SHHSEvent{Title = "Light Up The Night", Time = "5:30PM - 7:30PM", DaysLeft = "In 2 days", Location = "South Hills High School"},
+                new SHHSEvent{Title = "Light Up The Night", Time = "5:30PM - 7:30PM", DaysLeft = "In 2 days", Location = "South Hills High School"},
+                new SHHSEvent{Title = "Light Up The Night", Time = "5:30PM - 7:30PM", DaysLeft = "In 2 days", Location = "South Hills High School"},
+                new SHHSEvent{Title = "Light Up The Night", Time = "5:30PM - 7:30PM", DaysLeft = "In 2 days", Location = "South Hills High School"},
+                new SHHSEvent{Title = "Light Up The Night", Time = "5:30PM - 7:30PM", DaysLeft = "In 2 days", Location = "South Hills High School"}
 
             };
 

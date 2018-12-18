@@ -7,10 +7,12 @@
             android:TabbedPage.BarItemColor="#66FFFFFF"
             android:TabbedPage.BarSelectedItemColor="#EFFACB"
             BarBackgroundColor="#2B7251"   
-            
-               
             x:Class="SHHS.Controller.MainPage">
     
+    
+    
+
+
     
     
   <ContentPage Title="Home" Icon="home.png" BackgroundColor="#2B7251">
@@ -19,11 +21,14 @@
                 
             </OnPlatform>
         </ContentPage.Padding>
-        <RelativeLayout x:Name="HomePage" Margin="10" >
-      
-            
-            
+
+          <RelativeLayout x:Name="HomePage" Margin="10" >
+           
         </RelativeLayout>
+        
+      
+        
+      
         
  </ContentPage>
 
