@@ -161,8 +161,19 @@ namespace SHHS.Controller
             timer.PeriodInfo = scheduleManager.CurrentMessage;
             timer.length = scheduleManager.PeriodLength;
             string scheduleName = scheduleManager.ScheduleName;
-            timer.line1 = scheduleName.Substring(0, scheduleName.IndexOf(" ", StringComparison.CurrentCulture));
-            timer.line2 = scheduleName.Substring(scheduleName.IndexOf(" ", StringComparison.CurrentCulture) + 1);
+       
+
+            if( timer.line1.Contains(" ")){
+                timer.line1 = scheduleName.Substring(0, scheduleName.IndexOf(" ", StringComparison.CurrentCulture));
+                timer.line2 = scheduleName.Substring(scheduleName.IndexOf(" ", StringComparison.CurrentCulture) + 1);
+
+            } else {
+
+                timer.line1 = scheduleName;
+                timer.line2 = "Schedule";
+
+            }
+
 
             if (timer.minutes == 0 && timer.seconds == 0)
             {
