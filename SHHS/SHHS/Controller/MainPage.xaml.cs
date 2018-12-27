@@ -126,14 +126,23 @@ namespace SHHS.Controller
         protected override async void OnAppearing()
         {
             base.OnAppearing();
-            await scheduleManager.GetScheduleException();
-            await scheduleManager.RefreshData();
-            await announcementManager.GetAnnoucements();
-            myCarousel.ItemsSource = announcementManager.MyItemsSource;
+            if (await scheduleManager.GetScheduleException()) {
+                await scheduleManager.RefreshData();
+                await announcementManager.GetAnnoucements();
+                myCarousel.ItemsSource = announcementManager.MyItemsSource;
+            } else {
+
+                scheduleManager.LocalJson();
+                await DisplayAlert("No Internet", "You will not be able to get any updated schedule or news", "Ok");
+            }
+
+            RefreshSchedule();
+
+
+
 
             //Tells the the timer that schedule has benn loaded
-            RefreshSchedule();
-         
+
             Console.WriteLine(scheduleManager.MinutesLeft + " Minutes " + scheduleManager.SecondsLeft + " Seconds.");
         }
 
@@ -163,7 +172,7 @@ namespace SHHS.Controller
             string scheduleName = scheduleManager.ScheduleName;
        
 
-            if( timer.line1.Contains(" ")){
+            if( scheduleName.Contains(" ")){
                 timer.line1 = scheduleName.Substring(0, scheduleName.IndexOf(" ", StringComparison.CurrentCulture));
                 timer.line2 = scheduleName.Substring(scheduleName.IndexOf(" ", StringComparison.CurrentCulture) + 1);
 

@@ -2,8 +2,9 @@
 using System.Threading.Tasks;
 using Xamarin.Forms;
 using System.Globalization;
+using Plugin.LocalNotifications;
+using System.Collections.ObjectModel;
 using SHHS.Model;
-using System.Collections.Generic;
 
 namespace SHHS.Controller
 {
@@ -12,8 +13,7 @@ namespace SHHS.Controller
 
          int currentYear = DateTime.Today.Date.Year;
          int currentMonth = DateTime.Today.Date.Month;
-         List<SHHSEvent> annoucements;
-
+        int currentSelected;
 
 
         public CalenderPage()
@@ -28,30 +28,27 @@ namespace SHHS.Controller
                     Calendar.Children.Add(label, col, row);
                 }
             RefreshDate();
+        }
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
 
 
-            //Annoucement List View Initalization
-            annoucements = new List<SHHSEvent>
-            {
-                new SHHSEvent{Title = "Light Up The Night", Time = "5:30PM - 7:30PM", DaysLeft = "In 2 days", Location = "South Hills High School"},
-                new SHHSEvent{Title = "Light Up The Night", Time = "5:30PM - 7:30PM", DaysLeft = "In 2 days", Location = "South Hills High School"},
-                new SHHSEvent{Title = "Light Up The Night", Time = "5:30PM - 7:30PM", DaysLeft = "In 2 days", Location = "South Hills High School"},
-                new SHHSEvent{Title = "Light Up The Night", Time = "5:30PM - 7:30PM", DaysLeft = "In 2 days", Location = "South Hills High School"},
-                new SHHSEvent{Title = "Light Up The Night", Time = "5:30PM - 7:30PM", DaysLeft = "In 2 days", Location = "South Hills High School"},
-                new SHHSEvent{Title = "Light Up The Night", Time = "5:30PM - 7:30PM", DaysLeft = "In 2 days", Location = "South Hills High School"},
-                new SHHSEvent{Title = "Light Up The Night", Time = "5:30PM - 7:30PM", DaysLeft = "In 2 days", Location = "South Hills High School"},
-                new SHHSEvent{Title = "Light Up The Night", Time = "5:30PM - 7:30PM", DaysLeft = "In 2 days", Location = "South Hills High School"}
+        }
 
-            };
 
-            AnnoucementList.ItemsSource = annoucements;
+        public void SetDataSource(ObservableCollection<SHHSEvent> s) {
 
-            
+            AnnoucementList.ItemsSource = s;
+
         }
 
 
 
-          void RefreshDate()
+
+
+        void RefreshDate()
         {
 
 
@@ -80,6 +77,8 @@ namespace SHHS.Controller
             for (int i = daysInPreviousMonth - daysNeedToBeDisplayFromPreviousMonth; i < daysInPreviousMonth; i++)
             {
                 Button lb = ((Button)(Calendar.Children[row * 7 + column]));
+                lb.BackgroundColor = Color.Transparent;
+                lb.TextColor = Color.White;
                 lb.Opacity = 0.5;
                 lb.Text = $"{i}";
 
@@ -92,7 +91,10 @@ namespace SHHS.Controller
             for (int i = 1; i <= daysInMonth; i++)
             {
                 Button lb = ((Button)(Calendar.Children[row * 7 + column]));
+                lb.BackgroundColor = Color.Transparent;
+                lb.TextColor = Color.White;
                 lb.Text = $"{i}";
+                lb.Opacity = 1;
                 lb.Clicked += DateClicked;
 
                 column++;
@@ -111,6 +113,8 @@ namespace SHHS.Controller
             for (int i = 1; row < 6; i++)
             {
                 Button lb = ((Button)(Calendar.Children[row * 7 + column]));
+                lb.BackgroundColor = Color.Transparent;
+                lb.TextColor = Color.White;
                 lb.Text = $"{i}";
                 lb.Opacity = 0.5;
                 column++;
@@ -131,8 +135,8 @@ namespace SHHS.Controller
             {
 
                 var button = ((Button)Calendar.Children[DateTime.Today.Day + daysNeedToBeDisplayFromPreviousMonth - 1]);
-                button.BackgroundColor = Color.Red;
-                button.Opacity = 0.3;
+                button.TextColor = Color.Red;
+                button.Opacity = 1;
 
 
             }
@@ -145,10 +149,26 @@ namespace SHHS.Controller
 
         void DateClicked(object sender, System.EventArgs e){
 
-            var button = (Button)sender;
-            button.BackgroundColor = Color.Green;
-            button.Opacity = 0.2;
 
+            if(currentSelected != 0) {
+                int daysNeedToBeDisplayFromPreviousMonth = (int)new DateTime(currentYear, currentMonth, 1).DayOfWeek - 1;
+                var lb = ((Button)(Calendar.Children[currentSelected + daysNeedToBeDisplayFromPreviousMonth - 1]));
+
+                lb.BackgroundColor = Color.Transparent;
+                lb.TextColor = Color.White;
+
+
+            }
+
+            var button = (Button)sender;
+
+            currentSelected = Convert.ToInt32(button.Text);
+
+            button.BackgroundColor = Color.Green;
+
+
+
+            CrossLocalNotifications.Current.Show("Test","Test Message");
 
         }
 
@@ -199,8 +219,10 @@ namespace SHHS.Controller
             await button.FadeTo(1, 250);
         }
 
-
-
+        public static implicit operator CalenderPage(NavigationPage v)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
 

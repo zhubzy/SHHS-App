@@ -37,7 +37,7 @@ namespace SHHS.Model
         }
 
 
-        public async Task GetScheduleException(){
+        public async Task<bool> GetScheduleException(){
 
             var firebase = new FirebaseClient("https://shhs-45632.firebaseio.com/");
 
@@ -52,6 +52,8 @@ namespace SHHS.Model
 
                 }
 
+                return true;
+
             }
             catch (FirebaseException e){
                 
@@ -59,7 +61,7 @@ namespace SHHS.Model
                 
                 Console.WriteLine(e.StackTrace);
 
-
+                return false;
             }
 
         }

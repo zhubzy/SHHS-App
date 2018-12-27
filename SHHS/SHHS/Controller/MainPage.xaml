@@ -32,7 +32,6 @@
         
  </ContentPage>
 
-    <local:CalenderPage Title="Calender" Icon="calendar.png" BackgroundColor="#2B7251"/>
            
         
 </TabbedPage>

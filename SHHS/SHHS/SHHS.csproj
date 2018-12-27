@@ -19,6 +19,7 @@
     <PackageReference Include="CarouselView.FormsPlugin" Version="5.2.0" />
     <PackageReference Include="Xamarin.FFImageLoading.Forms" Version="2.4.4.859" />
     <PackageReference Include="LiveXAML" Version="2.1.50" />
+    <PackageReference Include="sqlite-net-pcl" Version="1.5.231" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="View\" />
@@ -30,6 +31,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Remove="Schedule.xaml.cs" />
+    <Compile Remove="Model\SHHSEventManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="Controller\CalenderPage.xaml.cs">
