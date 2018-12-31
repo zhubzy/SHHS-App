@@ -19,6 +19,8 @@ namespace SHHS.Droid
             CarouselViewRenderer.Init();
 
             LocalNotificationsImplementation.NotificationIconId = Resource.Drawable.plugin_lc_smallicon;
+
+            Rg.Plugins.Popup.Popup.Init(this, savedInstanceState);
             LoadApplication(new App());
         }
     }

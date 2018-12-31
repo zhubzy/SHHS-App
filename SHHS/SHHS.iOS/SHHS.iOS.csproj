@@ -176,5 +176,6 @@
     <BundleResource Include="Resources\huskylogo.jpg" />
     <BundleResource Include="Resources\location%403x.png" />
     <BundleResource Include="Resources\clock%403x.png" />
+    <BundleResource Include="Resources\Add.png" />
   </ItemGroup>
 </Project>

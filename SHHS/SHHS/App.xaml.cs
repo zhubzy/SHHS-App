@@ -1,13 +1,11 @@
-﻿using System;
-using Xamarin.Forms;
+﻿using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using SHHS.Controller;
 using System.Globalization;
 using System.Threading;
-using SQLite;
-using System.IO;
+
 using SHHS.Model;
-using System.Collections.ObjectModel;
+
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 
@@ -18,10 +16,9 @@ namespace SHHS
 
         MainPage shhsMain;
         CalenderPage shhsCalender;
-        private SQLiteAsyncConnection _connection;
-        public ObservableCollection<SHHSEvent> events;
+        public SHHSEventManager shhsEventManager;
 
-   
+
         public App()
         {
             InitializeComponent();
@@ -32,20 +29,19 @@ namespace SHHS
             shhsCalender = new CalenderPage { Title = "Calendar", Icon = "calendar.png" };
             MainPage = shhsMain;
             shhsMain.Children.Add(shhsCalender);
+            shhsEventManager = new SHHSEventManager();
             Current = this;
-            var databasePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "MyData.db");
-            _connection = new SQLiteAsyncConnection(databasePath);
-            
+
+
 
         }
 
         override protected async void OnStart()
         {
             // Handle when your app starts
-            await _connection.CreateTableAsync<SHHSEvent>();
-            var data = await _connection.Table<SHHSEvent>().ToListAsync();
-            events = new ObservableCollection<SHHSEvent>(data);
-            shhsCalender.SetDataSource(events);
+
+            await shhsEventManager.InitalizeEventTable();
+            shhsCalender.SetDataSource(shhsEventManager.events);
 
         }
 
@@ -53,7 +49,7 @@ namespace SHHS
         {
             // Handle when your app sleeps
         }
-     
+
         protected override void OnResume()
         {
 

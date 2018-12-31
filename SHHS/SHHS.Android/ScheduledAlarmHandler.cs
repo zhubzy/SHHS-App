@@ -26,8 +26,8 @@ namespace Plugin.LocalNotifications
         {
             var extra = intent.GetStringExtra(LocalNotificationKey);
             var notification = DeserializeNotification(extra);
-
-            CrossLocalNotifications.Current.Show(notification.Title, notification.Body, notification.Id);
+         
+            CrossLocalNotifications.Current.Show(notification.Title, notification.Body,notification.HasSound,notification.HasVibration, notification.Id);
         }
 
         private LocalNotification DeserializeNotification(string notificationString)

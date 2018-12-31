@@ -6,7 +6,6 @@ using System;
 using System.IO;
 using System.Xml.Serialization;
 using Android.OS;
-using Android;
 using Plugin.LocalNotifications;
 
 [assembly: Xamarin.Forms.Dependency(typeof(LocalNotificationsImplementation))]
@@ -31,15 +30,21 @@ namespace Plugin.LocalNotifications
         /// <param name="title">Title of the notification</param>
         /// <param name="body">Body or description of the notification</param>
         /// <param name="id">Id of the notification</param>
-        public void Show(string title, string body, int id = 0)
+        public void Show(string title, string body, bool hasSound, bool hasVibration, int id)
         {
             var builder = new Notification.Builder(Application.Context);
             builder.SetContentTitle(title);
             builder.SetContentText(body);
             builder.SetAutoCancel(true);
+            if (hasSound)
+                builder.SetDefaults(NotificationDefaults.Sound);
 
-          
-                builder.SetSmallIcon(NotificationIconId);
+
+            if (hasVibration)
+                builder.SetVibrate(new long[] { 0, 1500 });
+
+
+            builder.SetSmallIcon(NotificationIconId);
             
           
 
@@ -77,7 +82,7 @@ namespace Plugin.LocalNotifications
         /// <param name="body">Body or description of the notification</param>
         /// <param name="id">Id of the notification</param>
         /// <param name="notifyTime">Time to show notification</param>
-        public void Show(string title, string body, int id, DateTime notifyTime)
+        public void Show(string title, string body, int id, DateTime notifyTime, bool hasSound, bool hasVibration)
         {
             var intent = CreateIntent(id);
 
@@ -86,16 +91,18 @@ namespace Plugin.LocalNotifications
             localNotification.Body = body;
             localNotification.Id = id;
             localNotification.NotifyTime = notifyTime;
-         
-                localNotification.IconId = NotificationIconId;
-   
+            localNotification.HasSound = hasSound;
+            localNotification.HasVibration = hasVibration;
+            localNotification.IconId = NotificationIconId;
+           
+
             var serializedNotification = SerializeNotification(localNotification);
             intent.PutExtra(ScheduledAlarmHandler.LocalNotificationKey, serializedNotification);
 
             var pendingIntent = PendingIntent.GetBroadcast(Application.Context, 0, intent, PendingIntentFlags.CancelCurrent);
             var triggerTime = NotifyTimeInMilliseconds(localNotification.NotifyTime);
             var alarmManager = GetAlarmManager();
-
+            
             alarmManager.Set(AlarmType.RtcWakeup, triggerTime, pendingIntent);
         }
 
@@ -113,6 +120,21 @@ namespace Plugin.LocalNotifications
 
             var notificationManager = NotificationManagerCompat.From(Application.Context);
             notificationManager.Cancel(id);
+        }
+
+        public void CancelAll()
+        {
+
+            var intent = CreateIntent(0);
+            var pendingIntent = PendingIntent.GetBroadcast(Application.Context, 0, intent, PendingIntentFlags.CancelCurrent);
+
+
+            var alarmManager = GetAlarmManager();
+            alarmManager.Cancel(pendingIntent);
+
+            var notificationManager = NotificationManagerCompat.From(Application.Context);
+            notificationManager.CancelAll();
+
         }
 
         private Intent CreateIntent(int id)

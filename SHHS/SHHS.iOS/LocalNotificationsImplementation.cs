@@ -22,18 +22,21 @@ namespace Plugin.LocalNotifications
         /// <param name="title">Title of the notification</param>
         /// <param name="body">Body or description of the notification</param>
         /// <param name="id">Id of the notification</param>
-        public void Show(string title, string body, int id = 0)
+        public void Show(string title, string body, bool hasSound, bool hasVibrate, int id)
         {
-            
+
             if (UIDevice.CurrentDevice.CheckSystemVersion(10, 0))
             {
                 var trigger = UNTimeIntervalNotificationTrigger.CreateTrigger(.1, false);
-                ShowUserNotification(title, body, id, trigger);
+                ShowUserNotification(title, body, id, hasSound, trigger);
             }
             else
             {
-                Show(title, body, id, DateTime.Now);
+                Show(title, body, id, DateTime.Now, true, true);
+
             }
+
+
         }
 
         /// <summary>
@@ -43,12 +46,12 @@ namespace Plugin.LocalNotifications
         /// <param name="body">Body or description of the notification</param>
         /// <param name="id">Id of the notification</param>
         /// <param name="notifyTime">Time to show notification</param>
-        public void Show(string title, string body, int id, DateTime notifyTime)
+        public void Show(string title, string body, int id, DateTime notifyTime, bool hasSound, bool hasVibration)
         {
             if (UIDevice.CurrentDevice.CheckSystemVersion(10, 0))
             {
                 var trigger = UNCalendarNotificationTrigger.CreateTrigger(GetNSDateComponentsFromDateTime(notifyTime), false);
-                ShowUserNotification(title, body, id, trigger);
+                ShowUserNotification(title, body, id, hasSound, trigger);
             }
             else
             {
@@ -57,7 +60,10 @@ namespace Plugin.LocalNotifications
                     FireDate = (NSDate)notifyTime,
                     AlertTitle = title,
                     AlertBody = body,
-                    UserInfo = NSDictionary.FromObjectAndKey(NSObject.FromObject(id), NSObject.FromObject(NotificationKey))
+                    UserInfo = NSDictionary.FromObjectAndKey(NSObject.FromObject(id), NSObject.FromObject(NotificationKey)),
+                    SoundName = hasSound ? UILocalNotification.DefaultSoundName : null
+                    
+
                 };
 
                 UIApplication.SharedApplication.ScheduleLocalNotification(notification);
@@ -85,11 +91,31 @@ namespace Plugin.LocalNotifications
                 {
                     UIApplication.SharedApplication.CancelLocalNotification(notification);
                 }
+
             }
         }
 
+        public void CancelAll() {
+
+            if (UIDevice.CurrentDevice.CheckSystemVersion(10, 0))
+            {
+                UNUserNotificationCenter.Current.RemoveAllPendingNotificationRequests();
+                UNUserNotificationCenter.Current.RemoveAllDeliveredNotifications();
+            }
+            else
+            {
+
+                UIApplication.SharedApplication.CancelAllLocalNotifications();
+                
+
+            }
+
+
+        }
+
+
         // Show local notifications using the UNUserNotificationCenter using a notification trigger (iOS 10+ only)
-        void ShowUserNotification(string title, string body, int id, UNNotificationTrigger trigger)
+        void ShowUserNotification(string title, string body, int id, bool hasSound, UNNotificationTrigger trigger)
         {
             if (!UIDevice.CurrentDevice.CheckSystemVersion(10, 0))
             {
@@ -99,7 +125,9 @@ namespace Plugin.LocalNotifications
             var content = new UNMutableNotificationContent()
             {
                 Title = title,
-                Body = body
+                Body = body,
+                Sound = hasSound ? UNNotificationSound.Default : null
+
             };
             
             var request = UNNotificationRequest.FromIdentifier(id.ToString(), content, trigger);
@@ -119,5 +147,7 @@ namespace Plugin.LocalNotifications
                 Second = dateTime.Second
             };
         }
+
+
     }
 }

@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:local="clr-namespace:SHHS" x:Class="SHHS.Controller.CalenderPage" BackgroundColor="#2B7251">
-   
     <ContentPage.Padding>
-            <OnPlatform x:TypeArguments="Thickness" iOS="0,15,0,0">
+            <OnPlatform x:TypeArguments="Thickness" iOS="0,5,0,0">
+                
             </OnPlatform>
         </ContentPage.Padding>
-    
-    <StackLayout Orientation="Vertical" Margin="5" Spacing="10">
+        
+       
+    <StackLayout x:Name="MasterPage" Orientation="Vertical" Margin="5" Spacing="3">
         <!-- Place new controls here -->
-        <StackLayout MinimumHeightRequest="800">
-            <ScrollView VerticalScrollBarVisibility="Default">
             <RelativeLayout x:Name="RelativeView">
-                <Label  x:Name="YearLabel" Text="2018" TextColor="White" FontSize="30"  RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent,Property=Width}" HorizontalTextAlignment="Center">
+                <Label  x:Name="YearLabel" Text="2018" TextColor="White" FontSize="20"  RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent,Property=Width}" VerticalTextAlignment = "Center"
+                      HorizontalTextAlignment="Center" HeightRequest="50">
                     <Label.FontFamily>
                         <OnPlatform x:TypeArguments="x:String">
                             <On Platform="iOS" Value="OpenSans-Bold" />
@@ -19,16 +19,9 @@
                         </OnPlatform>
                     </Label.FontFamily>
                 </Label>
-                <StackLayout HorizontalOptions="Center" x:Name="DateStack" Orientation="Horizontal" Spacing=" 25"  RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToView, ElementName=YearLabel, Property=Y, Constant= 30}" RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property= Width, Factor=1}">
+                <StackLayout HeightRequest="50" HorizontalOptions="Center" x:Name="DateStack" Orientation="Horizontal" Spacing="200"  RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToView, ElementName=YearLabel, Property=Y, Constant= 0}" RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property= Width, Factor=1}">
                     <Button Clicked="PreviousMonth" Image="arrowLeft.png" BackgroundColor="Transparent" HorizontalOptions="Start"/>
-                    <Label x:Name="MonthLabel" Text="SEPTEMBER" HorizontalOptions="Center" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" TextColor="White" FontSize="30">
-                        <Label.FontFamily>
-                            <OnPlatform x:TypeArguments="x:String">
-                                <On Platform="iOS" Value="OpenSans-Bold" />
-                                <On Platform="Android" Value="OpenSans-Bold.ttf#OpenSans-Bold" />
-                            </OnPlatform>
-                        </Label.FontFamily>
-                    </Label>
+         
                     <Button Clicked="NextMonth" Image="arrowLeft.png" BackgroundColor="Transparent" Rotation="180" HorizontalOptions="End"/>
                 </StackLayout>
                 <Grid x:Name="week" RowSpacing="40" ColumnSpacing="1" Padding="0,0,0,0" RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor= 1 }" RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToView, Property= Y,ElementName= DateStack,Factor=1, Constant= 50}">
@@ -40,19 +33,39 @@
                     <Label Grid.Column="5" Text="Sat" TextColor="White" HorizontalOptions="Center" />
                     <Label Grid.Column="6" Text="Sun" TextColor="White" HorizontalOptions="Center" />
                 </Grid>
-                <Grid x:Name="Calendar" RowSpacing="5" ColumnSpacing="1" Padding="0,0,0,0" RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor= 1 }" RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToView, Property= Y,ElementName= week,Factor=1, Constant= 30}">
+                    
+                <ScrollView x:Name="CalendarScroll" VerticalScrollBarVisibility="Default" Padding="0,0,0,0" RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor= 1 }" RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToView, Property= Y,ElementName= week,Factor=1, Constant= 30}">
+
+                <Grid x:Name="Calendar" ColumnSpacing="1">
                 </Grid>
                 <!-- Annoucementbar 1 -->
-                </RelativeLayout>
                 </ScrollView>
-                </StackLayout>
                 
-                    <ListView x:Name="AnnoucementList" RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToView,ElementName=Calendar,Property=Y,Constant=300 }" RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property= Width, Factor=1}" RowHeight="130" SeparatorVisibility="None" BackgroundColor="#2B7251" >
+                </RelativeLayout>
+                 
+   
+            
+    
+            
+            
+
+                    <ListView x:Name="AnnoucementList" RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property= Width, Factor=1}" MinimumHeightRequest="130" RowHeight="130" SeparatorVisibility="None" BackgroundColor="#2B7251" >
                         <ListView.ItemTemplate>
                             <DataTemplate>
                                 
                                 <ViewCell>
+                            
+
+                                    <ViewCell.ContextActions> 
+                                       <MenuItem  Text="Delete" Clicked="DeleteEvent" IsDestructive="true" CommandParameter="{Binding .}"/>
+                                    </ViewCell.ContextActions>
+                            
+                            
+                            
                                     <Frame Padding="0" Margin="0,5,0,5" BackgroundColor="#E5EDCD" HasShadow="false">
+                                        
+                                    
+                                
                                         <StackLayout Padding="0,10,5,5" Spacing="10">
                                         <StackLayout Orientation="Horizontal">
                                             <StackLayout HorizontalOptions="CenterAndExpand" Orientation="Horizontal">
@@ -81,5 +94,18 @@
 
 
                 <!-- Annoucementbar 2 -->
+        
+        
+         <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" >
+
+               <ImageButton Opacity="0.75" Clicked="AddEvent" HorizontalOptions="CenterAndExpand"
+               x:Name="button" Source="Add.png" Aspect="AspectFit"/>
+     
+            
+     
+   </StackLayout>
     </StackLayout>
+        
+        
+               
 </ContentPage>

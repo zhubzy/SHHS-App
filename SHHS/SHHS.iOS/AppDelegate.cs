@@ -1,4 +1,5 @@
-﻿ 
+﻿
+using System;
 using CarouselView.FormsPlugin.iOS;
 using FFImageLoading.Forms.Touch;
 using Foundation;
@@ -27,6 +28,7 @@ namespace SHHS.iOS
             UITabBar.Appearance.TintColor = UIColor.White;
             CarouselViewRenderer.Init();
             FFImageLoading.Forms.Platform.CachedImageRenderer.Init();
+            Rg.Plugins.Popup.Popup.Init();
 
             if (UIDevice.CurrentDevice.CheckSystemVersion(10, 0))
             {
@@ -48,5 +50,11 @@ namespace SHHS.iOS
             }
             return base.FinishedLaunching(app, options);
         }
+
+        [Export("application:supportedInterfaceOrientationsForWindow:")] 
+        public UIInterfaceOrientationMask GetSupportedInterfaceOrientations(UIApplication application, IntPtr forWindow) 
+        { 
+        return Plugin.DeviceOrientation.DeviceOrientationImplementation.SupportedInterfaceOrientations;
+         }
     }
 }

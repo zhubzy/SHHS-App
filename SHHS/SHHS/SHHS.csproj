@@ -20,6 +20,8 @@
     <PackageReference Include="Xamarin.FFImageLoading.Forms" Version="2.4.4.859" />
     <PackageReference Include="LiveXAML" Version="2.1.50" />
     <PackageReference Include="sqlite-net-pcl" Version="1.5.231" />
+    <PackageReference Include="Rg.Plugins.Popup" Version="1.1.5.180" />
+    <PackageReference Include="Plugin.DeviceOrientation" Version="1.0.7" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="View\" />
@@ -31,7 +33,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Remove="Schedule.xaml.cs" />
-    <Compile Remove="Model\SHHSEventManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="Controller\CalenderPage.xaml.cs">

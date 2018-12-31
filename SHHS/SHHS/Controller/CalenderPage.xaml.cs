@@ -5,6 +5,10 @@ using System.Globalization;
 using Plugin.LocalNotifications;
 using System.Collections.ObjectModel;
 using SHHS.Model;
+using SHHS.View;
+using Rg.Plugins.Popup.Services;
+using Plugin.DeviceOrientation;
+using Plugin.DeviceOrientation.Abstractions;
 
 namespace SHHS.Controller
 {
@@ -24,18 +28,38 @@ namespace SHHS.Controller
             for (int row = 0; row < 6; row++)
                 for (int col = 0; col < 7; col++){
 
-                    var label = new Button { Text = $"{row*7 + col}", HorizontalOptions = LayoutOptions.Center, TextColor = Color.White, CornerRadius = 20, WidthRequest = 40, HeightRequest = 40, BackgroundColor = Color.Transparent, Opacity = 1 };
+                    var label = new Button { Text = $"{row*7 + col}", HorizontalOptions = LayoutOptions.Center, TextColor = Color.White, WidthRequest = 40, HeightRequest = 40, BackgroundColor = Color.Transparent, Opacity = 1 };
+                    label.CornerRadius = (int)(label.HeightRequest / 2);
                     Calendar.Children.Add(label, col, row);
                 }
             RefreshDate();
+
+
+
         }
+
+
+        protected override void OnSizeAllocated(double width, double height)
+        {
+            base.OnSizeAllocated(width, height);
+
+            CalendarScroll.HeightRequest = height / 2.2;
+
+        }
+
 
         protected override void OnAppearing()
         {
             base.OnAppearing();
-
+            CrossDeviceOrientation.Current.LockOrientation(DeviceOrientations.Portrait);
 
         }
+
+
+
+
+
+
 
 
         public void SetDataSource(ObservableCollection<SHHSEvent> s) {
@@ -45,14 +69,14 @@ namespace SHHS.Controller
         }
 
 
+       
 
 
 
-        void RefreshDate()
+        private void RefreshDate()
         {
 
 
-        
 
 
             int daysInMonth = DateTime.DaysInMonth(currentYear, currentMonth);
@@ -68,8 +92,7 @@ namespace SHHS.Controller
             int column = 0;
             int row = 0;
 
-            MonthLabel.Text = CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(currentMonth);
-            YearLabel.Text = currentYear.ToString();
+            YearLabel.Text = CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(currentMonth) + " " + currentYear.ToString();
          
 
 
@@ -77,10 +100,11 @@ namespace SHHS.Controller
             for (int i = daysInPreviousMonth - daysNeedToBeDisplayFromPreviousMonth; i < daysInPreviousMonth; i++)
             {
                 Button lb = ((Button)(Calendar.Children[row * 7 + column]));
+                lb.Text = $"{i}";
                 lb.BackgroundColor = Color.Transparent;
                 lb.TextColor = Color.White;
+                button.BorderWidth = 0;
                 lb.Opacity = 0.5;
-                lb.Text = $"{i}";
 
                 column++;
 
@@ -91,10 +115,11 @@ namespace SHHS.Controller
             for (int i = 1; i <= daysInMonth; i++)
             {
                 Button lb = ((Button)(Calendar.Children[row * 7 + column]));
+                lb.Text = $"{i}";
                 lb.BackgroundColor = Color.Transparent;
                 lb.TextColor = Color.White;
-                lb.Text = $"{i}";
                 lb.Opacity = 1;
+                button.BorderWidth = 0;
                 lb.Clicked += DateClicked;
 
                 column++;
@@ -113,10 +138,12 @@ namespace SHHS.Controller
             for (int i = 1; row < 6; i++)
             {
                 Button lb = ((Button)(Calendar.Children[row * 7 + column]));
+                lb.Text = $"{i}";
                 lb.BackgroundColor = Color.Transparent;
                 lb.TextColor = Color.White;
-                lb.Text = $"{i}";
                 lb.Opacity = 0.5;
+                button.BorderWidth = 0;
+
                 column++;
                 if (column != 0 && column % 7 == 0)
                 {
@@ -133,15 +160,21 @@ namespace SHHS.Controller
             //Highlight the current date
             if (currentMonth == DateTime.Today.Month && currentYear == DateTime.Today.Year)
             {
-
+                
                 var button = ((Button)Calendar.Children[DateTime.Today.Day + daysNeedToBeDisplayFromPreviousMonth - 1]);
-                button.TextColor = Color.Red;
+                button.BorderColor = Color.Green;
+                button.BorderWidth = 5;
                 button.Opacity = 1;
-
 
             }
         }
 
+        void AddEvent(object sender, System.EventArgs e)
+        {
+
+            PopupNavigation.Instance.PushAsync(new SHHSEventLayout());
+
+        }
 
 
 
@@ -153,7 +186,6 @@ namespace SHHS.Controller
             if(currentSelected != 0) {
                 int daysNeedToBeDisplayFromPreviousMonth = (int)new DateTime(currentYear, currentMonth, 1).DayOfWeek - 1;
                 var lb = ((Button)(Calendar.Children[currentSelected + daysNeedToBeDisplayFromPreviousMonth - 1]));
-
                 lb.BackgroundColor = Color.Transparent;
                 lb.TextColor = Color.White;
 
@@ -165,10 +197,10 @@ namespace SHHS.Controller
             currentSelected = Convert.ToInt32(button.Text);
 
             button.BackgroundColor = Color.Green;
+            
 
 
-
-            CrossLocalNotifications.Current.Show("Test","Test Message");
+            CrossLocalNotifications.Current.Show("Test","Test Message",0, DateTime.Now.AddSeconds(5),true,true);
 
         }
 
@@ -219,9 +251,12 @@ namespace SHHS.Controller
             await button.FadeTo(1, 250);
         }
 
-        public static implicit operator CalenderPage(NavigationPage v)
+ 
+        async void DeleteEvent(object sender, System.EventArgs e)
         {
-            throw new NotImplementedException();
+            var menuItem = sender as MenuItem;
+            var shhsEvent = menuItem.CommandParameter as SHHSEvent;
+                       await ((App)Application.Current).shhsEventManager.RemoveEvent(shhsEvent);
         }
     }
 }

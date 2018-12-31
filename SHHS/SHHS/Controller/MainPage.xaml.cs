@@ -1,9 +1,9 @@
 ﻿using System;
-
 using SHHS.View;
 using SHHS.Model;
 using Xamarin.Forms;
 using CarouselView.FormsPlugin.Abstractions;
+using Plugin.DeviceOrientation;
 
 namespace SHHS.Controller
 {
@@ -68,35 +68,23 @@ namespace SHHS.Controller
             //Adding news scroll
             HomePage.Children.Add(myCarousel, null,Constraint.RelativeToParent((parent) =>
             {
-                if (parent.Width > parent.Height)
-                {
-                    return 0;
-                }
+              
                 return timer.Height + 30;
             }),
             Constraint.RelativeToParent((parent) =>
             {
-                if (parent.Width > parent.Height)
-                {
-
-
-                    return 0;
-                }
+               
                 return parent.Width;
             }),
             Constraint.RelativeToParent((parent) =>
             {
-                if (parent.Width > parent.Height)
-                {
-
-                    return 0;
-                }
-                return parent.Height / 3;
+               
+                return Height / 3;
             }));
 
 
 
-
+            CurrentPageChanged += CurrentPageChangedEvent;
 
             scheduleManager = new SHHSScheduleManager();
 
@@ -123,6 +111,23 @@ namespace SHHS.Controller
             });
 
         }
+
+        void CurrentPageChangedEvent(object sender, EventArgs e)
+        {
+
+            var i = Children.IndexOf(CurrentPage);
+
+            if(i == 0)
+            CrossDeviceOrientation.Current.UnlockOrientation();
+
+
+        }
+
+
+
+
+
+
         protected override async void OnAppearing()
         {
             base.OnAppearing();
@@ -137,6 +142,7 @@ namespace SHHS.Controller
             }
 
             RefreshSchedule();
+            scheduleManager.PushLocalNotifications();
 
 
 
@@ -146,14 +152,22 @@ namespace SHHS.Controller
             Console.WriteLine(scheduleManager.MinutesLeft + " Minutes " + scheduleManager.SecondsLeft + " Seconds.");
         }
 
+
+
+
         protected override void OnSizeAllocated(double width, double height)
         {
             base.OnSizeAllocated(width, height);
             if (width > height && HomePage.Children.Count > 0)
             {
                 timer.canvasView.InvalidateSurface();
-            }
 
+            
+
+            } else {
+
+
+            }
         }
 
 

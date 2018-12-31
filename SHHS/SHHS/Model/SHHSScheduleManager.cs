@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Firebase.Database;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using Plugin.LocalNotifications;
 
 namespace SHHS.Model
 {
@@ -239,7 +240,26 @@ namespace SHHS.Model
 
             return (int)DateTime.Today.DayOfWeek == 6 || (int)DateTime.Today.DayOfWeek == 0 ? -1 : 0;
         }
+        
+        public void PushLocalNotifications()
+        {
 
+            if (ScheduleOfTheDay != -1) {
+
+                CrossLocalNotifications.Current.CancelAll();
+
+                var notID = 0;
+
+                foreach(var s in ScheduleList[ScheduleOfTheDay].Schedule) {
+
+                    if(DateTime.Compare(DateTime.Now,s.EndDateTime) < 0){
+                    CrossLocalNotifications.Current.Show("2 Minute Warning!", s.PeriodName + " is about to end in 2 minutes", notID, s.EndDateTime.AddSeconds(-120) ,true, true);
+                        notID++;
+                    }
+                }
+
+            }
+        }
 
 
 
