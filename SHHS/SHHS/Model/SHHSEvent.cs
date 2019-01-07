@@ -6,6 +6,10 @@ namespace SHHS.Model
     public class SHHSEvent: BaseViewModel, IComparable
     {
 
+        [PrimaryKey, AutoIncrement]
+        public int ID { get; set; }
+
+
         //Fields
         private string _daysLeft;
         private string _title;
@@ -20,8 +24,7 @@ namespace SHHS.Model
 
 
         //Accessors
-        [PrimaryKey, AutoIncrement]
-        public int ID { get; set; }
+   
 
         public string LocationText { get; set; }
 

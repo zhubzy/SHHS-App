@@ -98,8 +98,8 @@ namespace SHHS.Model
 
             }
 
-
-            ((App)Application.Current).shhsCalender.SetDataSource(eventSorted);
+            events = eventSorted;
+            ((App)Application.Current).shhsCalender.SetDataSource(events);
             ((App)Application.Current).shhsCalender.RefreshDate();
 
 

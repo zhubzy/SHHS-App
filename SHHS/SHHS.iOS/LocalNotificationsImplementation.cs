@@ -6,6 +6,7 @@ using UserNotifications;
 using Plugin.LocalNotifications;
 using Plugin.LocalNotifications.Abstractions;
 
+
 [assembly: Xamarin.Forms.Dependency(typeof(LocalNotificationsImplementation))]
 namespace Plugin.LocalNotifications
 {

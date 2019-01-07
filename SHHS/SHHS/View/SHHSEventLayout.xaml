@@ -39,7 +39,7 @@
                                     <Image Source="Event.png" VerticalOptions="EndAndExpand" Aspect="AspectFit" />
                                 </StackLayout>
                                 <StackLayout Spacing="15" HorizontalOptions="FillAndExpand" Orientation="Vertical">
-                                    <Label HorizontalOptions="Start" Text=" From Date" />
+                                    <Label HorizontalOptions="Start" Text=" Date" />
                                     <DatePicker x:Name="StartDateEntry" HorizontalOptions="Fill" />
                                 </StackLayout>
                             </StackLayout>
@@ -51,11 +51,11 @@
                                     <Image Source="Event.png" VerticalOptions="EndAndExpand" Aspect="AspectFit" />
                                 </StackLayout>
                                 <StackLayout Spacing="15" HorizontalOptions="FillAndExpand" Orientation="Vertical">
-                                    <Label HorizontalOptions="Start" Text=" From Date" />
+                                    <Label HorizontalOptions="Start" Text=" Start Time" />
                                     <TimePicker x:Name="StartTimeEntry" HorizontalOptions="Fill" />
                                 </StackLayout>
                                 <StackLayout Spacing="15" HorizontalOptions="FillAndExpand" Orientation="Vertical">
-                                    <Label HorizontalOptions="Start" Text=" To Date" />
+                                    <Label HorizontalOptions="Start" Text=" End Time" />
                                     <TimePicker x:Name="EndTimeEntry" HorizontalOptions="Fill" />
                                 </StackLayout>
                             </StackLayout>

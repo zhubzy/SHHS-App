@@ -49,23 +49,21 @@
             
             
 
-                    <ListView x:Name="AnnoucementList" RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property= Width, Factor=1}" MinimumHeightRequest="130" RowHeight="140" SeparatorVisibility="Default" BackgroundColor="#2B7251" >
+                    <ListView ItemTapped="EditEvent" x:Name="AnnoucementList" RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property= Width, Factor=1}" MinimumHeightRequest="130" RowHeight="135" BackgroundColor="#2B7251" >
                         <ListView.ItemTemplate>
                             <DataTemplate>
                                 
-                                <ViewCell Tapped="EditEvent" BindingContext ="{Binding .}">
+                                <ViewCell>
                             
 
-                                    <ViewCell.ContextActions> 
-<!--                                       <MenuItem  Text="Edit" Clicked="MakeFavorite" IsDestructive="false" CommandParameter="{Binding .}"/>
--->      
-                                       <MenuItem  Text="Delete" Clicked="DeleteEvent" IsDestructive="true"/>
-
+                                    <ViewCell.ContextActions>       
+                                       <MenuItem Text="Delete" Clicked="DeleteEvent" IsDestructive="true" CommandParameter="{Binding .}"/>
+                                   
                                     </ViewCell.ContextActions>
                             
                             
                             
-                                    <Frame CornerRadius="0" Padding="0" Margin="0,0,0,0" BackgroundColor="#E5EDCD" HasShadow="false">
+                                    <Frame CornerRadius="0" Padding="0" Margin="0,5,0,5" BackgroundColor="#E5EDCD" HasShadow="false">
                                         
                                     
                                 

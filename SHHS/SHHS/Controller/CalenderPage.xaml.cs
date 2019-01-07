@@ -357,10 +357,10 @@ namespace SHHS.Controller
             var shhsEvent = menuItem.CommandParameter as SHHSEvent;
             await ((App)Application.Current).shhsEventManager.RemoveEvent(shhsEvent);
         }
-        async void MakeFavorite(object sender, System.EventArgs e)
-        {
+        //async void MakeFavorite(object sender, System.EventArgs e)
+        //{
 
-        }
+        //}
 
         async void AddEvent(object sender, System.EventArgs e)
         {
@@ -369,11 +369,12 @@ namespace SHHS.Controller
 
         }
 
-        async void EditEvent(object sender, System.EventArgs e)
+     
+
+         void EditEvent(object sender, Xamarin.Forms.ItemTappedEventArgs e)
         {
-            var menuItem = sender as ViewCell;
-            var shhsEvent = menuItem.BindingContext as SHHSEvent;
-            await PopupNavigation.Instance.PushAsync(new SHHSEventLayout(shhsEvent));
+            var shhsEvent = (e.Item as SHHSEvent);
+             PopupNavigation.Instance.PushAsync(new SHHSEventLayout(shhsEvent));
             AnnoucementList.SelectedItem = null;
         }
     }
