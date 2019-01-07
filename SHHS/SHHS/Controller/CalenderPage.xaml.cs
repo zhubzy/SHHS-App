@@ -2,7 +2,6 @@
 using System.Threading.Tasks;
 using Xamarin.Forms;
 using System.Globalization;
-using Plugin.LocalNotifications;
 using System.Collections.ObjectModel;
 using SHHS.Model;
 using SHHS.View;
@@ -19,6 +18,7 @@ namespace SHHS.Controller
          int currentMonth = DateTime.Today.Date.Month;
         int currentSelected;
 
+     
 
         public CalenderPage()
         {
@@ -28,11 +28,14 @@ namespace SHHS.Controller
             for (int row = 0; row < 6; row++)
                 for (int col = 0; col < 7; col++){
 
+                    var Stack = new StackLayout { Orientation = StackOrientation.Vertical, Spacing = -10 };
+                    var dot = new Label { Text = "", HorizontalOptions = LayoutOptions.Center, TextColor = Color.White };
                     var label = new Button { Text = $"{row*7 + col}", HorizontalOptions = LayoutOptions.Center, TextColor = Color.White, WidthRequest = 40, HeightRequest = 40, BackgroundColor = Color.Transparent, Opacity = 1 };
-                    label.CornerRadius = (int)(label.HeightRequest / 2);
-                    Calendar.Children.Add(label, col, row);
+                    Stack.Children.Add(label);
+                    Stack.Children.Add(dot);
+
+                    Calendar.Children.Add(Stack, col, row);
                 }
-            RefreshDate();
 
 
 
@@ -52,6 +55,7 @@ namespace SHHS.Controller
         {
             base.OnAppearing();
             CrossDeviceOrientation.Current.LockOrientation(DeviceOrientations.Portrait);
+            RefreshDate();
 
         }
 
@@ -73,7 +77,7 @@ namespace SHHS.Controller
 
 
 
-        private void RefreshDate()
+        public void RefreshDate()
         {
 
 
@@ -97,14 +101,30 @@ namespace SHHS.Controller
 
 
             //Display Dates From Previous Month
-            for (int i = daysInPreviousMonth - daysNeedToBeDisplayFromPreviousMonth; i < daysInPreviousMonth; i++)
+            for (int i = daysInPreviousMonth - daysNeedToBeDisplayFromPreviousMonth + 1; i <= daysInPreviousMonth; i++)
             {
-                Button lb = ((Button)(Calendar.Children[row * 7 + column]));
+                Button lb = (Button)((StackLayout)(Calendar.Children[row * 7 + column])).Children[0];
                 lb.Text = $"{i}";
                 lb.BackgroundColor = Color.Transparent;
                 lb.TextColor = Color.White;
-                button.BorderWidth = 0;
+                lb.BorderWidth = 0;
                 lb.Opacity = 0.5;
+                lb.BindingContext =  SubtraceOneMonth(currentYear,currentMonth,i);
+
+                int n = ((App)Application.Current).shhsEventManager.FindEvent((DateTime)lb.BindingContext);
+                Label b = (Label)((StackLayout)(Calendar.Children[row * 7 + column])).Children[1];
+                b.Text = "";
+
+
+                for (int a =0; a<n; a++)
+                {
+
+                    b.Text += ".";
+                    b.Opacity = 1;
+
+                }
+
+
 
                 column++;
 
@@ -114,13 +134,27 @@ namespace SHHS.Controller
             //Displays Dates From Current Month
             for (int i = 1; i <= daysInMonth; i++)
             {
-                Button lb = ((Button)(Calendar.Children[row * 7 + column]));
+                Button lb = (Button)((StackLayout)(Calendar.Children[row * 7 + column])).Children[0];
                 lb.Text = $"{i}";
                 lb.BackgroundColor = Color.Transparent;
                 lb.TextColor = Color.White;
                 lb.Opacity = 1;
-                button.BorderWidth = 0;
+                lb.BorderWidth = 0;
+                lb.BindingContext = new DateTime(currentYear, currentMonth, i);
                 lb.Clicked += DateClicked;
+
+
+                int n = ((App)Application.Current).shhsEventManager.FindEvent((DateTime)lb.BindingContext);
+                Label b = (Label)((StackLayout)(Calendar.Children[row * 7 + column])).Children[1];
+                b.Text = "";
+
+                for (int a = 0; a < n; a++)
+                {
+
+                    b.Text += ".";
+                    b.Opacity = 1;
+
+                }
 
                 column++;
                 if (column != 0 && column % 7 == 0)
@@ -128,8 +162,8 @@ namespace SHHS.Controller
                     column = 0;
                     row++;
                 }
-            
 
+            
 
             }
 
@@ -137,12 +171,28 @@ namespace SHHS.Controller
             //Displays Dates From Next Month
             for (int i = 1; row < 6; i++)
             {
-                Button lb = ((Button)(Calendar.Children[row * 7 + column]));
+                Button lb = (Button)((StackLayout)(Calendar.Children[row * 7 + column])).Children[0];
                 lb.Text = $"{i}";
                 lb.BackgroundColor = Color.Transparent;
                 lb.TextColor = Color.White;
                 lb.Opacity = 0.5;
-                button.BorderWidth = 0;
+                lb.BorderWidth = 0;
+                lb.BindingContext = AddOneMonth(currentYear, currentMonth, i);
+
+
+
+                int n = ((App)Application.Current).shhsEventManager.FindEvent((DateTime)lb.BindingContext);
+                Label b = (Label)((StackLayout)(Calendar.Children[row * 7 + column])).Children[1];
+                b.Text = "";
+
+                for (int a = 0; a < n; a++)
+                {
+
+                    b.Text += ".";
+                    b.Opacity = 0.5;
+
+                }
+
 
                 column++;
                 if (column != 0 && column % 7 == 0)
@@ -152,7 +202,9 @@ namespace SHHS.Controller
 
 
                 }
+                
 
+         
 
 
             }
@@ -160,21 +212,15 @@ namespace SHHS.Controller
             //Highlight the current date
             if (currentMonth == DateTime.Today.Month && currentYear == DateTime.Today.Year)
             {
-                
-                var button = ((Button)Calendar.Children[DateTime.Today.Day + daysNeedToBeDisplayFromPreviousMonth - 1]);
-                button.BorderColor = Color.Green;
-                button.BorderWidth = 5;
-                button.Opacity = 1;
+                Button lb = (Button)((StackLayout)(Calendar.Children[DateTime.Today.Day + daysNeedToBeDisplayFromPreviousMonth - 1])).Children[0];
+                lb.BorderColor = Color.Green;
+                lb.BorderWidth = 5;
+                lb.Opacity = 1;
 
             }
         }
 
-        void AddEvent(object sender, System.EventArgs e)
-        {
-
-            PopupNavigation.Instance.PushAsync(new SHHSEventLayout());
-
-        }
+  
 
 
 
@@ -183,33 +229,43 @@ namespace SHHS.Controller
         void DateClicked(object sender, System.EventArgs e){
 
 
-            if(currentSelected != 0) {
+
+            if (currentSelected != 0) {
                 int daysNeedToBeDisplayFromPreviousMonth = (int)new DateTime(currentYear, currentMonth, 1).DayOfWeek - 1;
-                var lb = ((Button)(Calendar.Children[currentSelected + daysNeedToBeDisplayFromPreviousMonth - 1]));
+                var lb = (Button)((StackLayout)(Calendar.Children[currentSelected + daysNeedToBeDisplayFromPreviousMonth - 1])).Children[0];
                 lb.BackgroundColor = Color.Transparent;
                 lb.TextColor = Color.White;
 
 
             }
 
-            var button = (Button)sender;
+            Button button = (Button)sender;
 
             currentSelected = Convert.ToInt32(button.Text);
 
             button.BackgroundColor = Color.Green;
             
 
-
-            CrossLocalNotifications.Current.Show("Test","Test Message",0, DateTime.Now.AddSeconds(5),true,true);
-
         }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         /// Display and refesh the calander in previous month.
         void PreviousMonth(object sender, System.EventArgs e)
         {
 
-
-            StartAnimation((Button)sender);
 
             if (currentMonth == 1)
             {
@@ -228,7 +284,6 @@ namespace SHHS.Controller
 
          void NextMonth(object sender, System.EventArgs e)
         {
-            StartAnimation((Button)sender);
             if (currentMonth == 12)
             {
 
@@ -243,7 +298,51 @@ namespace SHHS.Controller
              RefreshDate();
         }
 
-         async void StartAnimation(Button button)
+
+        DateTime SubtraceOneMonth(int yr, int mt, int day) {
+
+        
+            if(mt == 1) {
+
+                yr -= 1;
+                mt = 12;
+            
+            } else {
+
+                mt -= 1;
+            }
+
+            return new DateTime(yr, mt, day);
+
+        }
+
+
+
+        DateTime AddOneMonth(int yr, int mt, int day)
+        {
+       
+
+            if (mt == 12)
+            {
+
+                yr += 1;
+                mt = 1;
+
+            }
+            else
+            {
+
+                mt += 1;
+
+            }
+
+            return new DateTime(yr,mt,day);
+
+        }
+
+
+
+        async void StartAnimation(Button button)
         {
             await Task.Delay(20);
             await button.FadeTo(0, 250);
@@ -256,7 +355,26 @@ namespace SHHS.Controller
         {
             var menuItem = sender as MenuItem;
             var shhsEvent = menuItem.CommandParameter as SHHSEvent;
-                       await ((App)Application.Current).shhsEventManager.RemoveEvent(shhsEvent);
+            await ((App)Application.Current).shhsEventManager.RemoveEvent(shhsEvent);
+        }
+        async void MakeFavorite(object sender, System.EventArgs e)
+        {
+
+        }
+
+        async void AddEvent(object sender, System.EventArgs e)
+        {
+
+            await PopupNavigation.Instance.PushAsync(new SHHSEventLayout());
+
+        }
+
+        async void EditEvent(object sender, System.EventArgs e)
+        {
+            var menuItem = sender as ViewCell;
+            var shhsEvent = menuItem.BindingContext as SHHSEvent;
+            await PopupNavigation.Instance.PushAsync(new SHHSEventLayout(shhsEvent));
+            AnnoucementList.SelectedItem = null;
         }
     }
 }

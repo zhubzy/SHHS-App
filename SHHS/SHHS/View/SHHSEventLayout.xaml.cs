@@ -2,129 +2,151 @@
 using Rg.Plugins.Popup.Services;
 using Xamarin.Forms;
 using SHHS.Model;
-using System.Threading.Tasks;
 using System;
+using System.Globalization;
 
 namespace SHHS.View
 {
     public partial class SHHSEventLayout
     {
+
+        private SHHSEvent eventEditing;
+
+
+        public SHHSEventLayout(SHHSEvent e)
+        {
+            InitializeComponent();
+
+            EventNameEntry.Text = e.Title;
+            LoacationEntry.Text = e.Location;
+            StartDateEntry.Date = e.StartDate;
+            StartTimeEntry.Time = e.StartTime;
+            EndTimeEntry.Time = e.EndTime;
+            AllDaySwitch.IsToggled |= e.Time.Equals("All Day");
+            ConfirmButton.Text = "Confirm Changes";
+            eventEditing = e;
+        }
+
+
         public SHHSEventLayout()
         {
             InitializeComponent();
-        }
 
+        }
         void DiscardChanges(object sender, System.EventArgs e)
         {
-            PopupNavigation.Instance.PopAsync(false);
+            PopupNavigation.Instance.PopAsync(true);
         }
         async void SaveEvent(object sender, System.EventArgs e)
         {
-            SHHSEvent a = new SHHSEvent { Title = EventNameEntry.Text, Location = LoacationEntry.Text , StartDate = StartDateEntry.Date, EndDate = EndDateEntry.Date, StartTime = StartTimeEntry.Time,  EndTime = EndTimeEntry.Time  };
-
-            DateTime now = DateTime.Now;
-            DateTime today = DateTime.Now;
-            DateTime startDate = new DateTime(a.StartDate.Year, a.StartDate.Month, a.StartDate.Day, a.StartTime.Hours, a.StartTime.Minutes, a.StartTime.Seconds);
-            DateTime endDate = new DateTime(a.EndDate.Year, a.EndDate.Month, a.EndDate.Day, a.EndTime.Hours, a.EndTime.Minutes, a.EndTime.Seconds);
-
-            if (AllDaySwitch.IsToggled)
+            //Check if information is valid
+            if (string.IsNullOrEmpty(EventNameEntry.Text))
             {
-                a.Time = "All Day";
-
+                await DisplayAlert("Invalid Input", "Event name required", "OK");
             }
-            else
+            else if (StartTimeEntry.Time > EndTimeEntry.Time)
             {
-                a.Time = "" + a.StartTime + " - " + a.EndTime;
-            }
-
-            //For one time events 
-            int daysDifferenceS = (int)Math.Abs(startDate.Subtract(now).Days);
-            int hoursDifferenceS = (int)Math.Abs(startDate.Subtract(now).Hours);
-            int minsDifferenceS = (int)Math.Abs(startDate.Subtract(now).Minutes);
-            int daysDifferenceE = (int)Math.Abs(endDate.Subtract(now).Days);
-            int hoursDifferenceE = (int)Math.Abs(endDate.Subtract(now).Hours);
-            int minsDifferenceE = (int)Math.Abs(endDate.Subtract(now).Minutes);
-            String timeDifferencialS;
-            String timeDifferencialE;
-
-            //TODO: Simplify into method
-            if (daysDifferenceS > 0)
-            {
-                timeDifferencialS = "" + daysDifferenceS + " days";
-
-            } else if (hoursDifferenceS  == 0) {
-
-                timeDifferencialS = "" + minsDifferenceS + " mins";
-
-
-
-            }
-            else if (daysDifferenceE == 0) {
-
-                timeDifferencialS = "" + hoursDifferenceS + " hours";
-
-
-            }
-            else {
-
-                timeDifferencialS = "Error";
-            }
-
-            if (daysDifferenceE > 0)
-            {
-                timeDifferencialE = "" + daysDifferenceE + " days";
-
-            }
-            else if (hoursDifferenceE == 0)
-            {
-
-                timeDifferencialE = "" + minsDifferenceE + " mins";
-
-            }
-            else if (daysDifferenceE == 0)
-            {
-                timeDifferencialE = "" + hoursDifferenceE + " hours";
-
-
-
+                await DisplayAlert("Invalid Input", "The event cannot take place after it has ended!", "OK");
             }
             else
             {
 
-                timeDifferencialE = "Error";
-            }
 
 
-
-
-
-
-
-
-            if (startDate.Subtract(now).TotalSeconds > 0 ) {
-                //Event hasn't begin yet
-
-                a.DaysLeft = "In " + timeDifferencialS;
-
-            
-            } else {
-                //Event has past or in between
-
-                if (endDate.Subtract(now).TotalSeconds > 0)
+                if (eventEditing!= null)
                 {
-                    //Event hasn't ended yet
-                    a.DaysLeft = timeDifferencialE + " remaining";
+
+                    eventEditing.Title  = EventNameEntry.Text;
+                    eventEditing.Location = LoacationEntry.Text;
+                    eventEditing.StartDate = StartDateEntry.Date; 
+                    eventEditing.StartTime = StartTimeEntry.Time;
+                    eventEditing.EndTime = EndTimeEntry.Time;
+
+                    DateTime startDate = new DateTime(eventEditing.StartDate.Year, eventEditing.StartDate.Month, eventEditing.StartDate.Day, eventEditing.StartTime.Hours, eventEditing.StartTime.Minutes, eventEditing.StartTime.Seconds);
+                    DateTime endDate = new DateTime(eventEditing.StartDate.Year, eventEditing.StartDate.Month, eventEditing.StartDate.Day, eventEditing.EndTime.Hours, eventEditing.EndTime.Minutes, eventEditing.EndTime.Seconds);
+                    eventEditing.LocationText = startDate.ToString("D", CultureInfo.CreateSpecificCulture("en-US"));
+
+                     //Refresh events
+                    if (AllDaySwitch.IsToggled)
+                    {
+                        eventEditing.Time = "All Day";
+                    }
+                    else
+                    {
+                        eventEditing.Time = "" + startDate.ToString("t", CultureInfo.CreateSpecificCulture("en-US")) + " - " + endDate.ToString("t", CultureInfo.CreateSpecificCulture("en-US"));
+                    }
+                    if (!string.IsNullOrEmpty(LoacationEntry.Text)) { 
+                    eventEditing.LocationText += "\n@ " + LoacationEntry.Text; 
+                    }
+
+
+
                 }
                 else
                 {
-                    a.DaysLeft = timeDifferencialE + " remaing";
+
+
+                    SHHSEvent a = new SHHSEvent { Title = EventNameEntry.Text, Location = LoacationEntry.Text, StartDate = StartDateEntry.Date, StartTime = StartTimeEntry.Time, EndTime = EndTimeEntry.Time };
+
+                    DateTime startDate = new DateTime(a.StartDate.Year, a.StartDate.Month, a.StartDate.Day, a.StartTime.Hours, a.StartTime.Minutes, a.StartTime.Seconds);
+                    DateTime endDate = new DateTime(a.StartDate.Year, a.StartDate.Month, a.StartDate.Day, a.EndTime.Hours, a.EndTime.Minutes, a.EndTime.Seconds);
+                    a.LocationText = startDate.ToString("D", CultureInfo.CreateSpecificCulture("en-US"));
+
+                    if (AllDaySwitch.IsToggled)
+                    {
+                        a.Time = "All Day";
+
+                    }
+                    else
+                    {
+                        a.Time = "" + startDate.ToString("t", CultureInfo.CreateSpecificCulture("en-US")) + " - " + endDate.ToString("t", CultureInfo.CreateSpecificCulture("en-US"));
+                    }
+                    if (!string.IsNullOrEmpty(LoacationEntry.Text))
+                    {
+                        a.LocationText += " @" + LoacationEntry.Text;
+                    }
+                    //Add the event to SQLite
+                    await ((App)Application.Current).shhsEventManager.AddEvent(a);
                 }
+
+
+
+
+                await ((App)Application.Current).shhsEventManager.RefreshEvent();
+
+                //Dismiss the popup page
+                await PopupNavigation.Instance.PopAsync(true);
             }
-         
 
-
-            await ((App)Application.Current).shhsEventManager.AddEvent(a);
-            await PopupNavigation.Instance.PopAsync(true);
         }
+
+        void Handle_Toggled(object sender, Xamarin.Forms.ToggledEventArgs e)
+        {
+
+            var t = sender as Switch;
+            if (t.IsToggled)
+            {
+
+                StartTimeEntry.Opacity = 0.5;
+                EndTimeEntry.Opacity = 0.5;
+                StartTimeEntry.InputTransparent = true;
+                EndTimeEntry.InputTransparent = true;
+
+
+            }
+            else
+            {
+
+                StartTimeEntry.Opacity = 1;
+                EndTimeEntry.Opacity = 1;
+                StartTimeEntry.InputTransparent = false;
+                EndTimeEntry.InputTransparent = false;
+
+
+            }
+
+        }
+
+
     }
 }

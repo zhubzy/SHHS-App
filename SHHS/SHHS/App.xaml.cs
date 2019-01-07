@@ -15,7 +15,7 @@ namespace SHHS
     {
 
         MainPage shhsMain;
-        CalenderPage shhsCalender;
+        public CalenderPage shhsCalender;
         public SHHSEventManager shhsEventManager;
 
 
@@ -42,6 +42,7 @@ namespace SHHS
 
             await shhsEventManager.InitalizeEventTable();
             shhsCalender.SetDataSource(shhsEventManager.events);
+            await shhsEventManager.RefreshEvent();
 
         }
 
@@ -50,11 +51,13 @@ namespace SHHS
             // Handle when your app sleeps
         }
 
-        protected override void OnResume()
+        override protected async void OnResume()
         {
 
             // Handle when your app resumes
             shhsMain.RefreshSchedule();
+            await shhsEventManager.RefreshEvent();
+
         }
     }
 }

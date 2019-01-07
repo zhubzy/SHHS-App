@@ -49,24 +49,27 @@
             
             
 
-                    <ListView x:Name="AnnoucementList" RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property= Width, Factor=1}" MinimumHeightRequest="130" RowHeight="130" SeparatorVisibility="None" BackgroundColor="#2B7251" >
+                    <ListView x:Name="AnnoucementList" RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property= Width, Factor=1}" MinimumHeightRequest="130" RowHeight="140" SeparatorVisibility="Default" BackgroundColor="#2B7251" >
                         <ListView.ItemTemplate>
                             <DataTemplate>
                                 
-                                <ViewCell>
+                                <ViewCell Tapped="EditEvent" BindingContext ="{Binding .}">
                             
 
                                     <ViewCell.ContextActions> 
-                                       <MenuItem  Text="Delete" Clicked="DeleteEvent" IsDestructive="true" CommandParameter="{Binding .}"/>
+<!--                                       <MenuItem  Text="Edit" Clicked="MakeFavorite" IsDestructive="false" CommandParameter="{Binding .}"/>
+-->      
+                                       <MenuItem  Text="Delete" Clicked="DeleteEvent" IsDestructive="true"/>
+
                                     </ViewCell.ContextActions>
                             
                             
                             
-                                    <Frame Padding="0" Margin="0,5,0,5" BackgroundColor="#E5EDCD" HasShadow="false">
+                                    <Frame CornerRadius="0" Padding="0" Margin="0,0,0,0" BackgroundColor="#E5EDCD" HasShadow="false">
                                         
                                     
                                 
-                                        <StackLayout Padding="0,10,5,5" Spacing="10">
+                                        <StackLayout VerticalOptions="CenterAndExpand" Padding="0,10,5,5" Spacing="10">
                                         <StackLayout Orientation="Horizontal">
                                             <StackLayout HorizontalOptions="CenterAndExpand" Orientation="Horizontal">
                                                 <Label Text="{Binding Title}" VerticalTextAlignment="Center" TextColor="#343F4B" />
@@ -81,7 +84,7 @@
                                             </StackLayout>
                                                <StackLayout Orientation="Horizontal" Padding="15,0,0,0"> 
                                                <Image Source="location.png" Aspect="AspectFit"/>
-                                              <Label Text="{Binding Location}" VerticalTextAlignment="Center" TextColor="#343F4B"/>
+                                              <Label Text="{Binding LocationText}" VerticalTextAlignment="Center" TextColor="#343F4B"/>
                                             </StackLayout>
                                             </StackLayout>
                                             
@@ -99,7 +102,7 @@
          <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" >
 
                <ImageButton Opacity="0.75" Clicked="AddEvent" HorizontalOptions="CenterAndExpand"
-               x:Name="button" Source="Add.png" Aspect="AspectFit"/>
+               x:Name="SaveButton" Source="Add.png" Aspect="AspectFit"/>
      
             
      
