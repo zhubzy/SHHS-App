@@ -3,6 +3,7 @@ using Android.Content.PM;
 using Android.OS;
 using CarouselView.FormsPlugin.Android;
 using Plugin.LocalNotifications;
+using Plugin.CurrentActivity;
 
 namespace SHHS.Droid
 {
@@ -17,7 +18,7 @@ namespace SHHS.Droid
             base.OnCreate(savedInstanceState);
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
             CarouselViewRenderer.Init();
-
+            CrossCurrentActivity.Current.Activity = this;
             LocalNotificationsImplementation.NotificationIconId = Resource.Drawable.plugin_lc_smallicon;
 
             Rg.Plugins.Popup.Popup.Init(this, savedInstanceState);
