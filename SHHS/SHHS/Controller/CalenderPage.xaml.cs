@@ -30,7 +30,7 @@ namespace SHHS.Controller
 
                     var Stack = new StackLayout { Orientation = StackOrientation.Vertical, Spacing = -10 };
                     var dot = new Label { Text = "", HorizontalOptions = LayoutOptions.Center, TextColor = Color.White };
-                    var label = new Button { Text = $"{row*7 + col}", HorizontalOptions = LayoutOptions.Center, TextColor = Color.White, WidthRequest = 40, HeightRequest = 40, BackgroundColor = Color.Transparent, Opacity = 1 };
+                    var label = new Button { Text = $"{row*7 + col}", FontFamily="OpenSans-Light", HorizontalOptions = LayoutOptions.Center, TextColor = Color.White, WidthRequest = 40, HeightRequest = 40, BackgroundColor = Color.Transparent, Opacity = 1 };
                     Stack.Children.Add(label);
                     Stack.Children.Add(dot);
 
@@ -213,7 +213,7 @@ namespace SHHS.Controller
             if (currentMonth == DateTime.Today.Month && currentYear == DateTime.Today.Year)
             {
                 Button lb = (Button)((StackLayout)(Calendar.Children[DateTime.Today.Day + daysNeedToBeDisplayFromPreviousMonth - 1])).Children[0];
-                lb.BorderColor = Color.Green;
+                lb.BorderColor = Color.FromHex("e6e600");
                 lb.BorderWidth = 5;
                 lb.Opacity = 1;
 
@@ -228,8 +228,7 @@ namespace SHHS.Controller
 
         void DateClicked(object sender, System.EventArgs e){
 
-
-
+             
             if (currentSelected != 0) {
                 int daysNeedToBeDisplayFromPreviousMonth = (int)new DateTime(currentYear, currentMonth, 1).DayOfWeek - 1;
                 var lb = (Button)((StackLayout)(Calendar.Children[currentSelected + daysNeedToBeDisplayFromPreviousMonth - 1])).Children[0];
@@ -237,14 +236,15 @@ namespace SHHS.Controller
                 lb.TextColor = Color.White;
 
 
-            }
+            }//reset
 
             Button button = (Button)sender;
 
             currentSelected = Convert.ToInt32(button.Text);
+            button.TextColor = Color.Black;
+            button.BackgroundColor = Color.FromHex("e6e600");
 
-            button.BackgroundColor = Color.Green;
-            
+
 
         }
 
@@ -369,9 +369,21 @@ namespace SHHS.Controller
 
         }
 
-     
 
-         void EditEvent(object sender, Xamarin.Forms.ItemTappedEventArgs e)
+        public void ClearLabel()
+        {
+
+            for (int i = 0; i <= Calendar.Children.Count; i++)
+            {
+                Button lb = (Button)((StackLayout)(Calendar.Children[i])).Children[0];
+                lb.BackgroundColor = Color.Transparent;
+                lb.TextColor = Color.White;
+                lb.BorderWidth = 0;
+                lb.Opacity = 0.5;
+            }
+
+        }
+            void EditEvent(object sender, Xamarin.Forms.ItemTappedEventArgs e)
         {
             var shhsEvent = (e.Item as SHHSEvent);
              PopupNavigation.Instance.PushAsync(new SHHSEventLayout(shhsEvent));

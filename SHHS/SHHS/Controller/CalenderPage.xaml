@@ -97,7 +97,7 @@
                 <!-- Annoucementbar 2 -->
         
         
-         <StackLayout Orientation="Horizontal" BackgroundColor="Red" HorizontalOptions="FillAndExpand" >
+         <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" >
 
                <ImageButton Opacity="0.75" Clicked="AddEvent" HorizontalOptions="CenterAndExpand"
                x:Name="SaveButton" Source="Add.png" Aspect="AspectFit"/>

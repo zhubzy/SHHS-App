@@ -33,7 +33,7 @@
 	<key>CFBundleDisplayName</key>
 	<string>SHHS</string>
 	<key>CFBundleIdentifier</key>
-	<string>com.southhillscode.SHHS</string>
+	<string>test.SHHS</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>CFBundleName</key>

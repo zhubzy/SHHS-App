@@ -92,6 +92,7 @@
     <AndroidResource Include="Resources\drawable\calendar.png" />
     <AndroidResource Include="Resources\drawable-xxhdpi\clock.png" />
     <AndroidResource Include="Resources\drawable-xxhdpi\location.png" />
+    <AndroidResource Include="Resources\drawable\Add.png" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\drawable\" />

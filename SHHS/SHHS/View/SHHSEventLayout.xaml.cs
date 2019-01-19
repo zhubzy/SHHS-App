@@ -17,10 +17,11 @@ namespace SHHS.View
         {
             InitializeComponent();
 
-            if(Device.RuntimePlatform == Device.Android) {
+            if (Device.RuntimePlatform == Device.Android)
+            {
 
                 ConfirmButton.IsVisible = false;
-            
+
             }
 
 

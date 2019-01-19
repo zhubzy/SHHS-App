@@ -10,9 +10,9 @@ namespace SHHS.View
         float _sweepingAngleSlider;
         float _startingAngleSlider;
         string _timeLeft = "Loading";
-        string _periodInfo = "";
-        public string line1 = "";
-        public string line2 = "";
+        string _periodInfo = " ";
+        public string line1 = " ";
+        public string line2 = " ";
         public Boolean isActive;
 
         public float SweepAngleSlider { get { return _sweepingAngleSlider; } set { _sweepingAngleSlider = value; canvasView.InvalidateSurface(); } }
