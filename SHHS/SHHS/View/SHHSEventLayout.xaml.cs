@@ -17,6 +17,13 @@ namespace SHHS.View
         {
             InitializeComponent();
 
+            if(Device.RuntimePlatform == Device.Android) {
+
+                ConfirmButton.IsVisible = false;
+            
+            }
+
+
             EventNameEntry.Text = e.Title;
             LoacationEntry.Text = e.Location;
             StartDateEntry.Date = e.StartDate;

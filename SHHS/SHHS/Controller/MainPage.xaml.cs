@@ -34,12 +34,10 @@ namespace SHHS.Controller
                 ShowIndicators = false,
                 BackgroundColor = Color.FromHex("#E5EDCD")
             };
+
             myCarousel.PositionSelected += Handle_PositionSelected;
             myCarousel.Scrolled += Handle_Scrolled;
-         
-  
-            
-
+        
             //x,y,w,h
             //Adding timer
             HomePage.Children.Add(timer, null, null,

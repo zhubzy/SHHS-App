@@ -115,6 +115,7 @@ namespace SHHS.Model
             var annoucerLabel = new Label
             {
                 Text = v.Announcer,
+                FontFamily = "OpenSans-Bold",
                 VerticalOptions = LayoutOptions.Start,
                 HorizontalOptions = LayoutOptions.FillAndExpand
             };
