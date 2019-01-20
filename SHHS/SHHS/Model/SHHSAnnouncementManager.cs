@@ -122,6 +122,7 @@ namespace SHHS.Model
             var infoLabel = new Label
             {
                 Text = v.Info,
+                FontFamily = "OpenSans-Regular",
                 VerticalOptions = LayoutOptions.Center,
                 HorizontalOptions = LayoutOptions.Center
             };

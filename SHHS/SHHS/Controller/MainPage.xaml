@@ -1,13 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<TabbedPage xmlns:local = "clr-namespace:SHHS.Controller" 
+<TabbedPage xmlns:local = "clr-namespace:SHHS.View" 
             xmlns="http://xamarin.com/schemas/2014/forms" 
             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
             xmlns:android="clr-namespace:Xamarin.Forms.PlatformConfiguration.AndroidSpecific;assembly=Xamarin.Forms.Core"
             android:TabbedPage.ToolbarPlacement="Bottom" 
             android:TabbedPage.BarItemColor="#66FFFFFF"
             android:TabbedPage.BarSelectedItemColor="#EFFACB"
-            BarBackgroundColor="#2B7251"   
-            x:Class="SHHS.Controller.MainPage">
+            BarBackgroundColor="#31815c"   
+            x:Class="SHHS.Controller.MainPage"
+            NavigationPage.HasNavigationBar="false"
+
+            >
     
     
     
@@ -18,19 +21,13 @@
   <ContentPage Title="Home" Icon="home.png" BackgroundColor="#2B7251">
         <ContentPage.Padding>
             <OnPlatform x:TypeArguments="Thickness" iOS="0,10,0,0">
-                
             </OnPlatform>
         </ContentPage.Padding>
-
           <RelativeLayout x:Name="HomePage" Margin="10" >
-           
-        </RelativeLayout>
-        
-      
-        
-      
-        
+        </RelativeLayout> 
  </ContentPage>
+    
+    
 
            
         

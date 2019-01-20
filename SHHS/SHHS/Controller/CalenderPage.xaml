@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:local="clr-namespace:SHHS" x:Class="SHHS.Controller.CalenderPage" BackgroundColor="#2B7251">
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:local="clr-namespace:SHHS" x:Class="SHHS.Controller.CalenderPage" BackgroundColor="#2B7251" NavigationPage.HasNavigationBar="false" >
     <ContentPage.Padding>
             <OnPlatform x:TypeArguments="Thickness" iOS="0,5,0,0">
                 
@@ -70,19 +70,51 @@
                                         <StackLayout VerticalOptions="CenterAndExpand" Padding="0,10,5,5" Spacing="10">
                                         <StackLayout Orientation="Horizontal">
                                             <StackLayout HorizontalOptions="CenterAndExpand" Orientation="Horizontal">
-                                                <Label Text="{Binding Title}" VerticalTextAlignment="Center" TextColor="#343F4B" />
+                                                <Label Text="{Binding Title}" VerticalTextAlignment="Center" TextColor="#343F4B">
+                                          <Label.FontFamily>
+                        <OnPlatform x:TypeArguments="x:String">
+                            <On Platform="iOS" Value="OpenSans-Bold" />
+                            <On Platform="Android" Value="OpenSans-Bold.ttf#OpenSans-Bold" />
+                        </OnPlatform>
+                    </Label.FontFamily>    
+                                        
+                                        </Label>
                                             </StackLayout>
-                                            <Label Text="{Binding DaysLeft}" VerticalTextAlignment="Center" TextColor="#343F4B"/>
+                                            <Label Text="{Binding DaysLeft}" VerticalTextAlignment="Center" TextColor="#343F4B">
+                                          <Label.FontFamily>
+                        <OnPlatform x:TypeArguments="x:String">
+                            <On Platform="iOS" Value="OpenSans-Light" />
+                            <On Platform="Android" Value="OpenSans-Bold.ttf#OpenSans-Light" />
+                        </OnPlatform>
+                    </Label.FontFamily>
+                                        
+                                        </Label>
                                         </StackLayout>
                                             
                                              <StackLayout>
                                             <StackLayout Orientation="Horizontal" Padding="15,0,0,0"> 
                                               <Image Source="clock.png" Aspect="AspectFill"/>
-                                              <Label Text="{Binding Time}" VerticalTextAlignment="Center" TextColor="#343F4B" />
+                                              <Label Text="{Binding Time}" VerticalTextAlignment="Center" TextColor="#343F4B">
+                                          <Label.FontFamily>
+                        <OnPlatform x:TypeArguments="x:String">
+                            <On Platform="iOS" Value="OpenSans-Light" />
+                            <On Platform="Android" Value="OpenSans-Bold.ttf#OpenSans-Light" />
+                        </OnPlatform>
+                    </Label.FontFamily>    
+                                        
+                                        </Label>
                                             </StackLayout>
                                                <StackLayout Orientation="Horizontal" Padding="15,0,0,0"> 
                                                <Image Source="location.png" Aspect="AspectFit"/>
-                                              <Label Text="{Binding LocationText}" VerticalTextAlignment="Center" TextColor="#343F4B"/>
+                                              <Label Text="{Binding LocationText}" VerticalTextAlignment="Center" TextColor="#343F4B">
+                                            
+                                                                <Label.FontFamily>
+                        <OnPlatform x:TypeArguments="x:String">
+                            <On Platform="iOS" Value="OpenSans-Light" />
+                            <On Platform="Android" Value="OpenSans-Bold.ttf#OpenSans-Light" />
+                        </OnPlatform>
+                    </Label.FontFamily>   
+                                            </Label>
                                             </StackLayout>
                                             </StackLayout>
                                             

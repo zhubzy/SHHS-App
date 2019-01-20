@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="SHHS.View.SettingPage">
+    <ContentPage.Padding>
+            <OnPlatform x:TypeArguments="Thickness" iOS="0,10,0,0">
+                
+            </OnPlatform>
+            
+            
+            
+        </ContentPage.Padding>
+        
+        
+ 
+        
+    <TableView BackgroundColor="#EFFACB" Intent="Settings">
+            
+    <TableRoot>
+        <TableSection  Title="Notification">
+         
+            <SwitchCell   x:Name="notificationsetting" Text="Enable Notification" On="{Binding NotificationEnabled}" />
+            <SwitchCell x:Name="soundsetting" Text="Sound" On="{Binding SoundEnabled}" />
+                    <EntryCell  x:Name="minutessetting"  Label = "Number of Minutes to Send" Keyboard = "Numeric" Text="{Binding MinutesToSendNotification}"  HorizontalTextAlignment="Center" />
+        </TableSection>
+    </TableRoot>
+            
+            
+        <TableSection Title="About us">
+            
+            <TextCell Text="Submit Feedback" Tapped = "Handle_Tapped" />
+      <TextCell Text="About out team" Tapped="Handle_Tapped_1" />
+        </TableSection>
+            
+            
+            
+ </TableView>
+</ContentPage>

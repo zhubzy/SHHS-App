@@ -33,7 +33,7 @@
 	<key>CFBundleDisplayName</key>
 	<string>SHHS</string>
 	<key>CFBundleIdentifier</key>
-	<string>test.SHHS</string>
+	<string>com.southhillscode.SHHS</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>CFBundleName</key>
@@ -45,8 +45,8 @@
 	<key>UIStatusBarStyle</key>
 	<string>UIStatusBarStyleLightContent</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.7.1</string>
+	<string>1.9.0</string>
 	<key>CFBundleVersion</key>
-	<string>12</string>
+	<string>13</string>
 </dict>
 </plist>

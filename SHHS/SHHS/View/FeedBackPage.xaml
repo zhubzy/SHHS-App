@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="SHHS.View.FeedBackPage">
+    <ContentPage.Content>
+    </ContentPage.Content>
+    
+        <StackLayout Margin="10" Spacing="20" VerticalOptions="CenterAndExpand" Orientation="Vertical">
+        
+       <StackLayout HorizontalOptions="Fill" Orientation="Horizontal">
+    <Label   VerticalTextAlignment="Center" Text="Name:"   />            
+    <Entry    Placeholder="(Optional)" HorizontalOptions="FillAndExpand"  Keyboard="Default"/>   
+        </StackLayout>
+        
+        
+               <StackLayout HorizontalOptions="Fill" Orientation="Horizontal">
+    <Label   VerticalTextAlignment="Center" Text="Email: " />            
+    <Entry  Placeholder="(Optional)" HorizontalOptions="FillAndExpand"  Keyboard="Default"/>   
+        </StackLayout>
+        
+        
+     <StackLayout  VerticalOptions="CenterAndExpand" Orientation="Vertical">
+    <Label   VerticalTextAlignment="Center" HorizontalOptions="Center" Text="Suggestion: " />            
+    <Editor HeightRequest="300"   Placeholder="Enter Your Suggestion Here" VerticalOptions="FillAndExpand" HorizontalOptions="Fill"  Keyboard="Default"/>   
+                   
+        </StackLayout>
+        
+        
+        
+        <Button Text="Submit" Clicked="Handle_Clicked"/>
+
+        </StackLayout>
+</ContentPage>

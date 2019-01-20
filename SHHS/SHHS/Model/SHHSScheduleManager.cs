@@ -7,6 +7,7 @@ using Firebase.Database;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Plugin.LocalNotifications;
+using Xamarin.Forms;
 
 namespace SHHS.Model
 {
@@ -244,7 +245,13 @@ namespace SHHS.Model
         public void PushLocalNotifications()
         {
 
-            if (ScheduleOfTheDay != -1) {
+            var app = Application.Current as App;
+            
+            var mins = 2;
+            Int32.TryParse(app.MinutesToSendNotification, out mins);
+
+
+            if (ScheduleOfTheDay != -1 && app.NotificationEnabled) {
 
                 CrossLocalNotifications.Current.CancelAll();
 
@@ -253,12 +260,17 @@ namespace SHHS.Model
                 foreach(var s in ScheduleList[ScheduleOfTheDay].Schedule) {
 
                     if(DateTime.Compare(DateTime.Now,s.EndDateTime) < 0){
-                    CrossLocalNotifications.Current.Show("2 Minute Warning!", s.PeriodName + " is about to end in 2 minutes", notID, s.EndDateTime.AddSeconds(-120) ,true, true);
+                    CrossLocalNotifications.Current.Show(mins + " Minute Warning!", s.PeriodName + " is about to end in 2 minutes", notID, s.EndDateTime.AddMinutes(-1* mins) ,true, true);
                         notID++;
                     }
                 }
 
             }
+
+
+
+
+
         }
 
 
