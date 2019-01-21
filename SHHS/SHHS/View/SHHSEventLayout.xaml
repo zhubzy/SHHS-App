@@ -117,7 +117,7 @@
                 <Frame RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=0.5,Constant=-100}"
                        RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=1, Constant= -40}" RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width,Factor=0.5}"
                        HeightRequest="30" CornerRadius="30">
-                                <Button x:Name="ConfirmButton" Clicked="SaveEvent" Text="Save Event" TextColor="#2B7251">
+                                <Button x:Name="ConfirmButton" Clicked="SaveEvent" Text="Save Event" FontSize="Medium" TextColor="#2B7251">
                                     <Label.FontFamily>
                                         <OnPlatform x:TypeArguments="x:String">
                                         <On Platform="iOS" Value="OpenSans-Bold" />

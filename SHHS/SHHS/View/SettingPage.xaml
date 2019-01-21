@@ -19,7 +19,7 @@
          
             <SwitchCell   x:Name="notificationsetting" Text="Enable Notification" On="{Binding NotificationEnabled}" />
             <SwitchCell x:Name="soundsetting" Text="Sound" On="{Binding SoundEnabled}" />
-                    <EntryCell  x:Name="minutessetting"  Label = "Number of Minutes to Send" Keyboard = "Numeric" Text="{Binding MinutesToSendNotification}"  HorizontalTextAlignment="Center" />
+                    <EntryCell  x:Name="minutessetting"  Label = "Number of Minutes to Send" Keyboard = "Numeric" Text="{Binding MinutesToSendNotification}"  XAlign="End"  />
         </TableSection>
     </TableRoot>
             
