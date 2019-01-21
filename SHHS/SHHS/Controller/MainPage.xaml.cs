@@ -25,13 +25,13 @@ namespace SHHS.Controller
             announcementManager = new SHHSAnnouncementManager();
             myCarousel = new CarouselViewControl
             {
-                ItemsSource = announcementManager.MyItemsSource,  // ADD/REMOVE PAGES FROM CAROUSEL ADDING/REMOVING ELEMENTS FROM THE COLLECTION
+                ItemsSource = announcementManager.AnnouncementList,  // ADD/REMOVE PAGES FROM CAROUSEL ADDING/REMOVING ELEMENTS FROM THE COLLECTION
                 Position = 0, //default
                 InterPageSpacing = 10,
                 Orientation = CarouselViewOrientation.Horizontal,
                 PositionSelectedCommand = announcementManager.MyCommand,
                 ShowArrows = false,
-                ShowIndicators = false,
+                ShowIndicators = true,
                 BackgroundColor = Color.FromHex("#E5EDCD")
             };
 
@@ -132,7 +132,7 @@ namespace SHHS.Controller
             if (await scheduleManager.GetScheduleException()) {
                 await scheduleManager.RefreshData();
                 await announcementManager.GetAnnoucements();
-                myCarousel.ItemsSource = announcementManager.MyItemsSource;
+                myCarousel.ItemsSource = announcementManager.AnnouncementList;
             } else {
 
                 scheduleManager.LocalJson();

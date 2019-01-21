@@ -22,15 +22,25 @@ namespace SHHS
         private const string notificationKey = "Notification";
         private const string soundKey = "Sound";
         private const string minutesKey = "Minutes";
+        public string VersionNumber { get; set; }
+        public string BuildNumber { get; set; }
 
-     
 
         public App()
         {
             InitializeComponent();
+
+
+            //Init Culture
             var userSelectedCulture = new CultureInfo("en-US");
             Thread.CurrentThread.CurrentCulture = userSelectedCulture;
 
+            //Set Version
+            var version = DependencyService.Get<IAppVersionProvider>();
+            VersionNumber = version.ApplicationsPublicVersion;
+            BuildNumber = version.ApplicationsPrivateVersion;
+
+            //Init Page
             shhsMain = new MainPage();
             MainPage = new NavigationPage(shhsMain);
             shhsCalender = new CalenderPage { Title = "Calendar", Icon = "calendaricon.png" };

@@ -193,7 +193,7 @@ namespace SHHS.Model
                 IsActive = false;
                 MinutesLeft = 0;
                 SecondsLeft = 0;
-                CurrentMessage = "Class is Over";
+                CurrentMessage = GetScheduleName(DateTime.Today.AddDays(1)) + " tomorrow";
 
             }
 
@@ -202,25 +202,44 @@ namespace SHHS.Model
 
         public void GetTimeUntilEndOfPeriod(){
 
-            ScheduleOfTheDay = FindScheduleType();
+            ScheduleOfTheDay = FindScheduleType(DateTime.Today);
+     
 
-            if(ScheduleOfTheDay == -1){
+            if (ScheduleOfTheDay == -1){
                     IsActive = false;
                     MinutesLeft = 0;
                     SecondsLeft = 0;
-                    CurrentMessage = "Class is Over";
+                    CurrentMessage = GetScheduleName(DateTime.Today.AddDays(1)) + " tomorrow";
                     ScheduleName = "No School";
             } else {
-            CurrentSchedule = FindCurrentSchedule(DateTime.Now, ScheduleList[ScheduleOfTheDay].Schedule);
-            TimeTilEndOfPeriod(DateTime.Now, ScheduleList[ScheduleOfTheDay]);
+                CurrentSchedule = FindCurrentSchedule(DateTime.Now, ScheduleList[ScheduleOfTheDay].Schedule);
+                TimeTilEndOfPeriod(DateTime.Now, ScheduleList[ScheduleOfTheDay]);
                  ScheduleName = ScheduleList[ScheduleOfTheDay].ScheduleName ;
 
             }
         }
 
 
+        private string GetScheduleName(DateTime d) {
+            int tommorowShedule = FindScheduleType(d);
+            string tommorowScheduleName;
+            if (tommorowShedule < 0)
+            {
+                tommorowScheduleName = "No School";
+            }
+            else
+            {
 
-        public int FindScheduleType(){
+                tommorowScheduleName = ScheduleList[tommorowShedule].ScheduleName;
+            }
+
+            return tommorowScheduleName;
+
+
+        }
+
+
+        public int FindScheduleType(DateTime d){
 
      
 
@@ -232,14 +251,20 @@ namespace SHHS.Model
 
             for (int i = 0; i < scheduleExceptions.Count; i++)
             {
-                bool isFound = DateTime.Equals(DateTime.Today, DateTime.Parse(scheduleName[i]));
+                bool isFound = DateTime.Equals(d, DateTime.Parse(scheduleName[i]));
+
+
                 for (int s = 0; s < ScheduleList.Count; s++)
-                    if(string.Equals(time[i],ScheduleList[s].ScheduleName) && isFound)
+                {
+                    if (string.Equals(time[i],"No School") && isFound)
+                        return -1;
+                    if (string.Equals(time[i], ScheduleList[s].ScheduleName) && isFound)
                         return s;
+                }
             }
 
 
-            return (int)DateTime.Today.DayOfWeek == 6 || (int)DateTime.Today.DayOfWeek == 0 ? -1 : 0;
+            return (int)d.DayOfWeek == 6 || (int)d.DayOfWeek == 0 ? -1 : 0;
         }
         
         public void PushLocalNotifications()
@@ -260,7 +285,12 @@ namespace SHHS.Model
                 foreach(var s in ScheduleList[ScheduleOfTheDay].Schedule) {
 
                     if(DateTime.Compare(DateTime.Now,s.EndDateTime) < 0){
+
+                        if(app.SoundEnabled)
                     CrossLocalNotifications.Current.Show(mins + " Minute Warning!", s.PeriodName + " is about to end in " + mins +  " minutes", notID, s.EndDateTime.AddMinutes(-1.0 * mins) ,true, true);
+                        else
+                        CrossLocalNotifications.Current.Show(mins + " Minute Warning!", s.PeriodName + " is about to end in " + mins + " minutes", notID, s.EndDateTime.AddMinutes(-1.0 * mins), false, false);
+
                         notID++;
                     }
                 }

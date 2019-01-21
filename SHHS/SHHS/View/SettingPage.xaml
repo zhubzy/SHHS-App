@@ -27,9 +27,31 @@
         <TableSection Title="About us">
             
             <TextCell Text="Submit Feedback" Tapped = "Handle_Tapped" />
-      <TextCell Text="About out team" Tapped="Handle_Tapped_1" />
+      <TextCell Text="About our team" Tapped="Handle_Tapped_1" />
         </TableSection>
             
+        
+          <TableSection Title="App Info">
+            
+                    <ViewCell>
+                        <StackLayout Margin="20,0,20,0" Orientation="Horizontal">
+                            <Label Text="Version Number" VerticalTextAlignment="Center"/>
+                            <Label Text="{Binding VersionNumber}"
+                              HorizontalOptions="EndAndExpand" VerticalTextAlignment="Center"/>
+                        </StackLayout>
+                
+                    </ViewCell>       
+            
+                    <ViewCell>
+                        <StackLayout Margin="20,0,20,0" Orientation="Horizontal">
+                            <Label Text="Build Number" VerticalTextAlignment="Center"/>
+                            <Label Text="{Binding BuildNumber}"
+                              HorizontalOptions="EndAndExpand" VerticalTextAlignment="Center"/>
+                        </StackLayout>
+                
+                    </ViewCell>    
+        
+        </TableSection>
             
             
  </TableView>

@@ -3,23 +3,23 @@
     <ContentPage.Content>
     </ContentPage.Content>
     
-        <StackLayout Margin="10" Spacing="20" VerticalOptions="CenterAndExpand" Orientation="Vertical">
+        <StackLayout Margin="10" Spacing="20" VerticalOptions="StartAndExpand" Orientation="Vertical">
         
        <StackLayout HorizontalOptions="Fill" Orientation="Horizontal">
     <Label   VerticalTextAlignment="Center" Text="Name:"   />            
-    <Entry    Placeholder="(Optional)" HorizontalOptions="FillAndExpand"  Keyboard="Default"/>   
+    <Entry Text="{Binding Name}"    Placeholder="(Optional)" HorizontalOptions="FillAndExpand" IsSpellCheckEnabled="false" IsTextPredictionEnabled="false" Keyboard="Default"/>   
         </StackLayout>
         
         
                <StackLayout HorizontalOptions="Fill" Orientation="Horizontal">
     <Label   VerticalTextAlignment="Center" Text="Email: " />            
-    <Entry  Placeholder="(Optional)" HorizontalOptions="FillAndExpand"  Keyboard="Default"/>   
+    <Entry Text="{Binding Email}" Placeholder="(Optional)" HorizontalOptions="FillAndExpand"  Keyboard="Email"/>   
         </StackLayout>
         
         
      <StackLayout  VerticalOptions="CenterAndExpand" Orientation="Vertical">
     <Label   VerticalTextAlignment="Center" HorizontalOptions="Center" Text="Suggestion: " />            
-    <Editor HeightRequest="300"   Placeholder="Enter Your Suggestion Here" VerticalOptions="FillAndExpand" HorizontalOptions="Fill"  Keyboard="Default"/>   
+    <Editor AutoSize="TextChanges" Text="{Binding Feedback}"  Placeholder="Enter Your Suggestion Here" VerticalOptions="FillAndExpand" HorizontalOptions="Fill"  Keyboard="Default"/>   
                    
         </StackLayout>
         

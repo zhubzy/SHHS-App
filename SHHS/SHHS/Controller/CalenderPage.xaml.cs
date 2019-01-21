@@ -73,10 +73,6 @@ namespace SHHS.Controller
         }
 
 
-       
-
-
-
         public void RefreshDate()
         {
 
@@ -265,37 +261,12 @@ namespace SHHS.Controller
         /// Display and refesh the calander in previous month.
         void PreviousMonth(object sender, System.EventArgs e)
         {
-
-
-            if (currentMonth == 1)
-            {
-
-                currentYear--;
-                currentMonth = 12;
-            }
-            else
-            {
-                currentMonth--;
-            }
-
-            RefreshDate();
-
+            AdvanceToPreviousMonth();
         }
 
          void NextMonth(object sender, System.EventArgs e)
         {
-            if (currentMonth == 12)
-            {
-
-                currentYear++;
-                currentMonth = 1;
-            }
-            else
-            {
-                currentMonth++;
-            }
-
-             RefreshDate();
+            AdvanceToNextMonth();
         }
 
 
@@ -368,6 +339,57 @@ namespace SHHS.Controller
             await PopupNavigation.Instance.PushAsync(new SHHSEventLayout());
 
         }
+
+        void OnSwipedL(object sender, Xamarin.Forms.SwipedEventArgs e)
+        {
+            AdvanceToPreviousMonth();        
+           }
+
+
+        void OnSwipedR(object sender, Xamarin.Forms.SwipedEventArgs e)
+        {
+            AdvanceToNextMonth();
+        }
+
+
+
+        private void AdvanceToPreviousMonth() {
+
+            if (currentMonth == 1)
+            {
+
+                currentYear--;
+                currentMonth = 12;
+            }
+            else
+            {
+                currentMonth--;
+            }
+
+            RefreshDate();
+
+        }
+        private void AdvanceToNextMonth()
+        {
+
+
+            if (currentMonth == 12)
+            {
+
+                currentYear++;
+                currentMonth = 1;
+            }
+            else
+            {
+                currentMonth++;
+            }
+
+            RefreshDate();
+
+        }
+
+
+
 
 
         public void ClearLabel()

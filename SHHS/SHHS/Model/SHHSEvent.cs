@@ -27,11 +27,19 @@ namespace SHHS.Model
    
 
         public string LocationText { get; set; }
-
         public string Title { get { return _title; } set { SetValue(ref _title, value); } }
         public string Time { get { return _time; } set { SetValue(ref _time, value); } }
         public string Location { get { return _location; } set { SetValue(ref _location, value); } }
         public string DaysLeft { get { return _daysLeft; } set { SetValue(ref _daysLeft, value); } }
+
+
+        //Firebase
+        public string StartTimeString { get; set; }
+        public string EndTimeString { get; set; }
+        public string DateString { get; set; }
+
+
+
         public TimeSpan StartTime { get { return _startTime; } set { SetValue(ref _startTime, value); } }
         public TimeSpan EndTime { get { return _endTime; } set { SetValue(ref _endTime, value); } }
         public DateTime StartDate { get { return _startDate; } set { SetValue(ref _startDate, value); } }

@@ -13,29 +13,50 @@ namespace SHHS.Model
     public class SHHSAnnouncementManager : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
-        public List<SHHSAnnouncementView> AnnouncementList { get; set; }
+        ObservableCollection<Xamarin.Forms.View> _annoucementList;
+        public ObservableCollection<Xamarin.Forms.View> AnnouncementList
+        {
+            set
+            {
+                _annoucementList = value;
+                OnPropertyChanged("MyItemsSource");
+            }
+            get
+            {
+                return _annoucementList;
+            }
+        }
+
+        public Command MyCommand { protected set; get; }
+
+        protected virtual void OnPropertyChanged(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+
+
 
         public SHHSAnnouncementManager()
         {
 
 
-            AnnouncementList = new List<SHHSAnnouncementView>();
         
             MyCommand = new Command(() =>
             {
                 Debug.WriteLine("Position selected.");
             });
-            MyItemsSource = new ObservableCollection<Xamarin.Forms.View>();
+            AnnouncementList = new ObservableCollection<Xamarin.Forms.View>();
             SHHSAnnouncementView view = new SHHSAnnouncementView { Announcer = "Loading", Info = "Loading" };
             SHHSAnnouncementView view2 = new SHHSAnnouncementView { Announcer = "Loading", Info = "Your Internet May Be Slow" };
             SHHSAnnouncementView view3 = new SHHSAnnouncementView { Announcer = "Loading", Info = "Check Your Wifi Connection" };
             SHHSAnnouncementView view4 = new SHHSAnnouncementView { Announcer = "Loading", Info = "Please Be Patient" };
 
 
-            MyItemsSource.Add(CreateStackLayout(view));
-            MyItemsSource.Add(CreateStackLayout(view2));
-            MyItemsSource.Add(CreateStackLayout(view3));
-            MyItemsSource.Add(CreateStackLayout(view4));
+            AnnouncementList.Add(CreateStackLayout(view));
+            AnnouncementList.Add(CreateStackLayout(view2));
+            AnnouncementList.Add(CreateStackLayout(view3));
+            AnnouncementList.Add(CreateStackLayout(view4));
          
         }
 
@@ -44,13 +65,16 @@ namespace SHHS.Model
 
             var firebase = new FirebaseClient("https://shhs-45632.firebaseio.com/");
 
+       
+
             try
             {
 
                 var annoucements = await firebase.Child("South Hills Announcements").OnceAsync<SHHSAnnouncementView>();
+                AnnouncementList.Clear();
                 foreach (var e in annoucements)
                 {
-                    AnnouncementList.Add(e.Object);
+                    AnnouncementList.Add(CreateStackLayout(e.Object));
 
                 }
 
@@ -64,45 +88,10 @@ namespace SHHS.Model
 
 
             }
-            RefreshData();
 
         }
 
-        ObservableCollection<Xamarin.Forms.View> _myItemsSource;
-        public ObservableCollection<Xamarin.Forms.View> MyItemsSource
-        {
-            set
-            {
-                _myItemsSource = value;
-                OnPropertyChanged("MyItemsSource");
-            }
-            get
-            {
-                return _myItemsSource;
-            }
-        }
-
-        public Command MyCommand { protected set; get; }
-
-        protected virtual void OnPropertyChanged(string propertyName)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
-
-        public void RefreshData(){
-
-            MyItemsSource = new ObservableCollection<Xamarin.Forms.View>();
-
-
-            for (int i = 0; i < AnnouncementList.Count; i ++){
-
-                MyItemsSource.Add(CreateStackLayout(AnnouncementList[i]));
-
-            }
-
-
-
-        }
+   
 
 
 

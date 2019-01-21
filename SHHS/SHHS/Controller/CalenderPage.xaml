@@ -1,144 +1,105 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:local="clr-namespace:SHHS" x:Class="SHHS.Controller.CalenderPage" BackgroundColor="#2B7251" NavigationPage.HasNavigationBar="false" >
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:local="clr-namespace:SHHS" x:Class="SHHS.Controller.CalenderPage" BackgroundColor="#2B7251" NavigationPage.HasNavigationBar="false">
     <ContentPage.Padding>
-            <OnPlatform x:TypeArguments="Thickness" iOS="0,10,0,0">
-                
-            </OnPlatform>
-        </ContentPage.Padding>
-        
-       
+        <OnPlatform x:TypeArguments="Thickness" iOS="0,10,0,0">
+        </OnPlatform>
+    </ContentPage.Padding>
     <StackLayout x:Name="MasterPage" Orientation="Vertical" Margin="5" Spacing="3">
         <!-- Place new controls here -->
-            <RelativeLayout x:Name="RelativeView">
-                <Label  x:Name="YearLabel" Text="2018" TextColor="White" FontSize="20"  RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent,Property=Width}" VerticalTextAlignment = "Center"
-                      HorizontalTextAlignment="Center" HeightRequest="50">
-                    <Label.FontFamily>
-                        <OnPlatform x:TypeArguments="x:String">
-                            <On Platform="iOS" Value="OpenSans-Bold" />
-                            <On Platform="Android" Value="OpenSans-Bold.ttf#OpenSans-Bold" />
-                        </OnPlatform>
-                    </Label.FontFamily>
-                </Label>
-                <StackLayout HeightRequest="50" HorizontalOptions="Center" x:Name="DateStack" Orientation="Horizontal" Spacing="200"  RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToView, ElementName=YearLabel, Property=Y, Constant= 0}" RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property= Width, Factor=1}">
-                    <Button Clicked="PreviousMonth" Image="arrowLeft.png" BackgroundColor="Transparent" HorizontalOptions="Start"/>
-         
-                    <Button Clicked="NextMonth" Image="arrowLeft.png" BackgroundColor="Transparent" Rotation="180" HorizontalOptions="End"/>
-                </StackLayout>
-                <Grid x:Name="week" RowSpacing="40" ColumnSpacing="1" Padding="0,0,0,0" RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor= 1 }" RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToView, Property= Y,ElementName= DateStack,Factor=1, Constant= 50}">
-                    <Label Grid.Column="0" Text="Mon" TextColor="White" HorizontalOptions="Center" />
-                    <Label Grid.Column="1" Text="Tue" TextColor="White" HorizontalOptions="Center" />
-                    <Label Grid.Column="2" Text="Wed" TextColor="White" HorizontalOptions="Center" />
-                    <Label Grid.Column="3" Text="Thu" TextColor="White" HorizontalOptions="Center" />
-                    <Label Grid.Column="4" Text="Fri" TextColor="White" HorizontalOptions="Center" />
-                    <Label Grid.Column="5" Text="Sat" TextColor="White" HorizontalOptions="Center" />
-                    <Label Grid.Column="6" Text="Sun" TextColor="White" HorizontalOptions="Center" />
-                </Grid>
-                    
-                <ScrollView x:Name="CalendarScroll" VerticalScrollBarVisibility="Default" Padding="0,0,0,0" RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor= 1 }" RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToView, Property= Y,ElementName= week,Factor=1, Constant= 30}">
-
+        <RelativeLayout x:Name="RelativeView">
+            <Label x:Name="YearLabel" Text="2018" TextColor="White" FontSize="20" RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent,Property=Width}" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" HeightRequest="50">
+                <Label.FontFamily>
+                    <OnPlatform x:TypeArguments="x:String">
+                        <On Platform="iOS" Value="OpenSans-Bold" />
+                        <On Platform="Android" Value="OpenSans-Bold.ttf#OpenSans-Bold" />
+                    </OnPlatform>
+                </Label.FontFamily>
+            </Label>
+            <StackLayout HeightRequest="50" HorizontalOptions="Center" x:Name="DateStack" Orientation="Horizontal" Spacing="200" RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToView, ElementName=YearLabel, Property=Y, Constant= 0}" RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property= Width, Factor=1}">
+                <Button Clicked="PreviousMonth" Image="arrowLeft.png" BackgroundColor="Transparent" HorizontalOptions="Start" />
+                <Button Clicked="NextMonth" Image="arrowLeft.png" BackgroundColor="Transparent" Rotation="180" HorizontalOptions="End" />
+            </StackLayout>
+            <Grid x:Name="week" RowSpacing="40" ColumnSpacing="1" Padding="0,0,0,0" RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor= 1 }" RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToView, Property= Y,ElementName= DateStack,Factor=1, Constant= 50}">
+                <Label Grid.Column="0" Text="Mon" TextColor="White" HorizontalOptions="Center" />
+                <Label Grid.Column="1" Text="Tue" TextColor="White" HorizontalOptions="Center" />
+                <Label Grid.Column="2" Text="Wed" TextColor="White" HorizontalOptions="Center" />
+                <Label Grid.Column="3" Text="Thu" TextColor="White" HorizontalOptions="Center" />
+                <Label Grid.Column="4" Text="Fri" TextColor="White" HorizontalOptions="Center" />
+                <Label Grid.Column="5" Text="Sat" TextColor="White" HorizontalOptions="Center" />
+                <Label Grid.Column="6" Text="Sun" TextColor="White" HorizontalOptions="Center" />
+            </Grid>
+            <ScrollView x:Name="CalendarScroll" VerticalScrollBarVisibility="Default" Padding="0,0,0,0" RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor= 1 }" RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToView, Property= Y,ElementName= week,Factor=1, Constant= 30}">
                 <Grid x:Name="Calendar" ColumnSpacing="1">
+                    <Grid.GestureRecognizers>
+                        <SwipeGestureRecognizer Direction="Right" Swiped="OnSwipedR" />
+                        <SwipeGestureRecognizer Direction="Left" Swiped="OnSwipedL" />
+                    </Grid.GestureRecognizers>
                 </Grid>
                 <!-- Annoucementbar 1 -->
-                </ScrollView>
-                
-                </RelativeLayout>
-                 
-   
-            
-    
-            
-            
-
-                    <ListView ItemTapped="EditEvent" x:Name="AnnoucementList" RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property= Width, Factor=1}" MinimumHeightRequest="130" RowHeight="135" BackgroundColor="#2B7251" >
-                        <ListView.ItemTemplate>
-                            <DataTemplate>
-                                
-                                <ViewCell>
-                            
-
-                                    <ViewCell.ContextActions>       
-                                       <MenuItem Text="Delete" Clicked="DeleteEvent" IsDestructive="true" CommandParameter="{Binding .}"/>
-                                   
-                                    </ViewCell.ContextActions>
-                            
-                            
-                            
-                                    <Frame CornerRadius="0" Padding="0" Margin="0,5,0,5" BackgroundColor="#E5EDCD" HasShadow="false">
-                                        
-                                    
-                                
-                                        <StackLayout VerticalOptions="CenterAndExpand" Padding="0,10,5,5" Spacing="10">
-                                        <StackLayout Orientation="Horizontal">
-                                            <StackLayout HorizontalOptions="CenterAndExpand" Orientation="Horizontal">
-                                                <Label Text="{Binding Title}" VerticalTextAlignment="Center" TextColor="#343F4B">
-                                          <Label.FontFamily>
-                        <OnPlatform x:TypeArguments="x:String">
-                            <On Platform="iOS" Value="OpenSans-Bold" />
-                            <On Platform="Android" Value="OpenSans-Bold.ttf#OpenSans-Bold" />
-                        </OnPlatform>
-                    </Label.FontFamily>    
-                                        
+            </ScrollView>
+        </RelativeLayout>
+        <ListView ItemTapped="EditEvent" x:Name="AnnoucementList" RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property= Width, Factor=1}" MinimumHeightRequest="130" RowHeight="135" BackgroundColor="#2B7251">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <ViewCell.ContextActions>
+                            <MenuItem Text="Delete" Clicked="DeleteEvent" IsDestructive="true" CommandParameter="{Binding .}" />
+                        </ViewCell.ContextActions>
+                        <Frame CornerRadius="0" Padding="0" Margin="0,5,0,5" BackgroundColor="#E5EDCD" HasShadow="false">
+                            <StackLayout VerticalOptions="CenterAndExpand" Padding="0,10,5,5" Spacing="10">
+                                <StackLayout Orientation="Horizontal">
+                                    <StackLayout HorizontalOptions="CenterAndExpand" Orientation="Horizontal">
+                                        <Label Text="{Binding Title}" VerticalTextAlignment="Center" TextColor="#343F4B">
+                                            <Label.FontFamily>
+                                                <OnPlatform x:TypeArguments="x:String">
+                                                    <On Platform="iOS" Value="OpenSans-Bold" />
+                                                    <On Platform="Android" Value="OpenSans-Bold.ttf#OpenSans-Bold" />
+                                                </OnPlatform>
+                                            </Label.FontFamily>
                                         </Label>
-                                            </StackLayout>
-                                            <Label Text="{Binding DaysLeft}" VerticalTextAlignment="Center" TextColor="#343F4B">
-                                          <Label.FontFamily>
-                        <OnPlatform x:TypeArguments="x:String">
-                            <On Platform="iOS" Value="OpenSans-Light" />
-                            <On Platform="Android" Value="OpenSans-Bold.ttf#OpenSans-Light" />
-                        </OnPlatform>
-                    </Label.FontFamily>
-                                        
+                                    </StackLayout>
+                                    <Label Text="{Binding DaysLeft}" VerticalTextAlignment="Center" TextColor="#343F4B">
+                                        <Label.FontFamily>
+                                            <OnPlatform x:TypeArguments="x:String">
+                                                <On Platform="iOS" Value="OpenSans-Light" />
+                                                <On Platform="Android" Value="OpenSans-Bold.ttf#OpenSans-Light" />
+                                            </OnPlatform>
+                                        </Label.FontFamily>
+                                    </Label>
+                                </StackLayout>
+                                <StackLayout>
+                                    <StackLayout Orientation="Horizontal" Padding="15,0,0,0">
+                                        <Image Source="clock.png" Aspect="AspectFill" />
+                                        <Label Text="{Binding Time}" VerticalTextAlignment="Center" TextColor="#343F4B">
+                                            <Label.FontFamily>
+                                                <OnPlatform x:TypeArguments="x:String">
+                                                    <On Platform="iOS" Value="OpenSans-Light" />
+                                                    <On Platform="Android" Value="OpenSans-Bold.ttf#OpenSans-Light" />
+                                                </OnPlatform>
+                                            </Label.FontFamily>
                                         </Label>
-                                        </StackLayout>
-                                            
-                                             <StackLayout>
-                                            <StackLayout Orientation="Horizontal" Padding="15,0,0,0"> 
-                                              <Image Source="clock.png" Aspect="AspectFill"/>
-                                              <Label Text="{Binding Time}" VerticalTextAlignment="Center" TextColor="#343F4B">
-                                          <Label.FontFamily>
-                        <OnPlatform x:TypeArguments="x:String">
-                            <On Platform="iOS" Value="OpenSans-Light" />
-                            <On Platform="Android" Value="OpenSans-Bold.ttf#OpenSans-Light" />
-                        </OnPlatform>
-                    </Label.FontFamily>    
-                                        
+                                    </StackLayout>
+                                    <StackLayout Orientation="Horizontal" Padding="15,0,0,0">
+                                        <Image Source="location.png" Aspect="AspectFit" />
+                                        <Label Text="{Binding LocationText}" VerticalTextAlignment="Center" TextColor="#343F4B">
+                                            <Label.FontFamily>
+                                                <OnPlatform x:TypeArguments="x:String">
+                                                    <On Platform="iOS" Value="OpenSans-Light" />
+                                                    <On Platform="Android" Value="OpenSans-Bold.ttf#OpenSans-Light" />
+                                                </OnPlatform>
+                                            </Label.FontFamily>
                                         </Label>
-                                            </StackLayout>
-                                               <StackLayout Orientation="Horizontal" Padding="15,0,0,0"> 
-                                               <Image Source="location.png" Aspect="AspectFit"/>
-                                              <Label Text="{Binding LocationText}" VerticalTextAlignment="Center" TextColor="#343F4B">
-                                            
-                                                                <Label.FontFamily>
-                        <OnPlatform x:TypeArguments="x:String">
-                            <On Platform="iOS" Value="OpenSans-Light" />
-                            <On Platform="Android" Value="OpenSans-Bold.ttf#OpenSans-Light" />
-                        </OnPlatform>
-                    </Label.FontFamily>   
-                                            </Label>
-                                            </StackLayout>
-                                            </StackLayout>
-                                            
-                                        </StackLayout>
-                                    </Frame>
-                                </ViewCell>
-                            </DataTemplate>
-                        </ListView.ItemTemplate>
-                    </ListView>
-
-
-                <!-- Annoucementbar 2 -->
-        
-        
-         <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" >
-
-               <ImageButton Opacity="0.75" Clicked="AddEvent" HorizontalOptions="CenterAndExpand"
-               x:Name="SaveButton" Source="Add.png" Aspect="AspectFit"/>
-     
-            
-     
-   </StackLayout>
+                                    </StackLayout>
+                                </StackLayout>
+                            </StackLayout>
+                        </Frame>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        <!-- Annoucementbar 2 -->
+        <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+            <ImageButton Opacity="0.75" Clicked="AddEvent" HorizontalOptions="CenterAndExpand" x:Name="SaveButton" Source="Add.png" Aspect="AspectFit" />
+        </StackLayout>
     </StackLayout>
-        
-        
-               
 </ContentPage>

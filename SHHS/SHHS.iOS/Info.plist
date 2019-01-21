@@ -45,8 +45,8 @@
 	<key>UIStatusBarStyle</key>
 	<string>UIStatusBarStyleLightContent</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.9.0</string>
+	<string>1.9.2</string>
 	<key>CFBundleVersion</key>
-	<string>13</string>
+	<string>14</string>
 </dict>
 </plist>

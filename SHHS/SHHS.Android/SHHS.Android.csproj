@@ -63,6 +63,7 @@
     <Compile Include="LocalNotificationsImplementation.cs" />
     <Compile Include="ScheduledAlarmHandler.cs" />
     <Compile Include="LocalNotification.cs" />
+    <Compile Include="AppVersionProvider.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
