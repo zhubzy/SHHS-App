@@ -18,6 +18,7 @@ namespace SHHS
         MainPage shhsMain;
         public CalenderPage shhsCalender;
         public SHHSEventManager shhsEventManager;
+        public SettingPage shhsSetting;
         private const string notificationKey = "Notification";
         private const string soundKey = "Sound";
         private const string minutesKey = "Minutes";
@@ -29,12 +30,13 @@ namespace SHHS
             InitializeComponent();
             var userSelectedCulture = new CultureInfo("en-US");
             Thread.CurrentThread.CurrentCulture = userSelectedCulture;
-            shhsMain = new MainPage();
-            shhsCalender = new CalenderPage { Title = "Calendar", Icon = "calendar.png" };
 
-             MainPage = new NavigationPage(shhsMain);
+            shhsMain = new MainPage();
+            MainPage = new NavigationPage(shhsMain);
+            shhsCalender = new CalenderPage { Title = "Calendar", Icon = "calendaricon.png" };
+            shhsSetting =  new SettingPage { Title = "Setting", Icon = "setting.png", BackgroundColor = Color.FromHex("#EFFACB") };
             shhsMain.Children.Add(shhsCalender);
-            shhsMain.Children.Add(new SettingPage { Title = "Setting", Icon = "setting.png", BackgroundColor = Color.FromHex("#EFFACB") });
+            shhsMain.Children.Add(shhsSetting);
             shhsEventManager = new SHHSEventManager();
             Current = this;
 
@@ -59,34 +61,20 @@ namespace SHHS
 
         override protected async void OnResume()
         {
-
             // Handle when your app resumes
             shhsMain.RefreshSchedule();
             await shhsEventManager.RefreshEvent();
-
         }
-
-
         public bool NotificationEnabled { 
-        
             get {
-
                 if (Properties.ContainsKey(notificationKey))
                     return (bool)Properties[notificationKey];
                 return false;
-            
             }
-
             set {
-
-                Properties[notificationKey] = value;
-            
-            
+                Properties[notificationKey] = value; 
             }
-
-
         }
-
         public bool SoundEnabled
         {
 
@@ -127,7 +115,8 @@ namespace SHHS
 
                 Properties[minutesKey] = value;
 
-
+                if(shhsSetting!= null)
+                shhsMain.scheduleManager.PushLocalNotifications();
             }
 
 

@@ -260,7 +260,7 @@ namespace SHHS.Model
                 foreach(var s in ScheduleList[ScheduleOfTheDay].Schedule) {
 
                     if(DateTime.Compare(DateTime.Now,s.EndDateTime) < 0){
-                    CrossLocalNotifications.Current.Show(mins + " Minute Warning!", s.PeriodName + " is about to end in 2 minutes", notID, s.EndDateTime.AddMinutes(-1* mins) ,true, true);
+                    CrossLocalNotifications.Current.Show(mins + " Minute Warning!", s.PeriodName + " is about to end in " + mins +  " minutes", notID, s.EndDateTime.AddMinutes(-1.0 * mins) ,true, true);
                         notID++;
                     }
                 }
