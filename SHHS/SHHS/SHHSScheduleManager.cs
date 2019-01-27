@@ -178,7 +178,7 @@ namespace SHHS.Model
                 IsActive = true;
                 CurrentMessage = "Before " + schedule.Schedule[CurrentSchedule].PeriodName + " Starts";
 
-            } else if (closestPeriodEnd.Hour * 60 + closestPeriodEnd.Minute >= now.Hour * 60 + now.Minute) {
+            } else if (closestPeriodEnd.Hour * 60 + closestPeriodEnd.Minute > now.Hour * 60 + now.Minute) {
 
                 MinutesLeft = CalcTime(now, closestPeriodEnd) / 60;
                 SecondsLeft = CalcTime(now, closestPeriodEnd) % 60;
@@ -274,11 +274,11 @@ namespace SHHS.Model
             
             var mins = 2;
             Int32.TryParse(app.MinutesToSendNotification, out mins);
+                            CrossLocalNotifications.Current.CancelAll();
 
 
             if (ScheduleOfTheDay != -1 && app.NotificationEnabled) {
 
-                CrossLocalNotifications.Current.CancelAll();
 
                 var notID = 0;
 

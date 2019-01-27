@@ -19,15 +19,42 @@
          
             <SwitchCell   x:Name="notificationsetting" Text="Enable Notification" On="{Binding NotificationEnabled}" />
             <SwitchCell x:Name="soundsetting" Text="Sound" On="{Binding SoundEnabled}" />
-                    <EntryCell  x:Name="minutessetting"  Label = "Number of Minutes to Send" Keyboard = "Numeric" Text="{Binding MinutesToSendNotification}"  XAlign="End"  />
+                    <EntryCell   x:Name="minutessetting"  Label = "Number of Minutes to Send" Keyboard = "Numeric" Text="{Binding MinutesToSendNotification}"  XAlign="End"  />
         </TableSection>
     </TableRoot>
             
             
         <TableSection Title="About us">
             
-            <TextCell Text="Submit Feedback" Tapped = "Handle_Tapped" />
-      <TextCell Text="About our team" Tapped="Handle_Tapped_1" />
+            
+            
+            
+            
+                 <ViewCell Tapped="Handle_Tapped">
+                        <StackLayout Margin="20,0,20,0" Orientation="Horizontal">
+                            <Label Text="Submit Feedback" VerticalTextAlignment="Center"/>
+                       
+                        </StackLayout>
+                
+                    </ViewCell>       
+            
+                    <ViewCell Tapped="Handle_Tapped_1">
+                        <StackLayout Margin="20,0,20,0" Orientation="Horizontal">
+                            <Label Text="About our team" VerticalTextAlignment="Center"/>
+                     
+                        </StackLayout>
+                
+                    </ViewCell> 
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
         </TableSection>
             
         

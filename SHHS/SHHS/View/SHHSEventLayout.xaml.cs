@@ -17,13 +17,23 @@ namespace SHHS.View
         {
             InitializeComponent();
 
-            if (Device.RuntimePlatform == Device.Android)
+
+            if (Device.RuntimePlatform == Device.iOS)
+                RelativeView.Children.Add(iOSConfirmButton,
+            Constraint.RelativeToParent((parent) =>
+            {
+                return parent.Width * 0.5 - 100;
+            }),
+            Constraint.RelativeToParent((parent) =>
             {
 
-                ConfirmButton.IsVisible = false;
+                return parent.Height - 40;
+            }), Constraint.RelativeToParent((parent) =>
+            {
 
-            }
-
+                return parent.Width / 2;
+            })
+            );
 
             EventNameEntry.Text = e.Title;
             LoacationEntry.Text = e.Location;
@@ -31,7 +41,6 @@ namespace SHHS.View
             StartTimeEntry.Time = e.StartTime;
             EndTimeEntry.Time = e.EndTime;
             AllDaySwitch.IsToggled |= e.Time.Equals("All Day");
-            ConfirmButton.Text = "Confirm Changes";
             eventEditing = e;
         }
 
@@ -40,6 +49,22 @@ namespace SHHS.View
         {
             InitializeComponent();
 
+            if (Device.RuntimePlatform == Device.iOS)
+                RelativeView.Children.Add(iOSConfirmButton,
+            Constraint.RelativeToParent((parent) =>
+            {
+                return parent.Width * 0.5 - 100;
+            }),
+            Constraint.RelativeToParent((parent) =>
+            {
+               
+                return parent.Height -40;
+            }), Constraint.RelativeToParent((parent) =>
+            {
+
+                return parent.Width / 2;
+            })
+            );
         }
         void DiscardChanges(object sender, System.EventArgs e)
         {

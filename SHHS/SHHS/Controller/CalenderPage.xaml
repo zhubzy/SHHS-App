@@ -7,7 +7,7 @@
     <StackLayout x:Name="MasterPage" Orientation="Vertical" Margin="5" Spacing="3">
         <!-- Place new controls here -->
         <RelativeLayout x:Name="RelativeView">
-            <Label x:Name="YearLabel" Text="2018" TextColor="White" FontSize="20" RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent,Property=Width}" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" HeightRequest="50">
+            <Label  x:Name="YearLabel" Text="January 2018" TextColor="White" FontSize="20" RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent,Property=Width}" HorizontalTextAlignment="Center"  VerticalTextAlignment="Center" HeightRequest="50">
                 <Label.FontFamily>
                     <OnPlatform x:TypeArguments="x:String">
                         <On Platform="iOS" Value="OpenSans-Bold" />
@@ -20,13 +20,62 @@
                 <Button Clicked="NextMonth" Image="arrowLeft.png" BackgroundColor="Transparent" Rotation="180" HorizontalOptions="End" />
             </StackLayout>
             <Grid x:Name="week" RowSpacing="40" ColumnSpacing="1" Padding="0,0,0,0" RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor= 1 }" RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToView, Property= Y,ElementName= DateStack,Factor=1, Constant= 50}">
-                <Label Grid.Column="0" Text="Mon" TextColor="White" HorizontalOptions="Center" />
-                <Label Grid.Column="1" Text="Tue" TextColor="White" HorizontalOptions="Center" />
-                <Label Grid.Column="2" Text="Wed" TextColor="White" HorizontalOptions="Center" />
-                <Label Grid.Column="3" Text="Thu" TextColor="White" HorizontalOptions="Center" />
-                <Label Grid.Column="4" Text="Fri" TextColor="White" HorizontalOptions="Center" />
-                <Label Grid.Column="5" Text="Sat" TextColor="White" HorizontalOptions="Center" />
-                <Label Grid.Column="6" Text="Sun" TextColor="White" HorizontalOptions="Center" />
+                <Label Grid.Column="0" Text="Mon" TextColor="White" HorizontalOptions="Center">
+                     <Label.FontFamily>
+                    <OnPlatform x:TypeArguments="x:String">
+                        <On Platform="iOS" Value="OpenSans-Regular" />
+                        <On Platform="Android" Value="OpenSans-Regular.ttf#OpenSans-Regular" />
+                    </OnPlatform>
+                </Label.FontFamily>
+                </Label>
+                <Label Grid.Column="1" Text="Tue" TextColor="White" HorizontalOptions="Center">
+                     <Label.FontFamily>
+                    <OnPlatform x:TypeArguments="x:String">
+                        <On Platform="iOS" Value="OpenSans-Regular" />
+                        <On Platform="Android" Value="OpenSans-Regular.ttf#OpenSans-Regular" />
+                    </OnPlatform>
+                </Label.FontFamily>
+                </Label>
+                <Label Grid.Column="2" Text="Wed" TextColor="White" HorizontalOptions="Center">
+                    <Label.FontFamily>
+                    <OnPlatform x:TypeArguments="x:String">
+                        <On Platform="iOS" Value="OpenSans-Regular" />
+                        <On Platform="Android" Value="OpenSans-Regular.ttf#OpenSans-Regular" />
+                    </OnPlatform>
+                </Label.FontFamily>
+                </Label>
+                <Label Grid.Column="3" Text="Thu" TextColor="White" HorizontalOptions="Center">
+                    <Label.FontFamily>
+                    <OnPlatform x:TypeArguments="x:String">
+                        <On Platform="iOS" Value="OpenSans-Regular" />
+                        <On Platform="Android" Value="OpenSans-Regular.ttf#OpenSans-Regular" />
+                    </OnPlatform>
+                </Label.FontFamily>
+                </Label>
+                <Label Grid.Column="4" Text="Fri" TextColor="White" HorizontalOptions="Center">
+                    <Label.FontFamily>
+                    <OnPlatform x:TypeArguments="x:String">
+                        <On Platform="iOS" Value="OpenSans-Regular" />
+                        <On Platform="Android" Value="OpenSans-Regular.ttf#OpenSans-Regular" />
+                    </OnPlatform>
+                </Label.FontFamily>
+                </Label>
+                <Label Grid.Column="5" Text="Sat" TextColor="White" HorizontalOptions="Center">
+                    <Label.FontFamily>
+                    <OnPlatform x:TypeArguments="x:String">
+                        <On Platform="iOS" Value="OpenSans-Regular" />
+                        <On Platform="Android" Value="OpenSans-Regular.ttf#OpenSans-Regular" />
+                    </OnPlatform>
+                </Label.FontFamily>
+                </Label>
+                <Label Grid.Column="6" Text="Sun" TextColor="White" HorizontalOptions="Center">
+                    <Label.FontFamily>
+                    <OnPlatform x:TypeArguments="x:String">
+                        <On Platform="iOS" Value="OpenSans-Regular" />
+                        <On Platform="Android" Value="OpenSans-Regular.ttf#OpenSans-Regular" />
+                    </OnPlatform>
+                </Label.FontFamily>
+                </Label>
             </Grid>
             <ScrollView x:Name="CalendarScroll" VerticalScrollBarVisibility="Default" Padding="0,0,0,0" RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor= 1 }" RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToView, Property= Y,ElementName= week,Factor=1, Constant= 30}">
                 <Grid x:Name="Calendar" ColumnSpacing="1">
@@ -62,7 +111,7 @@
                                         <Label.FontFamily>
                                             <OnPlatform x:TypeArguments="x:String">
                                                 <On Platform="iOS" Value="OpenSans-Light" />
-                                                <On Platform="Android" Value="OpenSans-Bold.ttf#OpenSans-Light" />
+                                                <On Platform="Android" Value="OpenSans-Light.ttf#OpenSans-Light" />
                                             </OnPlatform>
                                         </Label.FontFamily>
                                     </Label>
@@ -74,7 +123,7 @@
                                             <Label.FontFamily>
                                                 <OnPlatform x:TypeArguments="x:String">
                                                     <On Platform="iOS" Value="OpenSans-Light" />
-                                                    <On Platform="Android" Value="OpenSans-Bold.ttf#OpenSans-Light" />
+                                                    <On Platform="Android" Value="OpenSans-Light.ttf#OpenSans-Light" />
                                                 </OnPlatform>
                                             </Label.FontFamily>
                                         </Label>
@@ -85,7 +134,7 @@
                                             <Label.FontFamily>
                                                 <OnPlatform x:TypeArguments="x:String">
                                                     <On Platform="iOS" Value="OpenSans-Light" />
-                                                    <On Platform="Android" Value="OpenSans-Bold.ttf#OpenSans-Light" />
+                                                    <On Platform="Android" Value="OpenSans-Light.ttf#OpenSans-Light" />
                                                 </OnPlatform>
                                             </Label.FontFamily>
                                         </Label>
@@ -98,8 +147,13 @@
             </ListView.ItemTemplate>
         </ListView>
         <!-- Annoucementbar 2 -->
-        <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
-            <ImageButton Opacity="0.75" Clicked="AddEvent" HorizontalOptions="CenterAndExpand" x:Name="SaveButton" Source="Add.png" Aspect="AspectFit" />
+        <StackLayout HeightRequest="50"  Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+            <ImageButton BackgroundColor="Transparent" WidthRequest="50" Opacity="0.75" IsOpaque="true" Clicked="AddEvent" HorizontalOptions="CenterAndExpand" x:Name="SaveButton" Source="Add.png" Aspect="AspectFit" >
+      
+                
+                
+        </ImageButton>
+        
         </StackLayout>
     </StackLayout>
 </ContentPage>

@@ -14,7 +14,7 @@
     <AssemblyName>SHHS.iOS</AssemblyName>
     <MtouchHttpClientHandler>NSUrlSessionHandler</MtouchHttpClientHandler>
     <NuGetPackageImportStamp></NuGetPackageImportStamp>
-    <ReleaseVersion>1.2</ReleaseVersion>
+    <ReleaseVersion>2.0.1</ReleaseVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|iPhoneSimulator' ">
     <DebugSymbols>true</DebugSymbols>
@@ -53,6 +53,7 @@
     <ConsolePause>false</ConsolePause>
     <MtouchArch>ARM64</MtouchArch>
     <CodesignKey>iPhone Developer: linwujun2002@gmail.com (RY32WR9N7C)</CodesignKey>
+    <CodesignKey>iPhone Developer: Robert Fitzgerald (9D5HPRMKHR)</CodesignKey>
     <MtouchDebug>true</MtouchDebug>
     <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
   </PropertyGroup>
@@ -172,12 +173,15 @@
     <BundleResource Include="Resources\OpenSans-Regular.ttf" />
     <BundleResource Include="Resources\icons8-home-50.png" />
     <BundleResource Include="Resources\home.png" />
-    <BundleResource Include="Resources\calendar.png" />
     <BundleResource Include="Resources\huskylogo.jpg" />
     <BundleResource Include="Resources\location%403x.png" />
     <BundleResource Include="Resources\clock%403x.png" />
     <BundleResource Include="Resources\Add.png" />
     <BundleResource Include="Resources\setting.png" />
     <BundleResource Include="Resources\calendaricon.png" />
+    <BundleResource Include="Resources\eventDate.png" />
+    <BundleResource Include="Resources\eventLocation.png" />
+    <BundleResource Include="Resources\eventTime.png" />
+    <BundleResource Include="Resources\eventTitle.png" />
   </ItemGroup>
 </Project>

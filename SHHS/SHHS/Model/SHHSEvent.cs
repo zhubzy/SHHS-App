@@ -52,7 +52,12 @@ namespace SHHS.Model
 
             if (obj is SHHSEvent eventA)
             {
-                if (this.StartDate.CompareTo(DateTime.Now) > 0 && eventA.StartDate.CompareTo(DateTime.Now) < 0)
+
+                if (eventA.DaysLeft.Equals("Today") && !this.DaysLeft.Equals("Today"))
+                    return 1;
+                else if (!eventA.DaysLeft.Equals("Today") && this.DaysLeft.Equals("Today"))
+                    return -1;
+                else if (this.StartDate.CompareTo(DateTime.Now) > 0 && eventA.StartDate.CompareTo(DateTime.Now) < 0)
                     return -1;
                 else if (this.StartDate.CompareTo(DateTime.Now) < 0 && eventA.StartDate.CompareTo(DateTime.Now) > 0)
                     return 1;

@@ -30,7 +30,7 @@ namespace SHHS.Controller
 
                     var Stack = new StackLayout { Orientation = StackOrientation.Vertical, Spacing = -10 };
                     var dot = new Label { Text = "", HorizontalOptions = LayoutOptions.Center, TextColor = Color.White };
-                    var label = new Button { Text = $"{row*7 + col}", FontFamily="OpenSans-Light", HorizontalOptions = LayoutOptions.Center, TextColor = Color.White, WidthRequest = 40, HeightRequest = 40, BackgroundColor = Color.Transparent, Opacity = 1 };
+                    var label = new Button { Text = $"{row*7 + col}", FontFamily= Device.RuntimePlatform == Device.iOS ? "OpenSans-Light" : "OpenSans-Light.ttf#OpenSans-Light", HorizontalOptions = LayoutOptions.Center, TextColor = Color.White, WidthRequest = 40, HeightRequest = 40, BackgroundColor = Color.Transparent, Opacity = 1 };
                     Stack.Children.Add(label);
                     Stack.Children.Add(dot);
 
@@ -38,6 +38,7 @@ namespace SHHS.Controller
                 }
 
 
+                        RefreshDate();
 
         }
 
@@ -55,7 +56,7 @@ namespace SHHS.Controller
         {
             base.OnAppearing();
             CrossDeviceOrientation.Current.LockOrientation(DeviceOrientations.Portrait);
-            RefreshDate();
+
 
         }
 
@@ -71,15 +72,16 @@ namespace SHHS.Controller
             AnnoucementList.ItemsSource = s;
 
         }
-
+     
 
         public void RefreshDate()
         {
 
-
+            YearLabel.Text =  CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(currentMonth) + " " + currentYear.ToString();
 
 
             int daysInMonth = DateTime.DaysInMonth(currentYear, currentMonth);
+            
             int daysNeedToBeDisplayFromPreviousMonth = (int)new DateTime(currentYear, currentMonth, 1).DayOfWeek - 1;
 
             DateTime lastDayOfpreviousMonth = currentMonth == 1
@@ -91,9 +93,8 @@ namespace SHHS.Controller
 
             int column = 0;
             int row = 0;
+            
 
-            YearLabel.Text = CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(currentMonth) + " " + currentYear.ToString();
-         
 
 
             //Display Dates From Previous Month
@@ -106,6 +107,7 @@ namespace SHHS.Controller
                 lb.BorderWidth = 0;
                 lb.Opacity = 0.5;
                 lb.BindingContext =  SubtraceOneMonth(currentYear,currentMonth,i);
+                lb.Clicked -= DateClicked ;
 
                 int n = ((App)Application.Current).shhsEventManager.FindEvent((DateTime)lb.BindingContext);
                 Label b = (Label)((StackLayout)(Calendar.Children[row * 7 + column])).Children[1];
@@ -138,7 +140,7 @@ namespace SHHS.Controller
                 lb.BorderWidth = 0;
                 lb.BindingContext = new DateTime(currentYear, currentMonth, i);
                 lb.Clicked += DateClicked;
-
+                Console.WriteLine(lb.Text);
 
                 int n = ((App)Application.Current).shhsEventManager.FindEvent((DateTime)lb.BindingContext);
                 Label b = (Label)((StackLayout)(Calendar.Children[row * 7 + column])).Children[1];
@@ -174,6 +176,7 @@ namespace SHHS.Controller
                 lb.Opacity = 0.5;
                 lb.BorderWidth = 0;
                 lb.BindingContext = AddOneMonth(currentYear, currentMonth, i);
+                lb.Clicked -= DateClicked ;
 
 
 
@@ -214,6 +217,7 @@ namespace SHHS.Controller
                 lb.Opacity = 1;
 
             }
+
         }
 
   
@@ -235,7 +239,6 @@ namespace SHHS.Controller
             }//reset
 
             Button button = (Button)sender;
-
             currentSelected = Convert.ToInt32(button.Text);
             button.TextColor = Color.Black;
             button.BackgroundColor = Color.FromHex("e6e600");

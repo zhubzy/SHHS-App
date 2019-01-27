@@ -19,7 +19,7 @@
     <AndroidHttpClientHandlerType>Xamarin.Android.Net.AndroidClientHandler</AndroidHttpClientHandlerType>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
-    <ReleaseVersion>1.2</ReleaseVersion>
+    <ReleaseVersion>2.0.1</ReleaseVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -90,10 +90,15 @@
     <AndroidResource Include="Resources\drawable-xxxhdpi\icon.png" />
     <AndroidResource Include="Resources\drawable\plugin_lc_smallicon.png" />
     <AndroidResource Include="Resources\drawable\home.png" />
-    <AndroidResource Include="Resources\drawable\calendar.png" />
     <AndroidResource Include="Resources\drawable-xxhdpi\clock.png" />
     <AndroidResource Include="Resources\drawable-xxhdpi\location.png" />
     <AndroidResource Include="Resources\drawable\Add.png" />
+    <AndroidResource Include="Resources\drawable\setting.png" />
+    <AndroidResource Include="Resources\drawable\calendaricon.png" />
+    <AndroidResource Include="Resources\drawable\eventDate.png" />
+    <AndroidResource Include="Resources\drawable\eventTitle.png" />
+    <AndroidResource Include="Resources\drawable\eventLocation.png" />
+    <AndroidResource Include="Resources\drawable\eventTime.png" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\drawable\" />

@@ -103,15 +103,16 @@ namespace SHHS.Model
             var ownerlayout = new StackLayout { Orientation = StackOrientation.Vertical };
             var annoucerLabel = new Label
             {
+
                 Text = v.Announcer,
-                FontFamily = "OpenSans-Bold",
+                FontFamily = Device.RuntimePlatform == Device.iOS ? "OpenSans-Bold": "OpenSans-Bold.ttf#OpenSans-Bold",
                 VerticalOptions = LayoutOptions.Start,
                 HorizontalOptions = LayoutOptions.FillAndExpand
             };
             var infoLabel = new Label
             {
                 Text = v.Info,
-                FontFamily = "OpenSans-Regular",
+                FontFamily = Device.RuntimePlatform == Device.iOS ? "OpenSans-Regular" : "OpenSans-Regular.ttf#OpenSans-Regular",
                 VerticalOptions = LayoutOptions.Center,
                 HorizontalOptions = LayoutOptions.Center
             };

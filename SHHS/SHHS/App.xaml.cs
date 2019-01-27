@@ -43,12 +43,10 @@ namespace SHHS
             //Init Page
             shhsMain = new MainPage();
             MainPage = new NavigationPage(shhsMain);
-            shhsCalender = new CalenderPage { Title = "Calendar", Icon = "calendaricon.png" };
-            shhsSetting =  new SettingPage { Title = "Setting", Icon = "setting.png", BackgroundColor = Color.FromHex("#EFFACB") };
-            shhsMain.Children.Add(shhsCalender);
-            shhsMain.Children.Add(shhsSetting);
             shhsEventManager = new SHHSEventManager();
             Current = this;
+            shhsSetting =  new SettingPage { Title = "Setting", Icon = "setting.png", BackgroundColor = Color.FromHex("#EFFACB") };
+
 
 
 
@@ -59,9 +57,12 @@ namespace SHHS
             // Handle when your app starts
 
             await shhsEventManager.InitalizeEventTable();
+            shhsCalender = new CalenderPage { Title = "Calendar", Icon = "calendaricon.png" };
             shhsCalender.SetDataSource(shhsEventManager.events);
             await shhsEventManager.RefreshEvent();
-
+              shhsMain.Children.Add(shhsCalender);
+            shhsMain.Children.Add(shhsSetting);
+         
         }
 
         protected override void OnSleep()
@@ -83,6 +84,8 @@ namespace SHHS
             }
             set {
                 Properties[notificationKey] = value; 
+                if(shhsSetting!= null)
+                shhsMain.scheduleManager.PushLocalNotifications();
             }
         }
         public bool SoundEnabled
@@ -101,7 +104,8 @@ namespace SHHS
             {
 
                 Properties[soundKey] = value;
-
+                 if(shhsSetting!= null)
+                shhsMain.scheduleManager.PushLocalNotifications();
 
             }
 

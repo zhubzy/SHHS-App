@@ -15,8 +15,8 @@
         
         <StackLayout Orientation=" Vertical" Spacing="5">
 
-    <Label HorizontalOptions="CenterAndExpand" Text="Lead Designer / Project Manager"/>    
-    <Label HorizontalOptions="Center" Text="Zach Zhong"/>
+    <Label FontSize="Medium" HorizontalOptions="CenterAndExpand" Text="Lead Designer / Project Manager"/>    
+    <Label FontSize="Medium" HorizontalOptions="Center" Text="Zach Zhong"/>
        </StackLayout>
        
         
@@ -24,36 +24,36 @@
         
                          <StackLayout Orientation=" Vertical" Spacing="5">
 
-    <Label HorizontalOptions="CenterAndExpand" Text="Core Mechnic Programmer"/>    
-    <Label HorizontalOptions="Center" Text="Jun Linwu"/>
+    <Label FontSize="Medium" HorizontalOptions="CenterAndExpand" Text="Core Mechanic Programmer"/>    
+    <Label FontSize="Medium" HorizontalOptions="Center" Text="Jun Linwu"/>
        </StackLayout>
         
                  <StackLayout Orientation=" Vertical" Spacing="5">
 
-    <Label HorizontalOptions="CenterAndExpand" Text="UX Design / Finance"/>    
-    <Label HorizontalOptions="Center" Text="Libby Shi"/>
+    <Label FontSize="Medium" HorizontalOptions="CenterAndExpand" Text="UX Design / Finance"/>    
+    <Label FontSize="Medium" HorizontalOptions="Center" Text="Libby Shi"/>
        </StackLayout>
         
         
                   <StackLayout Orientation=" Vertical" Spacing="5">
 
-    <Label HorizontalOptions="CenterAndExpand" Text="Concept Design"/>    
-    <Label HorizontalOptions="Center" Text="Luis Zhang"/>
+    <Label FontSize="Medium" HorizontalOptions="CenterAndExpand" Text="Concept Design"/>    
+    <Label FontSize="Medium" HorizontalOptions="Center" Text="Luis Zhang"/>
        </StackLayout>
 
        
                    <StackLayout Orientation=" Vertical" Spacing="5">
 
-    <Label HorizontalOptions="CenterAndExpand" Text="Quality Assurance"/>    
-    <Label HorizontalOptions="Center" Text="Ricky Feng"/>
+    <Label FontSize="Medium" HorizontalOptions="CenterAndExpand" Text="Quality Assurance"/>    
+    <Label FontSize="Medium" HorizontalOptions="Center" Text="Ricky Feng"/>
        </StackLayout>  
     <StackLayout Orientation=" Vertical" Spacing="5">
 
-    <Label HorizontalOptions="CenterAndExpand" Text="Adivisor"/>    
-    <Label HorizontalOptions="Center" Text="Mr. Fitzgerald"/>
+    <Label FontSize="Medium" HorizontalOptions="CenterAndExpand" Text="Adivisor"/>    
+    <Label FontSize="Medium" HorizontalOptions="Center" Text="Mr. Fitzgerald"/>
        </StackLayout>
 
-            <Label HorizontalTextAlignment="Center" Text="Based in South Hills High School, we are a group of passionate students who develope apps to assist the need of other in our community, we are constantly seeking new projects to take on, and we also welcome new member. If you would like to join our team, contact us via email: southhillscode@gmail.com"/>
+            <Label FontSize="Medium" HorizontalTextAlignment="Center" Text="Based in South Hills High School, we are a group of passionate students who develope apps to assist the need of others in our community. We are constantly seeking new projects to take on, and we also welcome new member. If you would like to join our team, contact us via email: southhillscode@gmail.com"/>
 
     
   </StackLayout>

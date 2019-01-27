@@ -9,7 +9,7 @@
             BarBackgroundColor="#31815c"   
             x:Class="SHHS.Controller.MainPage"
             NavigationPage.HasNavigationBar="false"
-
+            
             >
     
     

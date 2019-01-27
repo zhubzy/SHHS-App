@@ -3,16 +3,54 @@
     <pages:PopupPage.Animation>
         <animations:ScaleAnimation DurationIn="200" DurationOut="150" EasingIn="SinOut" EasingOut="SinIn" HasBackgroundAnimation="True" PositionIn="Center" PositionOut="Center" ScaleIn="1.2" ScaleOut="0.8" />
     </pages:PopupPage.Animation>
-    <StackLayout VerticalOptions="Center" x:Name="RelativeView">
+    
+          <Frame x:Name="AndriodConfirmButton" RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=0.5,Constant=-100}"
+                       RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=1, Constant= -40}" RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width,Factor=0.5}"
+                       HeightRequest="50" CornerRadius="30">
+                        
+  
+                        
+                                <Button Clicked="SaveEvent" Text="Save Events" FontSize="Medium" TextColor="#2B7251">
+                                    <Label.FontFamily>
+                                        <OnPlatform x:TypeArguments="x:String">
+                                        <On Platform="iOS" Value="OpenSans-Bold" />
+                                        <On Platform="Android" Value="OpenSans-Bold.ttf#OpenSans-Bold" />
+                                        </OnPlatform>
+                                    </Label.FontFamily>
+                                </Button>
+                             </Frame>
+    
+    
+    
+    
+          <Frame x:Name="iOSConfirmButton" RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=0.5,Constant=-100}"
+                       RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=1, Constant= -40}" RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width,Factor=0.5}"
+                       HeightRequest="20" WidthRequest="200" CornerRadius="30">
+                        
+  
+                        
+                                <Button Clicked="SaveEvent" Text="Save Events" FontSize="Medium" TextColor="#2B7251">
+                                    <Label.FontFamily>
+                                        <OnPlatform x:TypeArguments="x:String">
+                                        <On Platform="iOS" Value="OpenSans-Bold" />
+                                        <On Platform="Android" Value="OpenSans-Bold.ttf#OpenSans-Bold" />
+                                        </OnPlatform>
+                                    </Label.FontFamily>
+                                </Button>
+                             </Frame>
+    
+    
+    
+    <StackLayout VerticalOptions="Center">
         <ScrollView BackgroundColor="White" x:Name="frameView" VerticalScrollBarVisibility="Default" RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=1}" RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=1}">
             <StackLayout Spacing="30" VerticalOptions="Center" RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=1}" RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=1}">
-               <RelativeLayout HeightRequest="540">
+               <RelativeLayout x:Name="RelativeView" HeightRequest="540">
                 <Frame Margin="10" HasShadow="false" RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=1}" BackgroundColor="White" Opacity="0.75">
                     <StackLayout Orientation="Vertical" Spacing="20" Margin="0,0,0,40">
                         <StackLayout Orientation="Vertical" Spacing="20">
                             <StackLayout Spacing="20" Orientation="Horizontal">
                                 <StackLayout Orientation="Vertical">
-                                    <Image Source="Event.png" VerticalOptions="EndAndExpand" Aspect="AspectFit" />
+                                    <Image Source="eventTitle.png" VerticalOptions="EndAndExpand" Aspect="AspectFit" />
                                 </StackLayout>
                                 <StackLayout Spacing="15" HorizontalOptions="FillAndExpand" Orientation="Vertical">
                                     <Label HorizontalOptions="Start" Text=" Event Name" >
@@ -31,7 +69,7 @@
                         <StackLayout Orientation="Vertical" Spacing="20">
                             <StackLayout Spacing="20" Orientation="Horizontal">
                                 <StackLayout Orientation="Vertical">
-                                    <Image Source="Event.png" VerticalOptions="EndAndExpand" Aspect="AspectFit" />
+                                    <Image Source="eventLocation.png" VerticalOptions="EndAndExpand" Aspect="AspectFit" />
                                 </StackLayout>
                                 <StackLayout Spacing="15" HorizontalOptions="FillAndExpand" Orientation="Vertical">
                                     <Label HorizontalOptions="Start" Text=" Enter the location:" >
@@ -50,7 +88,7 @@
                         <StackLayout Orientation="Vertical" Spacing="20">
                             <StackLayout Spacing="15" Orientation="Horizontal">
                                 <StackLayout Orientation="Vertical">
-                                    <Image Source="Event.png" VerticalOptions="EndAndExpand" Aspect="AspectFit" />
+                                    <Image Source="eventDate.png" VerticalOptions="EndAndExpand" Aspect="AspectFit" />
                                 </StackLayout>
                                 <StackLayout Spacing="15" HorizontalOptions="FillAndExpand" Orientation="Vertical">
                                     <Label HorizontalOptions="Start" Text=" Date">
@@ -69,7 +107,7 @@
                         <StackLayout Orientation="Vertical" Spacing="20">
                             <StackLayout Spacing="20" Orientation="Horizontal">
                                 <StackLayout Orientation="Vertical">
-                                    <Image Source="Event.png" VerticalOptions="EndAndExpand" Aspect="AspectFit" />
+                                    <Image Source="eventTime.png" VerticalOptions="EndAndExpand" Aspect="AspectFit" />
                                 </StackLayout>
                                 <StackLayout Spacing="15" HorizontalOptions="FillAndExpand" Orientation="Vertical">
                                     <Label HorizontalOptions="Start" Text=" Start Time">
@@ -95,7 +133,8 @@
                                 </StackLayout>
                             </StackLayout>
                             <StackLayout Spacing="20" Orientation="Horizontal">
-                                <Switch Toggled="Handle_Toggled" x:Name="AllDaySwitch" Margin="55,0,0,0" />
+                               
+                                    <Switch Toggled="Handle_Toggled" x:Name="AllDaySwitch" Margin="55,0,0,0" />
                                     <Label  Text="All day event" VerticalOptions="Center" >
                                             <Label.FontFamily>
                                                 <OnPlatform x:TypeArguments="x:String">
@@ -114,22 +153,30 @@
                     </StackLayout>
                 </Frame>
                     
-                <Frame RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=0.5,Constant=-100}"
-                       RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=1, Constant= -40}" RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width,Factor=0.5}"
-                       HeightRequest="30" CornerRadius="30">
-                                <Button x:Name="ConfirmButton" Clicked="SaveEvent" Text="Save Events" FontSize="Medium" TextColor="#2B7251">
-                                    <Label.FontFamily>
-                                        <OnPlatform x:TypeArguments="x:String">
-                                        <On Platform="iOS" Value="OpenSans-Bold" />
-                                        <On Platform="Android" Value="OpenSans-Bold.ttf#OpenSans-Bold" />
-                                        </OnPlatform>
-                                    </Label.FontFamily>
-                                </Button>
-                             </Frame>
+          
                             
                 </RelativeLayout>   
                      <StackLayout Padding="0,0,0,0" RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width,Factor=1}" RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=0.92}">
-                        <Button Clicked="DiscardChanges" HorizontalOptions="Center" Text="Cancel and discard changes" TextColor="#2B7251">
+                         <Button  Clicked="SaveEvent"  HorizontalOptions="Center" Text="Confirm" TextColor="#2B7251">
+                            <Label.FontFamily>
+                                <OnPlatform x:TypeArguments="x:String">
+                                <On Platform="iOS" Value="OpenSans-Bold" />
+                                <On Platform="Android" Value="OpenSans-Bold.ttf#OpenSans-Bold" />
+                                </OnPlatform>
+                            </Label.FontFamily>
+                        
+                        <Button.IsVisible>
+                              <OnPlatform x:TypeArguments="x:Boolean">
+                                <On Platform="iOS" Value="false" />
+                                <On Platform="Android" Value="true" />
+                                </OnPlatform>
+                          
+                            
+                        </Button.IsVisible>
+                             
+                        </Button>
+                    
+                            <Button Clicked="DiscardChanges" HorizontalOptions="Center" Text="Cancel and discard changes" TextColor="#2B7251">
                             <Label.FontFamily>
                                 <OnPlatform x:TypeArguments="x:String">
                                 <On Platform="iOS" Value="OpenSans-Bold" />
