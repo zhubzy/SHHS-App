@@ -26,5 +26,10 @@ namespace SHHS.View
         {
             Navigation.PushAsync(new CreditPage());
         }
+
+        void Handle_ToLogInPage(object sender, System.EventArgs e)
+        {
+            Navigation.PushAsync(new LogInPage());
+        }
     }
 }

@@ -76,7 +76,16 @@
                               HorizontalOptions="EndAndExpand" VerticalTextAlignment="Center"/>
                         </StackLayout>
                 
+                    </ViewCell>   
+            
+            
+                    <ViewCell Tapped="Handle_ToLogInPage" >
+                        <StackLayout Margin="20,0,20,0" Orientation="Horizontal">
+                            <Label Text="Console" VerticalTextAlignment="Center"/>
+                        </StackLayout>
+                
                     </ViewCell>    
+        
         
         </TableSection>
             
