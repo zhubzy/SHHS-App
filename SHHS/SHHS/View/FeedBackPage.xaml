@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="SHHS.View.FeedBackPage">
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="SHHS.View.FeedBackPage" BackgroundColor="#EFFACB" >
     <ContentPage.Content>
     </ContentPage.Content>
     
-        <StackLayout Margin="10" Spacing="20" VerticalOptions="StartAndExpand" Orientation="Vertical">
+        <StackLayout Margin="20,40,20,10" Spacing="20" VerticalOptions="StartAndExpand" Orientation="Vertical">
         
        <StackLayout HorizontalOptions="Fill" Orientation="Horizontal">
     <Label   VerticalTextAlignment="Center" Text="Name:"   />            
@@ -19,13 +19,20 @@
         
      <StackLayout  VerticalOptions="CenterAndExpand" Orientation="Vertical">
     <Label   VerticalTextAlignment="Center" HorizontalOptions="Center" Text="Suggestion: " />            
-    <Editor AutoSize="TextChanges" Text="{Binding Feedback}"  Placeholder="Enter Your Suggestion Here" VerticalOptions="FillAndExpand" HorizontalOptions="Fill"  Keyboard="Default"/>   
+    <Editor AutoSize="TextChanges" Text="{Binding Feedback}"  Placeholder="Enter Your Suggestion Here" VerticalOptions="FillAndExpand" HorizontalOptions="Fill" HeightRequest="100" Keyboard="Default"/>   
                    
         </StackLayout>
         
         
         
-        <Button Text="Submit" Clicked="Handle_Clicked"/>
+        <Button Text="Submit" Clicked="Handle_Clicked"  FontSize="Medium" TextColor="#2B7251" >
+            <Label.FontFamily>
+                <OnPlatform x:TypeArguments="x:String">
+                <On Platform="iOS" Value="OpenSans-Bold" />
+                <On Platform="Android" Value="OpenSans-Bold.ttf#OpenSans-Bold" />
+                </OnPlatform>
+            </Label.FontFamily>
+        </Button>    
 
         </StackLayout>
 </ContentPage>

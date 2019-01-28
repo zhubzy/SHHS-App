@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="SHHS.View.LogInPage">
-   <StackLayout VerticalOptions="CenterAndExpand">
+<ContentPage  xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="SHHS.View.LogInPage" BackgroundColor="#EFFACB">
+   <StackLayout VerticalOptions="CenterAndExpand" >
         <Label Text="Adminstrator access only" FontSize="Large" HorizontalOptions="Center" VerticalOptions="CenterAndExpand" />
         <Entry x:Name="userName" Placeholder="Username" Keyboard="Default" Margin="50,30,50,0"/>
         <Entry x:Name="passWord" Placeholder="Password" Keyboard="Default" IsPassword="true" Margin="50,10,50,0"/>
