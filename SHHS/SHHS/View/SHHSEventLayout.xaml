@@ -186,7 +186,7 @@
                         </Button>
                    
                    </StackLayout>
-                        <Button Text="Advanced setting" HorizontalOptions="Center"/>
+                        <Button x:Name = adSetting Text="Sync To All" HorizontalOptions="Center" Clicked="Handled_PushToAll" IsVisible="false"/>
             </StackLayout>
         </ScrollView>
     </StackLayout>

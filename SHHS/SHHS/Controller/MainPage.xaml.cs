@@ -81,24 +81,28 @@ namespace SHHS.Controller
             }));
 
 
-        ImageButton addAnnouncement = new ImageButton { BackgroundColor = Color.Transparent, WidthRequest = 50, Opacity = 0.75, Source = "Add.png", Aspect = , HorizontalOptions = LayoutOptions.CenterAndExpand , IsVisible = true };
+        ImageButton addAnnouncement = new ImageButton { BackgroundColor = Color.Transparent, WidthRequest = 50, Opacity = 0.75, Source = "Add.png", Aspect = Aspect.AspectFit, HorizontalOptions = LayoutOptions.CenterAndExpand , IsVisible = false };
 
 
               HomePage.Children.Add(addAnnouncement, null,Constraint.RelativeToParent((parent) =>
             {
               
-                return myCarousel.Y.Height + 30;
+                return myCarousel.Y + myCarousel.Height + 30;
             }),
             Constraint.RelativeToParent((parent) =>
             {
                
                 return parent.Width;
-            }),
-            Constraint.RelativeToParent((parent) =>
+            })
+           );
+
+            async void ShowAddButton(object sender, System.EventArgs e)
             {
-               
-                return Height / 3;
-            }));
+                if (((App)Application.Current).isAdmin)
+                {
+                    addAnnouncement.IsVisible = true;
+                }
+            }
 
 
             CurrentPageChanged += CurrentPageChangedEvent;

@@ -28,10 +28,9 @@ namespace SHHS.View
                 if (login.Username.Equals(userName.Text) && login.Password.Equals(passWord.Text)) { 
                     ((App)Application.Current).isAdmin = true;
                        return;
-                    }else { 
+                    } else{ 
 
                     await DisplayAlert("Failed to log in", "Wrong Username or Password, please try again", "OK");
-
 
             }
         }
