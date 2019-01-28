@@ -149,10 +149,7 @@
         <!-- Annoucementbar 2 -->
         <StackLayout HeightRequest="50"  Orientation="Horizontal" HorizontalOptions="FillAndExpand">
             <ImageButton BackgroundColor="Transparent" WidthRequest="50" Opacity="0.75" IsOpaque="true" Clicked="AddEvent" HorizontalOptions="CenterAndExpand" x:Name="SaveButton" Source="Add.png" Aspect="AspectFit" >
-      
-                
-                
-        </ImageButton>
+            </ImageButton>
         
         </StackLayout>
     </StackLayout>

@@ -46,12 +46,12 @@
             <StackLayout Spacing="30" VerticalOptions="Center" RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=1}" RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=1}">
                <RelativeLayout x:Name="RelativeView" HeightRequest="540">
                 <Frame Margin="10" HasShadow="false" RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=1}" BackgroundColor="White" Opacity="0.75">
-                    <StackLayout Orientation="Vertical" Spacing="20" Margin="0,0,0,40">
+                        <StackLayout Orientation="Vertical" Spacing="20" Margin="0,0,0,40">
                         <StackLayout Orientation="Vertical" Spacing="20">
                             <StackLayout Spacing="20" Orientation="Horizontal">
                                 <StackLayout Orientation="Vertical">
                                     <Image Source="eventTitle.png" VerticalOptions="EndAndExpand" Aspect="AspectFit" />
-                                </StackLayout>
+                                </StackLayout>      
                                 <StackLayout Spacing="15" HorizontalOptions="FillAndExpand" Orientation="Vertical">
                                     <Label HorizontalOptions="Start" Text=" Event Name" >
                                             <Label.FontFamily>
@@ -184,7 +184,9 @@
                                 </OnPlatform>
                             </Label.FontFamily>
                         </Button>
-                     </StackLayout>
+                   
+                   </StackLayout>
+                        <Button Text="Advanced setting" HorizontalOptions="Center"/>
             </StackLayout>
         </ScrollView>
     </StackLayout>

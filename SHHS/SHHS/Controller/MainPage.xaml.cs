@@ -81,6 +81,25 @@ namespace SHHS.Controller
             }));
 
 
+        ImageButton addAnnouncement = new ImageButton { BackgroundColor = Color.Transparent, WidthRequest = 50, Opacity = 0.75, Source = "Add.png", Aspect = , HorizontalOptions = LayoutOptions.CenterAndExpand , IsVisible = true };
+
+
+              HomePage.Children.Add(addAnnouncement, null,Constraint.RelativeToParent((parent) =>
+            {
+              
+                return myCarousel.Y.Height + 30;
+            }),
+            Constraint.RelativeToParent((parent) =>
+            {
+               
+                return parent.Width;
+            }),
+            Constraint.RelativeToParent((parent) =>
+            {
+               
+                return Height / 3;
+            }));
+
 
             CurrentPageChanged += CurrentPageChangedEvent;
 
