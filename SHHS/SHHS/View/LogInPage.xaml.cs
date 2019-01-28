@@ -25,13 +25,15 @@ namespace SHHS.View
             await GetData();
             spinner.IsVisible = false;
             foreach (var login in a)
-                if (login.Username.Equals(userName.Text) && login.Password.Equals(passWord.Text))
-                    return;
+                if (login.Username.Equals(userName.Text) && login.Password.Equals(passWord.Text)) { 
+                    ((App)Application.Current).isAdmin = true;
+                       return;
+                    }else { 
 
-            await DisplayAlert("Failed to log in", "Wrong Username or Password, please try again", "OK");
+                    await DisplayAlert("Failed to log in", "Wrong Username or Password, please try again", "OK");
 
 
-
+            }
         }
 
         public async Task GetData()

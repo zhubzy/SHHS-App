@@ -24,7 +24,7 @@ namespace SHHS
         private const string minutesKey = "Minutes";
         public string VersionNumber { get; set; }
         public string BuildNumber { get; set; }
-
+        public bool isAdmin { get; set; }
 
         public App()
         {

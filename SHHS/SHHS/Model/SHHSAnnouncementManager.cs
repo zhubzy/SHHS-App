@@ -126,7 +126,6 @@ namespace SHHS.Model
             layout.Children.Add(ownerlayout);
             layout.Children.Add(infoLabel);
 
-            ImageButton addAnnouncement = new ImageButton { BackgroundColor = Color.Transparent, WidthRequest = 50, Opacity = 0.75, Source = "Add.png", HorizontalOptions = LayoutOptions.CenterAndExpand , IsVisible = true };
 
 
             return layout;
