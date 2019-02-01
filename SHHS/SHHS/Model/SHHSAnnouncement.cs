@@ -2,7 +2,7 @@
 namespace SHHS.Model
 {
 
-    public class SHHSAnnouncementView
+    public class SHHSAnnouncement
     {
 
         public string Announcer { get; set; }

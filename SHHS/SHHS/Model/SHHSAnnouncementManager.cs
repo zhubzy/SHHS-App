@@ -6,6 +6,7 @@ using System.Diagnostics;
 using System.Threading.Tasks;
 
 using Firebase.Database;
+using Firebase.Database.Query;
 using Xamarin.Forms;
 
 namespace SHHS.Model
@@ -47,30 +48,28 @@ namespace SHHS.Model
                 Debug.WriteLine("Position selected.");
             });
             AnnouncementList = new ObservableCollection<Xamarin.Forms.View>();
-            SHHSAnnouncementView view = new SHHSAnnouncementView { Announcer = "Loading", Info = "Loading" };
-            SHHSAnnouncementView view2 = new SHHSAnnouncementView { Announcer = "Loading", Info = "Your Internet May Be Slow" };
-            SHHSAnnouncementView view3 = new SHHSAnnouncementView { Announcer = "Loading", Info = "Check Your Wifi Connection" };
-            SHHSAnnouncementView view4 = new SHHSAnnouncementView { Announcer = "Loading", Info = "Please Be Patient" };
+            SHHSAnnouncement view = new SHHSAnnouncement { Announcer = "Loading", Info = "Loading" };
+            SHHSAnnouncement view2 = new SHHSAnnouncement { Announcer = "Loading", Info = "Your Internet May Be Slow" };
+         
 
 
             AnnouncementList.Add(CreateStackLayout(view));
             AnnouncementList.Add(CreateStackLayout(view2));
-            AnnouncementList.Add(CreateStackLayout(view3));
-            AnnouncementList.Add(CreateStackLayout(view4));
+
          
         }
 
         public async Task GetAnnoucements()
         {
 
-            var firebase = new FirebaseClient("https://shhs-45632.firebaseio.com/");
+            var firebase = (Application.Current as App).Client;
 
-       
+
 
             try
             {
 
-                var annoucements = await firebase.Child("South Hills Announcements").OnceAsync<SHHSAnnouncementView>();
+                var annoucements = await firebase.Child("South Hills Announcements").OnceAsync<SHHSAnnouncement>();
                 AnnouncementList.Clear();
                 foreach (var e in annoucements)
                 {
@@ -82,8 +81,6 @@ namespace SHHS.Model
             catch (FirebaseException e)
             {
 
-
-
                 Console.WriteLine(e.StackTrace);
 
 
@@ -91,12 +88,34 @@ namespace SHHS.Model
 
         }
 
-   
+        public async Task AddAnnoucements(SHHSAnnouncement s)
+        {
+
+            var firebase = new FirebaseClient("https://shhs-45632.firebaseio.com/");
+
+
+
+            try
+            {
+
+                await firebase.Child("South Hills Announcements").PostAsync(s);
+                AnnouncementList.Add(CreateStackLayout(s));
+
+
+            }
+            catch (FirebaseException e)
+            {
+                Console.WriteLine(e.StackTrace);
+            }
+
+        }
 
 
 
 
-        public StackLayout CreateStackLayout(SHHSAnnouncementView v)
+
+
+        public StackLayout CreateStackLayout(SHHSAnnouncement v)
         {
 
             var layout = new StackLayout { Orientation = StackOrientation.Horizontal };
@@ -117,17 +136,11 @@ namespace SHHS.Model
                 HorizontalOptions = LayoutOptions.Center
             };
 
-
-
             var icon = new BoxView { VerticalOptions = LayoutOptions.FillAndExpand, BackgroundColor = Color.Gold, HorizontalOptions = LayoutOptions.FillAndExpand };
-
             ownerlayout.Children.Add(annoucerLabel);
             ownerlayout.Children.Add(icon);
             layout.Children.Add(ownerlayout);
             layout.Children.Add(infoLabel);
-
-
-
             return layout;
 
         }

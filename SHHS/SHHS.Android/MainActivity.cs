@@ -18,6 +18,7 @@ namespace SHHS.Droid
             base.OnCreate(savedInstanceState);
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
             CarouselViewRenderer.Init();
+
             CrossCurrentActivity.Current.Activity = this;
             LocalNotificationsImplementation.NotificationIconId = Resource.Drawable.plugin_lc_smallicon;
 

@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pages:PopupPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="SHHS.View.AnnouncementAddPage" xmlns:animations="clr-namespace:Rg.Plugins.Popup.Animations;assembly=Rg.Plugins.Popup" xmlns:pages="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup" x:Name="MyPage">
+    <pages:PopupPage.Animation>
+        <animations:ScaleAnimation DurationIn="200" DurationOut="150" EasingIn="SinOut" EasingOut="SinIn" HasBackgroundAnimation="True" PositionIn="Center" PositionOut="Center" ScaleIn="1.2" ScaleOut="0.8" />
+    </pages:PopupPage.Animation>
+    <StackLayout VerticalOptions="Center">
+        <ScrollView BackgroundColor="White" x:Name="frameView" VerticalScrollBarVisibility="Default" RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=1}" RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=1}">
+            <StackLayout Spacing="30" VerticalOptions="Center" RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=1}" RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=1}">
+               <RelativeLayout x:Name="RelativeView">
+                <Frame Margin="10" HasShadow="false" RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=1}" BackgroundColor="White" Opacity="0.75">
+                        <StackLayout BindingContext="{x:Reference MyPage}" Orientation="Vertical" Spacing="20" Margin="0,0,0,40">
+                        <StackLayout Orientation="Vertical" Spacing="20">
+                            <StackLayout Spacing="20" Orientation="Horizontal">
+                                <StackLayout Orientation="Vertical">
+                                    <Image Source="eventTitle.png" VerticalOptions="EndAndExpand" Aspect="AspectFit" />
+                                </StackLayout>      
+                                <StackLayout Spacing="15" HorizontalOptions="FillAndExpand" Orientation="Vertical">
+                                    <Label HorizontalOptions="Start" Text=" Announcer" >
+                                            <Label.FontFamily>
+                                                <OnPlatform x:TypeArguments="x:String">
+                                                <On Platform="iOS" Value="OpenSans-Light" />
+                                                <On Platform="Android" Value="OpenSans-Light.ttf#OpenSans-Light" />
+                                                </OnPlatform>
+                                            </Label.FontFamily>
+                                    </Label>
+                                    <Entry Text="{Binding Announcer}" Keyboard="Default" HorizontalOptions="FillAndExpand" Placeholder="Enter the annoucer:" />
+                                </StackLayout>
+                            </StackLayout>
+                            <BoxView WidthRequest="100" HeightRequest="2" BackgroundColor="Black" />
+                        </StackLayout>
+                            <StackLayout Orientation="Vertical" Spacing="20">
+                            <StackLayout Spacing="15" Orientation="Horizontal">
+                                <StackLayout Orientation="Vertical">
+                                    <Image Source="eventPerson.png" VerticalOptions="EndAndExpand" Aspect="AspectFit" />
+                                </StackLayout>
+                                <StackLayout Spacing="15" HorizontalOptions="FillAndExpand" Orientation="Vertical">
+                                    <Label HorizontalOptions="Start" Text=" Date">
+                                            <Label.FontFamily>
+                                                <OnPlatform x:TypeArguments="x:String">
+                                                <On Platform="iOS" Value="OpenSans-Light" />
+                                                <On Platform="Android" Value="OpenSans-Light.ttf#OpenSans-Light" />
+                                                </OnPlatform>
+                                            </Label.FontFamily>
+                                        </Label>
+                                    <DatePicker Date="{Binding Date}"  HorizontalOptions="Fill" />
+                                </StackLayout>
+                            </StackLayout>
+                            <BoxView WidthRequest="100" HeightRequest="2" BackgroundColor="Black" />
+                        </StackLayout>
+                        <StackLayout Orientation="Vertical" Spacing="20">
+                            <StackLayout Spacing="20" Orientation="Horizontal">
+                                <StackLayout Orientation="Vertical">
+                                    <Image Source="eventTitle.png" VerticalOptions="Start" Aspect="AspectFit" />
+                                </StackLayout>
+                                <StackLayout Spacing="15" HorizontalOptions="FillAndExpand" Orientation="Vertical">
+                                    <Label HorizontalOptions="Start" Text=" Information" >
+                                            <Label.FontFamily>
+                                                <OnPlatform x:TypeArguments="x:String">
+                                                <On Platform="iOS" Value="OpenSans-Light" />
+                                                <On Platform="Android" Value="OpenSans-Light.ttf#OpenSans-Light" />
+                                                </OnPlatform>
+                                            </Label.FontFamily>
+                                        </Label>
+                                    <Editor WidthRequest="100" AutoSize="TextChanges"  Text="{Binding Detail}" Keyboard="Default" HorizontalOptions="Fill" Placeholder="Enter any note:" />
+                                </StackLayout>
+                            </StackLayout>
+                            <BoxView WidthRequest="100" HeightRequest="2" BackgroundColor="Black" />
+                        </StackLayout>
+                        
+                        <StackLayout Orientation="Vertical" Spacing="20">
+                      
+                            <StackLayout Spacing="20" Orientation="Horizontal">
+                               
+                                    <Button HorizontalOptions="CenterAndExpand" Clicked="Handle_Clicked" Text="Confirm"/>
+                                    <Button HorizontalOptions="CenterAndExpand" Clicked="Handle_Clicked_1" Text="Cancel"/>
+                                  
+                            </StackLayout>
+                        </StackLayout>
+                        
+                        
+                   
+              
+                        
+                    </StackLayout>
+                </Frame>
+               </RelativeLayout>   
+                
+
+            </StackLayout>
+            </ScrollView>
+         </StackLayout>
+
+</pages:PopupPage>

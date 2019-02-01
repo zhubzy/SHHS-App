@@ -41,14 +41,12 @@ namespace SHHS.Model
 
         public async Task<bool> GetScheduleException(){
 
-            var firebase = new FirebaseClient("https://shhs-45632.firebaseio.com/");
-
+            var firebase = (Application.Current as App).Client;
             try{
 
                 var exceptions = await firebase.Child("South Hills Schedule Exception").OnceAsync<SHHSScheduleExceptionManager>();
                 foreach (var e in exceptions)
                 {
-
                     scheduleExceptions = e.Object.ScheduleExceptionLists;
                     Offset = e.Object.Offset;
 
@@ -61,7 +59,7 @@ namespace SHHS.Model
                 
 
                 
-                Console.WriteLine(e.StackTrace);
+                Console.WriteLine(e.Message);
 
                 return false;
             }
@@ -71,7 +69,7 @@ namespace SHHS.Model
         public async Task RefreshData()
         {
 
-            var firebase = new FirebaseClient("https://shhs-45632.firebaseio.com/");
+            var firebase = (Application.Current as App).Client;
             Console.WriteLine("Before");
             // add new item 
             try

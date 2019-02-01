@@ -17,10 +17,49 @@
     <TableRoot>
         <TableSection  Title="Notification">
          
-            <SwitchCell   x:Name="notificationsetting" Text="Enable Notification" On="{Binding NotificationEnabled}" />
-            <SwitchCell x:Name="soundsetting" Text="Sound" On="{Binding SoundEnabled}" />
-                    <EntryCell   x:Name="minutessetting"  Label = "Number of Minutes to Send" Keyboard = "Numeric" Text="{Binding MinutesToSendNotification}"  XAlign="End"  />
-        </TableSection>
+                
+                     <ViewCell>
+                        <StackLayout  Margin="20,0,20,0" Orientation="Horizontal">
+                            <Label Text="Enable Notification" VerticalTextAlignment="Center"/>
+                            <Switch x:Name="notificationsetting" IsToggled="{Binding NotificationEnabled}"
+                              HorizontalOptions="EndAndExpand" />
+                        </StackLayout>
+                
+                    </ViewCell>  
+                <ViewCell>
+                        <StackLayout  Margin="20,0,20,0" Orientation="Horizontal">
+                            <Label Text="Sound" VerticalTextAlignment="Center"/>
+                            <Switch x:Name="soundsetting" IsToggled="{Binding SoundEnabled}"
+                              HorizontalOptions="EndAndExpand" />
+                        </StackLayout>
+                
+                    </ViewCell>  
+                  <ViewCell>
+                        <StackLayout  Margin="20,0,20,0" Orientation="Horizontal">
+                            <Label Text="Number of Minutes to Send" VerticalTextAlignment="Center"/>
+                        
+                        <Picker HorizontalOptions="EndAndExpand" x:Name="minutessetting" SelectedItem = "{Binding MinutesToSendNotification}" Title= "{Binding MinutesToSendNotification}" >
+  <Picker.ItemsSource>
+    <x:Array Type="{x:Type x:String}">
+      <x:String>1</x:String>
+      <x:String>2</x:String>
+      <x:String>3</x:String>
+      <x:String>4</x:String>
+      <x:String>5</x:String>
+      <x:String>6</x:String>
+      <x:String>7</x:String>
+      <x:String>8</x:String>
+      <x:String>9</x:String>
+      <x:String>10</x:String>
+    </x:Array>
+  </Picker.ItemsSource>
+</Picker>
+                           
+                        </StackLayout>
+                
+                    </ViewCell>  
+  
+          </TableSection>
     </TableRoot>
             
             

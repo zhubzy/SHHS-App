@@ -2,7 +2,7 @@
 <ContentPage  xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="SHHS.View.LogInPage" BackgroundColor="#EFFACB">
    <StackLayout VerticalOptions="CenterAndExpand" >
         <Label Text="Adminstrator access only" FontSize="Large" HorizontalOptions="Center" VerticalOptions="CenterAndExpand" />
-        <Entry x:Name="userName" Placeholder="Username" Keyboard="Default" Margin="50,30,50,0"/>
+        <Entry x:Name="userName" Placeholder="Username" Keyboard="Email" IsSpellCheckEnabled="false" IsTextPredictionEnabled="false" Margin="50,30,50,0"/>
         <Entry x:Name="passWord" Placeholder="Password" Keyboard="Default" IsPassword="true" Margin="50,10,50,0"/>
         <Button Text="Log in" TextColor="White" BorderRadius="10" Margin="50,40,50,0" BackgroundColor="#2B7251" Clicked="Handle_Clicked"/>
         <ActivityIndicator x:Name="spinner" IsRunning="true" Margin="30" />

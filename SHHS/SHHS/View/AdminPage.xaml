@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="SHHS.View.AdminPage" x:Name="MyPage">
+       <ListView x:Name="ScheduleExcpetionList" RowHeight="60" SeparatorVisibility="None">
+        
+   <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <StackLayout
+                        Orientation="Vertical">
+                            <StackLayout Orientation="Vertical">
+                                <Label VerticalTextAlignment="Center" Text="{Binding DisplayDate}"
+                               />
+                            
+                
+                               <Picker SelectedIndexChanged=  "Handle_SelectedIndexChanged" TextColor="Green" ItemsSource="{Binding ScheduleNames, Source={x:Reference MyPage}}" SelectedItem="{Binding CurrentSchedule}"
+                                >
+           
+                            </Picker>
+                            </StackLayout>
+                        </StackLayout>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+    
+    </ListView>
+    
+</ContentPage>

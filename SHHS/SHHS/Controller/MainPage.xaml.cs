@@ -4,6 +4,8 @@ using SHHS.Model;
 using Xamarin.Forms;
 using CarouselView.FormsPlugin.Abstractions;
 using Plugin.DeviceOrientation;
+using Rg.Plugins.Popup.Services;
+using System.Threading.Tasks;
 
 namespace SHHS.Controller
 {
@@ -14,8 +16,8 @@ namespace SHHS.Controller
         public SHHSScheduleManager scheduleManager;
         SHHSTimer timer;
         CarouselViewControl myCarousel;
-        SHHSAnnouncementManager announcementManager;
-
+        public SHHSAnnouncementManager announcementManager;
+        ImageButton addAnnouncement;
         Boolean isAnimating;
 
         public MainPage()
@@ -23,6 +25,8 @@ namespace SHHS.Controller
             InitializeComponent();
             timer = new SHHSTimer();
             announcementManager = new SHHSAnnouncementManager();
+            addAnnouncement = new ImageButton { BackgroundColor = Color.Transparent, WidthRequest = 50, Opacity = 0.75, Source = "Add.png", Aspect = Aspect.AspectFit, HorizontalOptions = LayoutOptions.CenterAndExpand, IsVisible = false };
+            addAnnouncement.Clicked += AddAnnouncement_Clicked;
             myCarousel = new CarouselViewControl
             {
                 ItemsSource = announcementManager.AnnouncementList,  // ADD/REMOVE PAGES FROM CAROUSEL ADDING/REMOVING ELEMENTS FROM THE COLLECTION
@@ -81,7 +85,6 @@ namespace SHHS.Controller
             }));
 
 
-        ImageButton addAnnouncement = new ImageButton { BackgroundColor = Color.Transparent, WidthRequest = 50, Opacity = 0.75, Source = "Add.png", Aspect = Aspect.AspectFit, HorizontalOptions = LayoutOptions.CenterAndExpand , IsVisible = false };
 
 
               HomePage.Children.Add(addAnnouncement, null,Constraint.RelativeToParent((parent) =>
@@ -96,13 +99,7 @@ namespace SHHS.Controller
             })
            );
 
-            async void ShowAddButton(object sender, System.EventArgs e)
-            {
-                if (((App)Application.Current).isAdmin)
-                {
-                    addAnnouncement.IsVisible = true;
-                }
-            }
+      
 
 
             CurrentPageChanged += CurrentPageChangedEvent;
@@ -110,29 +107,31 @@ namespace SHHS.Controller
             scheduleManager = new SHHSScheduleManager();
 
 
-            Device.StartTimer(TimeSpan.FromSeconds(5), () =>
-            {
-                if (myCarousel.ItemsSource.GetCount() == 0)
-                {
-                    return false;
-                }
+            //Device.StartTimer(TimeSpan.FromSeconds(5), () =>
+            //{
+            //    if (myCarousel.ItemsSource.GetCount() == 0)
+            //    {
+            //        return false;
+            //    }
 
-                if (myCarousel.Position == myCarousel.ItemsSource.GetCount() - 1)
-                {
+            //    if (myCarousel.Position == myCarousel.ItemsSource.GetCount() - 1)
+            //    {
 
-                    myCarousel.Position = 0;
-                }
-                else
-                {
-                    myCarousel.Position += 1;
+            //        myCarousel.Position = 0;
+            //    }
+            //    else
+            //    {
+            //        myCarousel.Position += 1;
 
 
-                }
-                return true; // True = Repeat again, False = Stop the timer
-            });
+            //    }
+            //    return true; // True = Repeat again, False = Stop the timer
+            //});
 
         }
 
+
+  
         void CurrentPageChangedEvent(object sender, EventArgs e)
         {
 
@@ -149,48 +148,46 @@ namespace SHHS.Controller
 
 
 
-        protected override async void OnAppearing()
-        {
+        public async Task ReInitMainPage() {
+
+
+            if ((Application.Current as App).Client == null)
+            {
+                return;
+            }
+
+            ShowAddButton();
+
             base.OnAppearing();
-            if (await scheduleManager.GetScheduleException()) {
+            if (await scheduleManager.GetScheduleException())
+            {
                 await scheduleManager.RefreshData();
                 await announcementManager.GetAnnoucements();
-                myCarousel.ItemsSource = announcementManager.AnnouncementList;
-            } else {
+                RefreshCarsoulView();
+            }
+            else
+            {
 
                 scheduleManager.LocalJson();
-                await DisplayAlert("No Internet", "You will not be able to get any updated schedule or news", "Ok");
+                await DisplayAlert("No Internet", "You will not be able to get any updated schedule or news", "OK");
             }
 
             RefreshSchedule();
             scheduleManager.PushLocalNotifications();
-
-
-
-
-            //Tells the the timer that schedule has benn loaded
-
-            Console.WriteLine(scheduleManager.MinutesLeft + " Minutes " + scheduleManager.SecondsLeft + " Seconds.");
+            var newestVerison = await SHHSFirebaseLogin.CheckForUpdate();
+            if (!newestVerison.Equals(""))
+               await DisplayAlert($"New Update Avalible: {newestVerison} ", "Go to the app store and get the newest version", "Ok");
         }
 
 
 
-
-        protected override void OnSizeAllocated(double width, double height)
-        {
-            base.OnSizeAllocated(width, height);
-            if (width > height && HomePage.Children.Count > 0)
-            {
-                timer.canvasView.InvalidateSurface();
-
-            
-
-            } else {
+        public void RefreshCarsoulView() {
 
 
-            }
+            myCarousel.ItemsSource = announcementManager.AnnouncementList;
+
+
         }
-
 
 
 
@@ -321,7 +318,13 @@ namespace SHHS.Controller
 
         }
 
-
+        private void ShowAddButton()
+        {
+            if (((App)Application.Current).isAdmin)
+            {
+                addAnnouncement.IsVisible = true;
+            }
+        }
 
         void Handle_PositionSelected(object sender, CarouselView.FormsPlugin.Abstractions.PositionSelectedEventArgs e)
         {
@@ -336,6 +339,14 @@ namespace SHHS.Controller
             Console.WriteLine("Direction = " + e.Direction);
         }
 
+
+        void AddAnnouncement_Clicked(object sender, EventArgs e)
+        {
+
+            PopupNavigation.Instance.PushAsync(new AnnouncementAddPage());
+
+
+        }
 
     }
 }

@@ -4,6 +4,9 @@ using Xamarin.Forms;
 using SHHS.Model;
 using System;
 using System.Globalization;
+using Firebase.Database;
+using Firebase.Database.Query;
+using System.Threading.Tasks;
 
 namespace SHHS.View
 {
@@ -22,7 +25,7 @@ namespace SHHS.View
                 RelativeView.Children.Add(iOSConfirmButton,
             Constraint.RelativeToParent((parent) =>
             {
-                return parent.Width * 0.5 - 100;
+                return parent.Width/2 - (parent.Width / 6);
             }),
             Constraint.RelativeToParent((parent) =>
             {
@@ -65,6 +68,12 @@ namespace SHHS.View
                 return parent.Width / 2;
             })
             );
+
+
+                if (((App)Application.Current).isAdmin)
+            {
+                adSetting.IsVisible = true;
+            }
         }
         void DiscardChanges(object sender, System.EventArgs e)
         {
@@ -72,6 +81,48 @@ namespace SHHS.View
         }
         async void SaveEvent(object sender, System.EventArgs e)
         {
+           await AddEvent(false);
+
+        }
+
+        async void SaveEventOnline(object sender, System.EventArgs e)
+        {
+
+           await AddEvent(true);
+
+
+        }
+
+        void Handle_Toggled(object sender, Xamarin.Forms.ToggledEventArgs e)
+        {
+
+            var t = sender as Switch;
+            if (t.IsToggled)
+            {
+
+                StartTimeEntry.Opacity = 0.5;
+                EndTimeEntry.Opacity = 0.5;
+                StartTimeEntry.InputTransparent = true;
+                EndTimeEntry.InputTransparent = true;
+
+
+            }
+            else
+            {
+
+                StartTimeEntry.Opacity = 1;
+                EndTimeEntry.Opacity = 1;
+                StartTimeEntry.InputTransparent = false;
+                EndTimeEntry.InputTransparent = false;
+
+
+            }
+
+        }
+
+
+        async Task AddEvent(bool Online) {
+
             //Check if information is valid
             if (string.IsNullOrEmpty(EventNameEntry.Text))
             {
@@ -86,12 +137,12 @@ namespace SHHS.View
 
 
 
-                if (eventEditing!= null)
+                if (eventEditing != null)
                 {
 
-                    eventEditing.Title  = EventNameEntry.Text;
+                    eventEditing.Title = EventNameEntry.Text;
                     eventEditing.Location = LoacationEntry.Text;
-                    eventEditing.StartDate = StartDateEntry.Date; 
+                    eventEditing.StartDate = StartDateEntry.Date;
                     eventEditing.StartTime = StartTimeEntry.Time;
                     eventEditing.EndTime = EndTimeEntry.Time;
 
@@ -99,7 +150,7 @@ namespace SHHS.View
                     DateTime endDate = new DateTime(eventEditing.StartDate.Year, eventEditing.StartDate.Month, eventEditing.StartDate.Day, eventEditing.EndTime.Hours, eventEditing.EndTime.Minutes, eventEditing.EndTime.Seconds);
                     eventEditing.LocationText = startDate.ToString("D", CultureInfo.CreateSpecificCulture("en-US"));
 
-                     //Refresh events
+                    //Refresh events
                     if (AllDaySwitch.IsToggled)
                     {
                         eventEditing.Time = "All Day";
@@ -108,8 +159,9 @@ namespace SHHS.View
                     {
                         eventEditing.Time = "" + startDate.ToString("t", CultureInfo.CreateSpecificCulture("en-US")) + " - " + endDate.ToString("t", CultureInfo.CreateSpecificCulture("en-US"));
                     }
-                    if (!string.IsNullOrEmpty(LoacationEntry.Text)) { 
-                    eventEditing.LocationText += "\n@ " + LoacationEntry.Text; 
+                    if (!string.IsNullOrEmpty(LoacationEntry.Text))
+                    {
+                        eventEditing.LocationText += "\n@ " + LoacationEntry.Text;
                     }
 
 
@@ -139,9 +191,42 @@ namespace SHHS.View
                         a.LocationText += " @" + LoacationEntry.Text;
                     }
                     //Add the event to SQLite
-                    await ((App)Application.Current).shhsEventManager.AddEvent(a);
-                }
 
+                    if (Online)
+                    {
+                        var firebase = new FirebaseClient("https://shhs-45632.firebaseio.com/");
+
+                        try
+                        {
+
+
+                            a.IsOnline = true;
+                            var annoucements = await firebase.Child("South Hills Events").PostAsync(a);
+
+                            //a.StartTimeString = a.StartDate.ToString();
+                            //a.EndTimeString = a.EndDate.ToString();
+
+
+
+
+                        }
+                        catch (FirebaseException e)
+                        {
+
+
+
+                            Console.WriteLine(e.StackTrace);
+
+
+                        }
+
+
+                    }
+                    else
+                    {
+                        await ((App)Application.Current).shhsEventManager.AddEvent(a);
+                    }
+                }
 
 
 
@@ -151,32 +236,9 @@ namespace SHHS.View
                 await PopupNavigation.Instance.PopAsync(true);
             }
 
-        }
-
-        void Handle_Toggled(object sender, Xamarin.Forms.ToggledEventArgs e)
-        {
-
-            var t = sender as Switch;
-            if (t.IsToggled)
-            {
-
-                StartTimeEntry.Opacity = 0.5;
-                EndTimeEntry.Opacity = 0.5;
-                StartTimeEntry.InputTransparent = true;
-                EndTimeEntry.InputTransparent = true;
 
 
-            }
-            else
-            {
 
-                StartTimeEntry.Opacity = 1;
-                EndTimeEntry.Opacity = 1;
-                StartTimeEntry.InputTransparent = false;
-                EndTimeEntry.InputTransparent = false;
-
-
-            }
 
         }
 

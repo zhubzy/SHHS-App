@@ -50,7 +50,10 @@ namespace SHHS.Model
         public async Task GetEvents()
         {
 
-            var firebase = new FirebaseClient("https://shhs-45632.firebaseio.com/");
+            if ((Application.Current as App).Client == null)
+                return;
+
+            var firebase = (Application.Current as App).Client;
 
             try
             {
@@ -58,28 +61,7 @@ namespace SHHS.Model
                 foreach (var e in annoucements)
                 {
 
-                    e.Object.StartDate = DateTime.Parse(e.Object.DateString);
-                    e.Object.StartTime = TimeSpan.Parse(e.Object.StartTimeString);
-                    e.Object.EndTime = TimeSpan.Parse(e.Object.EndTimeString);
-
-
-
-                    DateTime startDate = new DateTime(e.Object.StartDate.Year, e.Object.StartDate.Month, e.Object.StartDate.Day, e.Object.StartTime.Hours, e.Object.StartTime.Minutes, e.Object.StartTime.Seconds);
-                    DateTime endDate = new DateTime(e.Object.StartDate.Year, e.Object.StartDate.Month, e.Object.StartDate.Day, e.Object.EndTime.Hours, e.Object.EndTime.Minutes, e.Object.EndTime.Seconds);
-                    e.Object.LocationText = startDate.ToString("D", CultureInfo.CreateSpecificCulture("en-US"));
-                    if (e.Object.StartTime.Equals(e.Object.EndTime))
-                    {
-                        e.Object.Time = "All Day";
-                    }
-                    else
-                    {
-                        e.Object.Time = "" + e.Object.StartDate.ToString("t", CultureInfo.CreateSpecificCulture("en-US")) + " - " + e.Object.EndDate.ToString("t", CultureInfo.CreateSpecificCulture("en-US"));
-                    }
-
-                    if (!string.IsNullOrEmpty(e.Object.Location))
-                    {
-                        e.Object.LocationText += "\n@ " + e.Object.Location;
-                    }
+                
                     events.Add(e.Object);
                 }
 
@@ -113,49 +95,33 @@ namespace SHHS.Model
                 {
                     a.DaysLeft = "In " + timeDifferencialS;
                 }
-
                 else
-
                 {
-
                     //Event has past or in between
                     if (endDate.Subtract(DateTime.Now).TotalSeconds < 0)
                     {
                         a.DaysLeft = timeDifferencialE + " ago";
-
                     }
                     else
                     {
                         //Event hasn't ended yet, use remaining time
                         a.DaysLeft = timeDifferencialE + " remaining";
-
                     }
                 }
-
                 if (a.Time.Equals("All Day") && DateTime.Today.Equals(a.StartDate))
                     a.DaysLeft = "Today";
-
                 await _connection.UpdateAsync(a);
-
             }
             ObservableCollection<SHHSEvent> eventSorted = new ObservableCollection<SHHSEvent>(
                 events.OrderBy(person => person)
             );
-
-
             foreach (var a in eventSorted)
             {
-
                 Console.WriteLine(a.StartDate);
-
             }
-
             events = eventSorted;
             ((App)Application.Current).shhsCalender.SetDataSource(events);
             ((App)Application.Current).shhsCalender.RefreshDate();
-
-
-
         }
 
         public int FindEvent(DateTime a)
@@ -170,13 +136,6 @@ namespace SHHS.Model
 
             return times;
         }
-
-
-      
-
-
-
-
 
         void Events_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
         {

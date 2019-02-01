@@ -22,17 +22,20 @@ namespace SHHS.View
         async void Handle_Clicked(object sender, System.EventArgs e)
         {
             spinner.IsVisible = true;
-            await GetData();
             spinner.IsVisible = false;
-            foreach (var login in a)
-                if (login.Username.Equals(userName.Text) && login.Password.Equals(passWord.Text)) { 
-                    ((App)Application.Current).isAdmin = true;
-                       return;
-                    } else{ 
+            string loginSuccess = await SHHSFirebaseLogin.SignIn(userName.Text, passWord.Text);
 
-                    await DisplayAlert("Failed to log in", "Wrong Username or Password, please try again", "OK");
+
+                if (loginSuccess == null)
+                {
+                 ((App)Application.Current).isAdmin = true;
+                await Navigation.PushAsync(new AdminPage());
 
             }
+            else
+                    await DisplayAlert("Failed to log in", loginSuccess, "OK");
+
+            
         }
 
         public async Task GetData()
