@@ -78,12 +78,15 @@
                 </Label>
             </Grid>
             <ScrollView x:Name="CalendarScroll" VerticalScrollBarVisibility="Default" Padding="0,0,0,0" RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor= 1 }" RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToView, Property= Y,ElementName= week,Factor=1, Constant= 30}">
+                
                 <Grid x:Name="Calendar" ColumnSpacing="1">
-                    <Grid.GestureRecognizers>
+                         <BoxView.GestureRecognizers>
                         <SwipeGestureRecognizer Direction="Right" Swiped="OnSwipedR" />
                         <SwipeGestureRecognizer Direction="Left" Swiped="OnSwipedL" />
-                    </Grid.GestureRecognizers>
+                    </BoxView.GestureRecognizers>
                 </Grid>
+         
+                
                 <!-- Annoucementbar 1 -->
             </ScrollView>
         </RelativeLayout>

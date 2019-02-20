@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage Title="SHHS Schedules" xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="SHHS.View.ScheduleDisplayPage">
+   
+    <StackLayout VerticalOptions="Center">
+        
+      <Picker FontSize="Large" x:Name="SchedulePicker" SelectedIndexChanged= "Handle_SelectedIndexChanged" HorizontalOptions="CenterAndExpand"
+                                >
+           
+              <Picker.FontFamily>
+                                                <OnPlatform x:TypeArguments="x:String">
+                                                    <On Platform="iOS" Value="OpenSans-Bold" />
+                                                    <On Platform="Android" Value="OpenSans-Bold.ttf#OpenSans-Bold" />
+                                                </OnPlatform>
+                                            </Picker.FontFamily>
+            
+            
+                            </Picker>    <ListView x:Name="ScheduleDisplayList">  
+    <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        
+                            <StackLayout Margin="10,0,10,0" Orientation="Horizontal">
+                                <Label VerticalTextAlignment="Center" Text="{Binding PeriodName}"
+                               >
+                                  <Label.FontFamily>
+                                                <OnPlatform x:TypeArguments="x:String">
+                                                    <On Platform="iOS" Value="OpenSans-Regular" />
+                                                    <On Platform="Android" Value="OpenSans-Regular.ttf#OpenSans-Regular" />
+                                                </OnPlatform>
+                                            </Label.FontFamily>
+                                </Label>
+                     <Label VerticalTextAlignment="Center" HorizontalOptions="EndAndExpand" Text="{Binding DisplayTime}"
+                               > 
+                            
+                              <Label.FontFamily>
+                                                <OnPlatform x:TypeArguments="x:String">
+                                                    <On Platform="iOS" Value="OpenSans-Light" />
+                                                    <On Platform="Android" Value="OpenSans-Light.ttf#OpenSans-Light" />
+                                                </OnPlatform>
+                                            </Label.FontFamily>
+                            
+                            </Label>
+                            </StackLayout>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+    
+    </ListView>
+        </StackLayout>
+</ContentPage>

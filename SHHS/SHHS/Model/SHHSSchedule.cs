@@ -29,6 +29,14 @@ namespace SHHS.Model
         public DateTime EndDateTime { get; set; }
         public int Length { get; set; }
 
+        public string DisplayTime
+        {
+
+            get
+            {
+                return string.Format("{0} - {1}", StartTime, EndTime);
+            }
+        }
 
 
     }

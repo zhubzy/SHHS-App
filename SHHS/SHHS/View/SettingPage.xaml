@@ -96,7 +96,50 @@
             
         </TableSection>
             
+         <TableSection Title="Tool">
+            
+                   
+            
+                   <ViewCell Tapped="GoToScheduleDisplay" >
+                
+                        <StackLayout Margin="20,0,20,0" Orientation="Horizontal">
+                            <Label Text="View Schedules" VerticalTextAlignment="Center"/>
+                     
+                        </StackLayout>
+                
+                    </ViewCell>  
+            
+            
+                <ViewCell Tapped="GoToAeries" >
+                        <StackLayout Margin="20,0,20,0" Orientation="Horizontal">
+                            <Label Text="Check Grades" VerticalTextAlignment="Center"/>
+                    
+                        </StackLayout>
+                
+                    </ViewCell>   
+            
+            
+                  <ViewCell Tapped="ViewLunchMenu" >
+                        <StackLayout Margin="20,0,20,0" Orientation="Horizontal">
+                            <Label Text="View Cafeteria Menu" VerticalTextAlignment="Center"/>
+                    
+                        </StackLayout>
+                
+                    </ViewCell>  
+            
+                <ViewCell Tapped="ViewSports" >
+                        <StackLayout Margin="20,0,20,0" Orientation="Horizontal">
+                            <Label Text="View Sports Schedules" VerticalTextAlignment="Center"/>
+                    
+                        </StackLayout>
+                
+                    </ViewCell>  
+            
+            
         
+        
+        </TableSection>
+            
           <TableSection Title="App Info">
             
                     <ViewCell>

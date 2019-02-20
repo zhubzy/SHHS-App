@@ -49,12 +49,10 @@ namespace SHHS.Model
             });
             AnnouncementList = new ObservableCollection<Xamarin.Forms.View>();
             SHHSAnnouncement view = new SHHSAnnouncement { Announcer = "Loading", Info = "Loading" };
-            SHHSAnnouncement view2 = new SHHSAnnouncement { Announcer = "Loading", Info = "Your Internet May Be Slow" };
          
 
 
             AnnouncementList.Add(CreateStackLayout(view));
-            AnnouncementList.Add(CreateStackLayout(view2));
 
          
         }
@@ -119,21 +117,21 @@ namespace SHHS.Model
         {
 
             var layout = new StackLayout { Orientation = StackOrientation.Horizontal };
-            var ownerlayout = new StackLayout { Orientation = StackOrientation.Vertical };
+            var ownerlayout = new StackLayout { Orientation = StackOrientation.Vertical, WidthRequest = 100  };
             var annoucerLabel = new Label
             {
 
                 Text = v.Announcer,
                 FontFamily = Device.RuntimePlatform == Device.iOS ? "OpenSans-Bold": "OpenSans-Bold.ttf#OpenSans-Bold",
                 VerticalOptions = LayoutOptions.Start,
-                HorizontalOptions = LayoutOptions.FillAndExpand
+                HorizontalOptions = LayoutOptions.StartAndExpand
             };
             var infoLabel = new Label
             {
                 Text = v.Info,
+                VerticalOptions = LayoutOptions.CenterAndExpand,
                 FontFamily = Device.RuntimePlatform == Device.iOS ? "OpenSans-Regular" : "OpenSans-Regular.ttf#OpenSans-Regular",
-                VerticalOptions = LayoutOptions.Center,
-                HorizontalOptions = LayoutOptions.Center
+               
             };
 
             var icon = new BoxView { VerticalOptions = LayoutOptions.FillAndExpand, BackgroundColor = Color.Gold, HorizontalOptions = LayoutOptions.FillAndExpand };

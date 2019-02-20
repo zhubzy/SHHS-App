@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="X5k-f2-b5h">
+    <device id="retina5_5" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -17,40 +21,46 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="159" misplaced="YES" image="huskylogo.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="23">
-                                <rect key="frame" x="0.0" y="173" width="414" height="390"/>
-                                <rect key="contentStretch" x="0.0" y="0.0" width="0.0" height="0.0"/>
-                            </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="245">
-                                <rect key="frame" x="0.0" y="587" width="414" height="119"/>
-                                <attributedString key="attributedText">
-                                    <fragment content="Show what you know">
-                                        <attributes>
-                                            <font key="NSFont" size="26" name="HelveticaNeue"/>
-                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
-                                        </attributes>
-                                    </fragment>
-                                </attributedString>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="c3E-40-0NB">
+                                <rect key="frame" x="0.0" y="146.5" width="414" height="442.5"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="159" image="huskylogo.png" translatesAutoresizingMaskIntoConstraints="NO" id="23">
+                                        <rect key="frame" x="7" y="0.0" width="400" height="399.5"/>
+                                        <color key="tintColor" red="0.17254901960784313" green="0.51372549019607838" blue="0.27450980392156865" alpha="0.0" colorSpace="calibratedRGB"/>
+                                        <rect key="contentStretch" x="0.0" y="0.0" width="0.0" height="0.0"/>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="245">
+                                        <rect key="frame" x="53.5" y="399.5" width="307.5" height="43"/>
+                                        <attributedString key="attributedText">
+                                            <fragment content="Show what you know">
+                                                <attributes>
+                                                    <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                    <font key="NSFont" size="36" name="HelveticaNeue-CondensedBold"/>
+                                                    <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
+                                                </attributes>
+                                            </fragment>
+                                        </attributedString>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </stackView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.17254901960784313" green="0.51372549019607838" blue="0.27450980392156865" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="tintColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="245" firstAttribute="top" secondItem="23" secondAttribute="bottom" constant="20" id="453"/>
-                            <constraint firstAttribute="leadingMargin" secondItem="245" secondAttribute="leading" constant="20" id="860"/>
-                            <constraint firstItem="245" firstAttribute="trailing" secondItem="yd7-JS-zBw" secondAttribute="trailingMargin" constant="20" id="861"/>
-                            <constraint firstItem="23" firstAttribute="centerX" secondItem="yd7-JS-zBw" secondAttribute="centerX" id="1279"/>
-                            <constraint firstItem="23" firstAttribute="centerY" secondItem="yd7-JS-zBw" secondAttribute="centerY" id="1280"/>
+                            <constraint firstItem="c3E-40-0NB" firstAttribute="centerY" secondItem="yd7-JS-zBw" secondAttribute="centerY" id="Iaf-ut-3SZ"/>
+                            <constraint firstItem="c3E-40-0NB" firstAttribute="centerX" secondItem="yd7-JS-zBw" secondAttribute="centerX" id="TSb-fr-Wsn"/>
+                            <constraint firstItem="c3E-40-0NB" firstAttribute="leading" secondItem="yd7-JS-zBw" secondAttribute="leading" id="Uax-PB-72j"/>
+                            <constraint firstAttribute="trailing" secondItem="c3E-40-0NB" secondAttribute="trailing" id="i4J-BU-gVN"/>
                         </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XAI-xm-WK6" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="349" y="339"/>
+            <point key="canvasLocation" x="348" y="338.6807"/>
         </scene>
     </scenes>
     <resources>
-        <image name="huskylogo.jpg" width="400" height="400"/>
+        <image name="huskylogo.png" width="400" height="400"/>
     </resources>
 </document>

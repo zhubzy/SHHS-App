@@ -66,6 +66,37 @@ namespace SHHS.Model
 
         }
 
+        public List<SHHSPeriod> GetCurrentPeriodList() {
+
+            if(ScheduleOfTheDay >= 0) 
+            return ScheduleList[ScheduleOfTheDay].Schedule;
+                return ScheduleList[0].Schedule;
+            
+
+        }
+
+        public List<SHHSPeriod> GetCurrentPeriodList(int s)
+        {
+
+          
+            return ScheduleList[s].Schedule;
+
+
+        }
+
+
+        public List<String> GetScheduleNames()
+        {
+            List<String> schedules = new List<string>();
+           foreach(var sch in ScheduleList) {
+
+                schedules.Add(sch.ScheduleName);
+           }
+
+            return schedules;
+
+        }
+
         public async Task RefreshData()
         {
 

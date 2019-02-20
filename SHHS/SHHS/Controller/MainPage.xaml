@@ -24,7 +24,7 @@
             </OnPlatform>
         </ContentPage.Padding>
           <RelativeLayout x:Name="HomePage" Margin="10" >
-        </RelativeLayout> 
+        </RelativeLayout>
  </ContentPage>
     
     

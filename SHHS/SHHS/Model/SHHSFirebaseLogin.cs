@@ -82,27 +82,29 @@ namespace SHHS.Model
 
             var app = (App)(Application.Current);
 
-
-
-              var a = await app.Client.Child("App Info").OnceAsync<SHHSAppInfo>();
-                foreach (var info in a)
+            if (app.Client != null)
             {
 
-
-                if (Device.RuntimePlatform == Device.iOS)
-                {
-                    if (!CrossDeviceInfo.Current.AppBuild.Equals(info.Object.iOSBuild))
-                        return "V." + info.Object.iOSVersion;
-                } else if (Device.RuntimePlatform == Device.Android)
+                var a = await app.Client.Child("App Info").OnceAsync<SHHSAppInfo>();
+                foreach (var info in a)
                 {
 
-                    if (!CrossDeviceInfo.Current.AppBuild.Equals(info.Object.andriodBuild))
-                        return "V." + info.Object.andriodVersion;
 
+                    if (Device.RuntimePlatform == Device.iOS)
+                    {
+                        if (!CrossDeviceInfo.Current.AppBuild.Equals(info.Object.iOSBuild))
+                            return "V." + info.Object.iOSVersion;
+                    }
+                    else if (Device.RuntimePlatform == Device.Android)
+                    {
+
+                        if (!CrossDeviceInfo.Current.AppBuild.Equals(info.Object.andriodBuild))
+                            return "V." + info.Object.andriodVersion;
+
+                    }
                 }
-            }
 
-            
+            }
 
 
             return "";

@@ -31,7 +31,8 @@ namespace SHHS.Controller
                     var Stack = new StackLayout { Orientation = StackOrientation.Vertical, Spacing = -10 };
                     var dot = new Label { Text = "", HorizontalOptions = LayoutOptions.Center, TextColor = Color.White };
                     var label = new Button { Text = $"{row*7 + col}", FontFamily= Device.RuntimePlatform == Device.iOS ? "OpenSans-Light" : "OpenSans-Light.ttf#OpenSans-Light", HorizontalOptions = LayoutOptions.Center, TextColor = Color.White, WidthRequest = 40, HeightRequest = 40, BackgroundColor = Color.Transparent, Opacity = 1 };
-                    Stack.Children.Add(label);
+                   
+                     Stack.Children.Add(label);
                     Stack.Children.Add(dot);
 
                     Calendar.Children.Add(Stack, col, row);
@@ -345,13 +346,16 @@ namespace SHHS.Controller
 
         void OnSwipedL(object sender, Xamarin.Forms.SwipedEventArgs e)
         {
-            AdvanceToPreviousMonth();        
-           }
+            AdvanceToPreviousMonth();
+
+        }
 
 
         void OnSwipedR(object sender, Xamarin.Forms.SwipedEventArgs e)
         {
             AdvanceToNextMonth();
+
+
         }
 
 

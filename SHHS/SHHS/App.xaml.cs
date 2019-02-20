@@ -50,7 +50,7 @@ namespace SHHS
 
             //Init Page
             shhsMain = new MainPage();
-            MainPage = new NavigationPage(shhsMain);
+            MainPage = new LoadingPage(5);
             shhsEventManager = new SHHSEventManager();
             Current = this;
             shhsSetting =  new SettingPage { Title = "Setting", Icon = "setting.png", BackgroundColor = Color.FromHex("#EFFACB") };
@@ -70,17 +70,16 @@ namespace SHHS
             // Handle when your app starts
 
             //If sign in fails
-
             var signInResults = await SHHSFirebaseLogin.SignIn();
-
+            (MainPage as LoadingPage).ProgressComplete();
 
             if (signInResults != null && signInResults.Equals(AuthErrorReason.UserDisabled.ToString())){
-                await shhsMain.DisplayAlert(signInResults,"Your account has been disabled, default schedule has been set, please contact southhillscode@gmail.com for assistance", "Ok");
+                await MainPage.DisplayAlert(signInResults,"Your account has been disabled, default schedule has been set, please contact southhillscode@gmail.com for assistance", "Ok");
                 shhsMain.scheduleManager.LocalJson();
                 shhsMain.RefreshSchedule();
                 
             } else if (signInResults != null && signInResults.Equals(AuthErrorReason.Undefined.ToString())) {
-                await shhsMain.DisplayAlert(signInResults, "check your internet connection, default schedule has been set, you will not be able to get updated news or schedule", "Ok");
+                await MainPage.DisplayAlert(signInResults, "check your internet connection, default schedule has been set, you will not be able to get updated news or schedule", "Ok");
                 shhsMain.scheduleManager.LocalJson();
                 shhsMain.RefreshSchedule();
 
@@ -90,28 +89,35 @@ namespace SHHS
                 var signuPResults = await SHHSFirebaseLogin.SignUp();
 
                 if(signuPResults!= null) {
-                    await shhsMain.DisplayAlert(signInResults, "An error has occured authenticating, default schedule has been set, you will not be able to get updated news or schedule", "Ok");
+                    await MainPage.DisplayAlert(signInResults, "An error has occured authenticating, default schedule has been set, you will not be able to get updated news or schedule", "Ok");
                     shhsMain.scheduleManager.LocalJson();
                     shhsMain.RefreshSchedule();
 
                 }
             }
 
+             var newestVerison = await SHHSFirebaseLogin.CheckForUpdate();
+            if (!newestVerison.Equals(""))
+             await MainPage.DisplayAlert($"New Update Avalible: {newestVerison} ", "Go to the app store and get the newest version, if you are a beta tester, there may be a delay to testglight.", "Ok");
 
-              
-            
-
+           (MainPage as LoadingPage).ProgressComplete();
 
 
             //Gets all events from Firebase, and refresh their remaining time
             await shhsEventManager.InitalizeEventTable();
+            (MainPage as LoadingPage).ProgressComplete();
             shhsCalender = new CalenderPage { Title = "Calendar", Icon = "calendaricon.png" };
             //Must initalize eventManager before calender page
             shhsMain.Children.Add(shhsCalender);
             shhsMain.Children.Add(shhsSetting);
             await shhsEventManager.RefreshEvent();
+            (MainPage as LoadingPage).ProgressComplete();
             shhsCalender.SetDataSource(shhsEventManager.events);
             await shhsMain.ReInitMainPage();
+            (MainPage as LoadingPage).ProgressComplete();
+            await Task.Delay(700);
+            await (MainPage as LoadingPage).FadeAwayAsync();
+            MainPage = new NavigationPage(shhsMain);
 
 
 
@@ -128,8 +134,11 @@ namespace SHHS
         override protected async void OnResume()
         {
             // Handle when your app resumes
-            shhsMain.RefreshSchedule();
-            await shhsEventManager.RefreshEvent();
+            if (shhsMain.scheduleManager.ScheduleName != null)
+            {
+                shhsMain.RefreshSchedule();
+                await shhsEventManager.RefreshEvent();
+            }
         }
 
         public FirebaseClient Client

@@ -44,6 +44,7 @@ namespace SHHS.Controller
         
             //x,y,w,h
             //Adding timer
+
             HomePage.Children.Add(timer, null, null,
             Constraint.RelativeToParent((parent) =>
             {
@@ -165,18 +166,10 @@ namespace SHHS.Controller
                 await announcementManager.GetAnnoucements();
                 RefreshCarsoulView();
             }
-            else
-            {
-
-                scheduleManager.LocalJson();
-                await DisplayAlert("No Internet", "You will not be able to get any updated schedule or news", "OK");
-            }
 
             RefreshSchedule();
             scheduleManager.PushLocalNotifications();
-            var newestVerison = await SHHSFirebaseLogin.CheckForUpdate();
-            if (!newestVerison.Equals(""))
-               await DisplayAlert($"New Update Avalible: {newestVerison} ", "Go to the app store and get the newest version", "Ok");
+
         }
 
 
