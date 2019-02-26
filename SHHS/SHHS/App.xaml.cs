@@ -53,7 +53,7 @@ namespace SHHS
             MainPage = new LoadingPage(5);
             shhsEventManager = new SHHSEventManager();
             Current = this;
-            shhsSetting =  new SettingPage { Title = "Setting", Icon = "setting.png", BackgroundColor = Color.FromHex("#EFFACB") };
+            shhsSetting =  new SettingPage { Title = "Setting", Icon = "setting.png", BackgroundColor = Color.FromHex("#E5EDCD") };
 
 
 

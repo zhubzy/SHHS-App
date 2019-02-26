@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ContentPage  xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="SHHS.View.LogInPage" BackgroundColor="#EFFACB">
+<ContentPage  xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="SHHS.View.LogInPage" BackgroundColor="#E5EDCD">
    <StackLayout VerticalOptions="CenterAndExpand" >
         <Label Text="Adminstrator access only" FontSize="Large" HorizontalOptions="Center" VerticalOptions="CenterAndExpand" />
         <Entry x:Name="userName" Placeholder="Username" Keyboard="Email" IsSpellCheckEnabled="false" IsTextPredictionEnabled="false" Margin="50,30,50,0"/>

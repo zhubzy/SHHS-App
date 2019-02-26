@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="SHHS.View.SettingPage" BackgroundColor="#EFFACB" >
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="SHHS.View.SettingPage" BackgroundColor="#E5EDCD" >
     <ContentPage.Padding>
             <OnPlatform x:TypeArguments="Thickness" iOS="0,10,0,0">
                 
@@ -12,7 +12,7 @@
         
  
         
-    <TableView BackgroundColor="#EFFACB" Intent="Settings">
+    <TableView BackgroundColor="#E5EDCD" Intent="Settings">
             
     <TableRoot>
         <TableSection  Title="Notification">
@@ -22,7 +22,7 @@
                         <StackLayout  Margin="20,0,20,0" Orientation="Horizontal">
                             <Label Text="Enable Notification" VerticalTextAlignment="Center"/>
                             <Switch x:Name="notificationsetting" IsToggled="{Binding NotificationEnabled}"
-                              HorizontalOptions="EndAndExpand" />
+                              HorizontalOptions="EndAndExpand" VerticalOptions="Center"/>
                         </StackLayout>
                 
                     </ViewCell>  
@@ -30,7 +30,7 @@
                         <StackLayout  Margin="20,0,20,0" Orientation="Horizontal">
                             <Label Text="Sound" VerticalTextAlignment="Center"/>
                             <Switch x:Name="soundsetting" IsToggled="{Binding SoundEnabled}"
-                              HorizontalOptions="EndAndExpand" />
+                              HorizontalOptions="EndAndExpand" VerticalOptions="Center"/>
                         </StackLayout>
                 
                     </ViewCell>  

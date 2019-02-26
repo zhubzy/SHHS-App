@@ -3,7 +3,7 @@
     <Application.Resources>
         <ResourceDictionary>
             <Style TargetType="NavigationPage">
-                <Setter Property = "BarBackgroundColor" Value="#EFFACB"/>
+                <Setter Property = "BarBackgroundColor" Value="#E5EDCD"/>
                 <Setter Property= "BarTextColor" Value="#2B7251"/>
             </Style>
         </ResourceDictionary>

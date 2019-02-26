@@ -1,50 +1,47 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ContentPage Title="SHHS Schedules" xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="SHHS.View.ScheduleDisplayPage">
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="SHHS.View.ScheduleDisplayPage"
+             BackgroundColor="#E5EDCD" >
    
     <StackLayout VerticalOptions="Center">
         
-      <Picker FontSize="Large" x:Name="SchedulePicker" SelectedIndexChanged= "Handle_SelectedIndexChanged" HorizontalOptions="CenterAndExpand"
-                                >
-           
-              <Picker.FontFamily>
-                                                <OnPlatform x:TypeArguments="x:String">
-                                                    <On Platform="iOS" Value="OpenSans-Bold" />
-                                                    <On Platform="Android" Value="OpenSans-Bold.ttf#OpenSans-Bold" />
-                                                </OnPlatform>
-                                            </Picker.FontFamily>
-            
-            
-                            </Picker>    <ListView x:Name="ScheduleDisplayList">  
-    <ListView.ItemTemplate>
+      <Picker FontSize="Large" x:Name="SchedulePicker" SelectedIndexChanged= "Handle_SelectedIndexChanged" HorizontalOptions="CenterAndExpand">
+           <Picker.FontFamily>
+                <OnPlatform x:TypeArguments="x:String">
+                <On Platform="iOS" Value="OpenSans-Bold" />
+                <On Platform="Android" Value="OpenSans-Bold.ttf#OpenSans-Bold" />
+                </OnPlatform>
+            </Picker.FontFamily>
+        </Picker>    
+       
+      <ListView x:Name="ScheduleDisplayList" BackgroundColor="#E5EDCD">  
+             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
                         
-                            <StackLayout Margin="10,0,10,0" Orientation="Horizontal">
-                                <Label VerticalTextAlignment="Center" Text="{Binding PeriodName}"
-                               >
-                                  <Label.FontFamily>
-                                                <OnPlatform x:TypeArguments="x:String">
+                        <StackLayout Margin="10,0,10,0" Orientation="Horizontal" BackgroundColor="#E5EDCD">
+                                <Label VerticalTextAlignment="Center" Text="{Binding PeriodName}">
+                                    <Label.FontFamily>
+                                            <OnPlatform x:TypeArguments="x:String">
                                                     <On Platform="iOS" Value="OpenSans-Regular" />
                                                     <On Platform="Android" Value="OpenSans-Regular.ttf#OpenSans-Regular" />
-                                                </OnPlatform>
-                                            </Label.FontFamily>
+                                            </OnPlatform>
+                                    </Label.FontFamily>
                                 </Label>
-                     <Label VerticalTextAlignment="Center" HorizontalOptions="EndAndExpand" Text="{Binding DisplayTime}"
-                               > 
-                            
-                              <Label.FontFamily>
-                                                <OnPlatform x:TypeArguments="x:String">
+                     
+                                <Label VerticalTextAlignment="Center" HorizontalOptions="EndAndExpand" Text="{Binding DisplayTime}"> 
+                                    <Label.FontFamily>
+                                            <OnPlatform x:TypeArguments="x:String">
                                                     <On Platform="iOS" Value="OpenSans-Light" />
                                                     <On Platform="Android" Value="OpenSans-Light.ttf#OpenSans-Light" />
-                                                </OnPlatform>
-                                            </Label.FontFamily>
+                                            </OnPlatform>
+                                    </Label.FontFamily>
+                                </Label>
                             
-                            </Label>
-                            </StackLayout>
+                        </StackLayout>
                     </ViewCell>
                 </DataTemplate>
             </ListView.ItemTemplate>
     
-    </ListView>
-        </StackLayout>
+     </ListView>
+  </StackLayout>
 </ContentPage>

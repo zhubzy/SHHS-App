@@ -13,7 +13,7 @@ namespace SHHS.iOS
         protected override void OnElementChanged(ElementChangedEventArgs<ProgressBar> e)
         {
             base.OnElementChanged(e);
-            Control.ProgressTintColor = Color.FromRgb(169, 169, 169).ToUIColor(); 
+            Control.ProgressTintColor = Color.FromRgb(198, 182, 130).ToUIColor(); 
             Control.TrackTintColor = Color.FromRgb(255, 255, 255).ToUIColor();
 
         }
