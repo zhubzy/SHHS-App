@@ -20,7 +20,7 @@
                 
                      <ViewCell>
                         <StackLayout  Margin="20,0,20,0" Orientation="Horizontal">
-                            <Label Text="Enable Notification" VerticalTextAlignment="Center"/>
+                            <Label Text="Enable Notification" VerticalTextAlignment="Center" TextColor="Black"/>
                             <Switch x:Name="notificationsetting" IsToggled="{Binding NotificationEnabled}"
                               HorizontalOptions="EndAndExpand" VerticalOptions="Center"/>
                         </StackLayout>
@@ -28,7 +28,7 @@
                     </ViewCell>  
                 <ViewCell>
                         <StackLayout  Margin="20,0,20,0" Orientation="Horizontal">
-                            <Label Text="Sound" VerticalTextAlignment="Center"/>
+                            <Label Text="Sound" VerticalTextAlignment="Center" TextColor="Black"/>
                             <Switch x:Name="soundsetting" IsToggled="{Binding SoundEnabled}"
                               HorizontalOptions="EndAndExpand" VerticalOptions="Center"/>
                         </StackLayout>
@@ -36,7 +36,7 @@
                     </ViewCell>  
                   <ViewCell>
                         <StackLayout  Margin="20,0,20,0" Orientation="Horizontal">
-                            <Label Text="Number of Minutes to Send" VerticalTextAlignment="Center"/>
+                            <Label Text="Number of Minutes to Send" VerticalTextAlignment="Center" TextColor="Black"/>
                         
                         <Picker HorizontalOptions="EndAndExpand" x:Name="minutessetting" SelectedItem = "{Binding MinutesToSendNotification}" Title= "{Binding MinutesToSendNotification}" >
   <Picker.ItemsSource>
@@ -71,7 +71,7 @@
             
                  <ViewCell Tapped="Handle_Tapped">
                         <StackLayout Margin="20,0,20,0" Orientation="Horizontal">
-                            <Label Text="Submit Feedback" VerticalTextAlignment="Center"/>
+                            <Label Text="Submit Feedback" VerticalTextAlignment="Center" TextColor="Black"/>
                        
                         </StackLayout>
                 
@@ -79,7 +79,7 @@
             
                     <ViewCell Tapped="Handle_Tapped_1">
                         <StackLayout Margin="20,0,20,0" Orientation="Horizontal">
-                            <Label Text="About our team" VerticalTextAlignment="Center"/>
+                            <Label Text="About our team" VerticalTextAlignment="Center" TextColor="Black"/>
                      
                         </StackLayout>
                 
@@ -103,7 +103,7 @@
                    <ViewCell Tapped="GoToScheduleDisplay" >
                 
                         <StackLayout Margin="20,0,20,0" Orientation="Horizontal">
-                            <Label Text="View Schedules" VerticalTextAlignment="Center"/>
+                            <Label Text="View Schedules" VerticalTextAlignment="Center" TextColor="Black"/>
                      
                         </StackLayout>
                 
@@ -112,7 +112,7 @@
             
                 <ViewCell Tapped="GoToAeries" >
                         <StackLayout Margin="20,0,20,0" Orientation="Horizontal">
-                            <Label Text="Check Grades" VerticalTextAlignment="Center"/>
+                            <Label Text="Check Grades" VerticalTextAlignment="Center" TextColor="Black"/>
                     
                         </StackLayout>
                 
@@ -121,7 +121,7 @@
             
                   <ViewCell Tapped="ViewLunchMenu" >
                         <StackLayout Margin="20,0,20,0" Orientation="Horizontal">
-                            <Label Text="View Cafeteria Menu" VerticalTextAlignment="Center"/>
+                            <Label Text="View Cafeteria Menu" VerticalTextAlignment="Center" TextColor="Black"/>
                     
                         </StackLayout>
                 
@@ -129,7 +129,7 @@
             
                 <ViewCell Tapped="ViewSports" >
                         <StackLayout Margin="20,0,20,0" Orientation="Horizontal">
-                            <Label Text="View Sports Schedules" VerticalTextAlignment="Center"/>
+                            <Label Text="View Sports Schedules" VerticalTextAlignment="Center" TextColor="Black"/>
                     
                         </StackLayout>
                 
@@ -144,18 +144,18 @@
             
                     <ViewCell>
                         <StackLayout Margin="20,0,20,0" Orientation="Horizontal">
-                            <Label Text="Version Number" VerticalTextAlignment="Center"/>
+                            <Label Text="Version Number" VerticalTextAlignment="Center" TextColor="Black"/>
                             <Label Text="{Binding VersionNumber}"
-                              HorizontalOptions="EndAndExpand" VerticalTextAlignment="Center"/>
+                              HorizontalOptions="EndAndExpand" VerticalTextAlignment="Center" TextColor="Black"/>
                         </StackLayout>
                 
                     </ViewCell>       
             
                     <ViewCell>
                         <StackLayout Margin="20,0,20,0" Orientation="Horizontal">
-                            <Label Text="Build Number" VerticalTextAlignment="Center"/>
+                            <Label Text="Build Number" VerticalTextAlignment="Center" TextColor="Black"/>
                             <Label Text="{Binding BuildNumber}"
-                              HorizontalOptions="EndAndExpand" VerticalTextAlignment="Center"/>
+                              HorizontalOptions="EndAndExpand" VerticalTextAlignment="Center" TextColor="Black"/>
                         </StackLayout>
                 
                     </ViewCell>   
@@ -163,7 +163,7 @@
             
                     <ViewCell Tapped="Handle_ToLogInPage" >
                         <StackLayout Margin="20,0,20,0" Orientation="Horizontal">
-                            <Label Text="Console" VerticalTextAlignment="Center"/>
+                            <Label Text="Console" VerticalTextAlignment="Center" TextColor="Black"/>
                         </StackLayout>
                 
                     </ViewCell>    

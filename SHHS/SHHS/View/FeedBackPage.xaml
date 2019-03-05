@@ -6,26 +6,26 @@
         <StackLayout Margin="20,40,20,10" Spacing="20" VerticalOptions="StartAndExpand" Orientation="Vertical">
         
        <StackLayout HorizontalOptions="Fill" Orientation="Horizontal">
-    <Label   VerticalTextAlignment="Center" Text="Name:"   />            
+    <Label   VerticalTextAlignment="Center" Text="Name:" TextColor="Black" />            
     <Entry Text="{Binding Name}"    Placeholder="(Optional)" HorizontalOptions="FillAndExpand" IsSpellCheckEnabled="false" IsTextPredictionEnabled="false" Keyboard="Default"/>   
         </StackLayout>
         
         
                <StackLayout HorizontalOptions="Fill" Orientation="Horizontal">
-    <Label   VerticalTextAlignment="Center" Text="Email: " />            
+    <Label   VerticalTextAlignment="Center" Text="Email: " TextColor="Black" />            
     <Entry Text="{Binding Email}" Placeholder="(Optional)" HorizontalOptions="FillAndExpand"  Keyboard="Email"/>   
         </StackLayout>
         
         
      <StackLayout  VerticalOptions="CenterAndExpand" Orientation="Vertical">
-    <Label   VerticalTextAlignment="Center" HorizontalOptions="Center" Text="Suggestion: " />            
+    <Label   VerticalTextAlignment="Center" HorizontalOptions="Center" Text="Suggestion: " TextColor="Black" />            
     <Editor AutoSize="TextChanges" Text="{Binding Feedback}"  Placeholder="Enter Your Suggestion Here" VerticalOptions="FillAndExpand" HorizontalOptions="Fill" HeightRequest="100" Keyboard="Default"/>   
                    
         </StackLayout>
         
         
         
-        <Button Text="Submit" Clicked="Handle_Clicked"  FontSize="Medium" TextColor="#2B7251" >
+        <Button Text="Submit" Clicked="Handle_Clicked"  FontSize="Medium" TextColor="#2B7251" BackgroundColor="Transparent" >
             <Label.FontFamily>
                 <OnPlatform x:TypeArguments="x:String">
                 <On Platform="iOS" Value="OpenSans-Bold" />

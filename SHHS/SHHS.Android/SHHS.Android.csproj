@@ -98,6 +98,7 @@
     <AndroidResource Include="Resources\drawable\eventTitle.png" />
     <AndroidResource Include="Resources\drawable\eventLocation.png" />
     <AndroidResource Include="Resources\drawable\eventTime.png" />
+    <AndroidResource Include="Resources\drawable\huskylogo.png" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\drawable\" />

@@ -19,7 +19,7 @@
                     <ViewCell>
                         
                         <StackLayout Margin="10,0,10,0" Orientation="Horizontal" BackgroundColor="#E5EDCD">
-                                <Label VerticalTextAlignment="Center" Text="{Binding PeriodName}">
+                                <Label VerticalTextAlignment="Center" Text="{Binding PeriodName}" TextColor="Black">
                                     <Label.FontFamily>
                                             <OnPlatform x:TypeArguments="x:String">
                                                     <On Platform="iOS" Value="OpenSans-Regular" />
@@ -28,7 +28,7 @@
                                     </Label.FontFamily>
                                 </Label>
                      
-                                <Label VerticalTextAlignment="Center" HorizontalOptions="EndAndExpand" Text="{Binding DisplayTime}"> 
+                                <Label VerticalTextAlignment="Center" HorizontalOptions="EndAndExpand" Text="{Binding DisplayTime}" TextColor="Black"> 
                                     <Label.FontFamily>
                                             <OnPlatform x:TypeArguments="x:String">
                                                     <On Platform="iOS" Value="OpenSans-Light" />

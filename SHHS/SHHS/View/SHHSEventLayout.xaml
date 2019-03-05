@@ -157,7 +157,7 @@
                             
                 </RelativeLayout>   
                      <StackLayout Padding="0,0,0,0" RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width,Factor=1}" RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=0.92}">
-                         <Button  Clicked="SaveEvent"  HorizontalOptions="Center" Text="Confirm" TextColor="#2B7251">
+                         <Button  Clicked="SaveEvent"  HorizontalOptions="Center" Text="Save" TextColor="#2B7251">
                             <Label.FontFamily>
                                 <OnPlatform x:TypeArguments="x:String">
                                 <On Platform="iOS" Value="OpenSans-Bold" />
@@ -176,7 +176,7 @@
                              
                         </Button>
                     
-                            <Button Clicked="DiscardChanges" HorizontalOptions="Center" Text="Cancel and discard changes" TextColor="#2B7251">
+                            <Button Clicked="DiscardChanges" HorizontalOptions="Center" Text="Cancel and discard changes" TextColor="#2B7251" BackgroundColor="Transparent" >
                             <Label.FontFamily>
                                 <OnPlatform x:TypeArguments="x:String">
                                 <On Platform="iOS" Value="OpenSans-Bold" />
