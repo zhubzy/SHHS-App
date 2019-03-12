@@ -3,7 +3,7 @@
     <ContentPage.Content>
     </ContentPage.Content>
     <StackLayout x:Name="StackLayoutLoad"  HorizontalOptions="Center" VerticalOptions="Center">
-        <Image x:Name="Logo" Source="huskylogo.jpg" Margin="-25,0,-25,0" Aspect="AspectFill"/>
+        <Image x:Name="Logo" Source="huskylogo.png" Margin="-25,0,-25,0" Aspect="AspectFill"/>
              <local:CustomProgressBar Margin="20,0,20,0"  x:Name="LoadingBar" Progress="0.0" />
     </StackLayout> 
 </ContentPage>

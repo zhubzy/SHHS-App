@@ -42,14 +42,17 @@ namespace SHHS.View
             }
         }
 
+        public int days;
+        public int hours;
         public int minutes;
         public int seconds;
         public int length;
-        float infoWidth;
-        float textWidth;
+        public int miliSecs;
+        protected float infoWidth;
+        protected float textWidth;
 
 
-        SKPaint outlinePaint = new SKPaint
+        protected SKPaint outlinePaint = new SKPaint
         {
             IsAntialias = true,
             Style = SKPaintStyle.Fill,
@@ -58,20 +61,20 @@ namespace SHHS.View
 
 
         };
-        SKPaint textPaint = new SKPaint
+       protected SKPaint textPaint = new SKPaint
         {
             IsAntialias = true,
             Color = SKColors.Black,
             Typeface = SKTypeface.FromFile("OpenSans-Bold.ttf")
         };
-        SKPaint infoPaint = new SKPaint
+        protected SKPaint infoPaint = new SKPaint
         {
             IsAntialias = true,
             Color = SKColors.Black,
             Typeface = SKTypeface.FromFile("OpenSans-Light.ttf")
 
         };
-        SKPaint arcPaint = new SKPaint
+        protected SKPaint arcPaint = new SKPaint
         {
             IsAntialias = true,
             Style = SKPaintStyle.Stroke,

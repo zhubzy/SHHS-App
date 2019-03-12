@@ -16,7 +16,10 @@ namespace SHHS.Controller
         public SHHSScheduleManager scheduleManager;
         SHHSTimer timer;
         CarouselViewControl myCarousel;
+        SHHSCountDown countdown;
+
         public SHHSAnnouncementManager announcementManager;
+        public SHHSAnnouncementManager countdownManager;
         ImageButton addAnnouncement;
         Boolean isAnimating;
 
@@ -24,9 +27,18 @@ namespace SHHS.Controller
         {
             InitializeComponent();
             timer = new SHHSTimer();
+            countdown = new SHHSCountDown(new DateTime(2019,4,9,8,0,0),"School Day SAT");
+            countdownManager = new SHHSAnnouncementManager();
             announcementManager = new SHHSAnnouncementManager();
             addAnnouncement = new ImageButton { BackgroundColor = Color.Transparent, WidthRequest = 50, Opacity = 0.75, Source = "Add.png", Aspect = Aspect.AspectFit, HorizontalOptions = LayoutOptions.CenterAndExpand, IsVisible = false };
             addAnnouncement.Clicked += AddAnnouncement_Clicked;
+
+
+
+
+
+
+
             myCarousel = new CarouselViewControl
             {
                 ItemsSource = announcementManager.AnnouncementList,  // ADD/REMOVE PAGES FROM CAROUSEL ADDING/REMOVING ELEMENTS FROM THE COLLECTION
@@ -68,37 +80,56 @@ namespace SHHS.Controller
 
 
 
-            //Adding news scroll
-            HomePage.Children.Add(myCarousel, null,Constraint.RelativeToParent((parent) =>
+            HomePage.Children.Add(countdown, null, Constraint.RelativeToParent((parent) =>
             {
-              
-                return timer.Height + 30;
+
+                return timer.Height + 10;
             }),
             Constraint.RelativeToParent((parent) =>
             {
-               
+
                 return parent.Width;
             }),
             Constraint.RelativeToParent((parent) =>
             {
-               
-                return Height / 3;
+
+                return Height / 4;
             }));
 
 
 
 
-              HomePage.Children.Add(addAnnouncement, null,Constraint.RelativeToParent((parent) =>
+            //Adding news scroll
+            HomePage.Children.Add(myCarousel, null,Constraint.RelativeToParent((parent) =>
             {
               
-                return myCarousel.Y + myCarousel.Height + 30;
+                return countdown.Y + countdown.Height + 30;
             }),
             Constraint.RelativeToParent((parent) =>
             {
                
-                return parent.Width;
-            })
-           );
+                return countdown.Width;
+            }),
+            Constraint.RelativeToParent((parent) =>
+            {
+               
+                return Height / 4;
+            }));
+
+
+
+
+           //   HomePage.Children.Add(addAnnouncement, null,Constraint.RelativeToParent((parent) =>
+           // {
+              
+           //     return myCarousel.Y + myCarousel.Height + 30;
+           // }),
+           // Constraint.RelativeToParent((parent) =>
+           // {
+               
+           //     return parent.Width;
+           // })
+           //);
 
       
 
