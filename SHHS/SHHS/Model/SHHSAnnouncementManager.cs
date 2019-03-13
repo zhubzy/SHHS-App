@@ -122,6 +122,7 @@ namespace SHHS.Model
             {
 
                 Text = v.Announcer,
+                TextColor = Color.Black,
                 FontFamily = Device.RuntimePlatform == Device.iOS ? "OpenSans-Bold": "OpenSans-Bold.ttf#OpenSans-Bold",
                 VerticalOptions = LayoutOptions.Start,
                 HorizontalOptions = LayoutOptions.StartAndExpand
@@ -129,12 +130,13 @@ namespace SHHS.Model
             var infoLabel = new Label
             {
                 Text = v.Info,
+                TextColor = Color.Black,
                 VerticalOptions = LayoutOptions.CenterAndExpand,
                 FontFamily = Device.RuntimePlatform == Device.iOS ? "OpenSans-Regular" : "OpenSans-Regular.ttf#OpenSans-Regular",
                
             };
 
-            var icon = new BoxView { VerticalOptions = LayoutOptions.FillAndExpand, BackgroundColor = Color.Gold, HorizontalOptions = LayoutOptions.FillAndExpand };
+            var icon = new BoxView { VerticalOptions = LayoutOptions.FillAndExpand, BackgroundColor = Color.Gold, HorizontalOptions = LayoutOptions.FillAndExpand};
             ownerlayout.Children.Add(annoucerLabel);
             ownerlayout.Children.Add(icon);
             layout.Children.Add(ownerlayout);

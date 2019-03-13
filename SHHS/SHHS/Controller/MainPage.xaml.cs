@@ -103,7 +103,7 @@ namespace SHHS.Controller
             HomePage.Children.Add(myCarousel, null,Constraint.RelativeToParent((parent) =>
             {
               
-                return countdown.Y + countdown.Height + 30;
+                return countdown.Y + countdown.Height - 10;
             }),
             Constraint.RelativeToParent((parent) =>
             {
