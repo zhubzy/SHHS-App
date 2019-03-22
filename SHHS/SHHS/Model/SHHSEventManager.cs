@@ -3,6 +3,7 @@ using System.Collections.ObjectModel;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using Firebase.Database;
 using SQLite;
@@ -28,6 +29,7 @@ namespace SHHS.Model
 
             await _connection.CreateTableAsync<SHHSEvent>();
             var data = await _connection.Table<SHHSEvent>().ToListAsync();
+
             events = new ObservableCollection<SHHSEvent>(data);
             events.CollectionChanged += Events_CollectionChanged;
 
@@ -47,6 +49,35 @@ namespace SHHS.Model
             events.Remove(e);
 
         }
+
+        public SHHSEvent GetCountDownEvent() {
+            foreach (var e in events)
+            {
+                
+                if (DateTime.Now.CompareTo( e.StartDate) < 0){
+
+                    if ( !(e.IsOnline) && e.IsCountDown)
+                        return e;
+
+
+                }
+            }
+            foreach (var e in events)
+            {
+
+                if (DateTime.Now.CompareTo(e.StartDate) < 0)
+                {
+
+                    if (e.IsOnline && e.IsCountDown)
+                        return e;
+
+
+                }
+            }
+            return null;
+
+        }
+
         public async Task GetEvents()
         {
 
@@ -61,7 +92,7 @@ namespace SHHS.Model
                 foreach (var e in annoucements)
                 {
 
-                
+                 
                     events.Add(e.Object);
                 }
 
@@ -79,9 +110,45 @@ namespace SHHS.Model
 
         }
 
+
+        public async Task UpdateEvent() {
+            foreach (var a in events)
+            {
+
+                DateTime startDate = new DateTime(a.StartDate.Year, a.StartDate.Month, a.StartDate.Day, a.StartTime.Hours, a.StartTime.Minutes, a.StartTime.Seconds);
+                DateTime endDate = new DateTime(a.StartDate.Year, a.StartDate.Month, a.StartDate.Day, a.EndTime.Hours, a.EndTime.Minutes, a.EndTime.Seconds);
+                string timeDifferencialS = DifferencialInString(startDate, DateTime.Now);
+                string timeDifferencialE = DifferencialInString(endDate, DateTime.Now);
+
+                //Event hasn't begin yet
+                if (startDate.Subtract(DateTime.Now).TotalSeconds > 0)
+                {
+                    a.DaysLeft = "In " + timeDifferencialS;
+                }
+                else
+                {
+                    //Event has past or in between
+                    if (endDate.Subtract(DateTime.Now).TotalSeconds < 0)
+                    {
+                        a.DaysLeft = timeDifferencialE + " ago";
+                    }
+                    else
+                    {
+                        //Event hasn't ended yet, use remaining time
+                        a.DaysLeft = timeDifferencialE + " remaining";
+                    }
+                }
+                if (a.Time.Equals("All Day") && DateTime.Today.Equals(a.StartDate))
+                    a.DaysLeft = "Today";
+                await _connection.UpdateAsync(a);
+            }
+
+        }
+
+
+
         public async Task RefreshEvent()
         {
-
             foreach (var a in events)
             {
 

@@ -19,7 +19,7 @@
     <AndroidHttpClientHandlerType>Xamarin.Android.Net.AndroidClientHandler</AndroidHttpClientHandlerType>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
-    <ReleaseVersion>2.0.1</ReleaseVersion>
+    <ReleaseVersion>2.4</ReleaseVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -63,6 +63,7 @@
     <Compile Include="LocalNotificationsImplementation.cs" />
     <Compile Include="ScheduledAlarmHandler.cs" />
     <Compile Include="LocalNotification.cs" />
+    <Compile Include="CustomProgressBarRenderer.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />

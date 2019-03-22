@@ -10,6 +10,8 @@ using Firebase.Database;
 using Firebase.Auth;
 using Plugin.DeviceInfo;
 using System.Threading.Tasks;
+using System;
+using Plugin.LocalNotifications;
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 
@@ -28,10 +30,11 @@ namespace SHHS
         private const string UIDkey = "UID";
         private const string loginClient = "LoginToken";
         private const string loginToken = "FBToken";
+        private const string remindToday = "Reminder";
 
         public string VersionNumber { get; set; }
 
-        public string BuildNumber { get; set; }
+        public int BuildNumber { get; set; }
         public bool isAdmin { get; set; }
 
         public App()
@@ -45,7 +48,7 @@ namespace SHHS
 
             //Set Version
             VersionNumber = CrossDeviceInfo.Current.AppVersion;
-            BuildNumber = CrossDeviceInfo.Current.AppBuild;
+            BuildNumber = int.Parse(CrossDeviceInfo.Current.AppBuild);
 
 
             //Init Page
@@ -68,6 +71,7 @@ namespace SHHS
         override protected async void OnStart()
         {
             // Handle when your app starts
+
 
             //If sign in fails
             var signInResults = await SHHSFirebaseLogin.SignIn();
@@ -96,9 +100,9 @@ namespace SHHS
                 }
             }
 
-             var newestVerison = await SHHSFirebaseLogin.CheckForUpdate();
-            if (!newestVerison.Equals(""))
-             await MainPage.DisplayAlert($"New Update Avalible: {newestVerison} ", "Go to the app store and get the newest version, if you are a beta tester, there may be a delay to testglight.", "Ok");
+             var newestBuild= await SHHSFirebaseLogin.CheckForUpdate();
+            if (BuildNumber < newestBuild)
+             await MainPage.DisplayAlert($"New Update Avalible", "Go to the app store and get the newest version", "Ok");
 
            (MainPage as LoadingPage).ProgressComplete();
 
@@ -118,8 +122,16 @@ namespace SHHS
             await Task.Delay(700);
             await (MainPage as LoadingPage).FadeAwayAsync();
             MainPage = new NavigationPage(shhsMain);
+            RefreshCountdown();
 
-
+        }
+        public void RefreshCountdown() {
+            var e = shhsEventManager.GetCountDownEvent();
+            if (e != null)
+            {
+                shhsMain.countdown.EventTitle = e.Title;
+                shhsMain.countdown.CountDownDate = e.StartDate;
+            }
 
 
 
@@ -201,7 +213,7 @@ namespace SHHS
             get {
                 if (Properties.ContainsKey(notificationKey))
                     return (bool)Properties[notificationKey];
-                return false;
+                return true;
             }
             set {
                 Properties[notificationKey] = value; 
@@ -213,27 +225,45 @@ namespace SHHS
 
         public bool SoundEnabled
         {
-
             get
             {
-
                 if (Properties.ContainsKey(soundKey))
                     return (bool)Properties[soundKey];
-                return false;
-
+                return true;
             }
 
             set
             {
-
                 Properties[soundKey] = value;
                  if(shhsSetting!= null)
                 shhsMain.scheduleManager.PushLocalNotifications();
 
             }
-
-
         }
+
+
+
+        public string RemindToday
+        {
+            get
+            {
+                if (Properties.ContainsKey(remindToday))
+                    return (string)Properties[remindToday];
+
+                return "";
+            }
+
+            set
+            {
+
+                Properties[remindToday] = value;
+                CrossLocalNotifications.Current.CancelAll();
+                if (shhsSetting != null)
+                    shhsMain.scheduleManager.PushLocalNotifications();
+            }
+        }
+
+
 
         public string MinutesToSendNotification
         {

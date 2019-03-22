@@ -22,8 +22,7 @@ namespace SHHS.Controller
         public void ProgressComplete() {
 
             completedTasks++;
-            LoadingBar.ProgressTo((completedTasks * 1.0) / (numberOfTasks * 1.0));
-        
+            LoadingBar.ProgressTo((completedTasks * 1.0 ) / (numberOfTasks * 1.0));
         }
         public async System.Threading.Tasks.Task FadeAwayAsync() {
             LoadingBar.IsVisible = false;
@@ -33,7 +32,6 @@ namespace SHHS.Controller
 
         }
     }
-
     public class CustomProgressBar: ProgressBar {
         public void ProgressTo(double value)
         {

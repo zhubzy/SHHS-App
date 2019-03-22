@@ -76,7 +76,7 @@ namespace SHHS.Model
 
    
 
-        public static async Task<string> CheckForUpdate()
+        public static async Task<int> CheckForUpdate()
         {
 
 
@@ -92,22 +92,21 @@ namespace SHHS.Model
 
                     if (Device.RuntimePlatform == Device.iOS)
                     {
-                        if (!CrossDeviceInfo.Current.AppBuild.Equals(info.Object.iOSBuild))
-                            return "V." + info.Object.iOSVersion;
+                            return int.Parse(info.Object.iOSBuild);
                     }
                     else if (Device.RuntimePlatform == Device.Android)
                     {
 
-                        if (!CrossDeviceInfo.Current.AppBuild.Equals(info.Object.andriodBuild))
-                            return "V." + info.Object.andriodVersion;
+                            return int.Parse(info.Object.andriodBuild);
 
                     }
                 }
 
             }
 
+            return 0;
 
-            return "";
+
         }
 
 

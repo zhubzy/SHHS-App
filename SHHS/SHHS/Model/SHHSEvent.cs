@@ -20,11 +20,12 @@ namespace SHHS.Model
         private TimeSpan _endTime;
         private DateTime _startDate;
         private DateTime _endDate;
+        private bool _isCountdown;
 
 
 
         //Accessors
-   
+
 
         public string LocationText { get; set; }
         public string Title { get { return _title; } set { SetValue(ref _title, value); } }
@@ -32,8 +33,12 @@ namespace SHHS.Model
         public string Location { get { return _location; } set { SetValue(ref _location, value); } }
         public string DaysLeft { get { return _daysLeft; } set { SetValue(ref _daysLeft, value); } }
         public bool IsOnline { get; set; }
+        public bool IsCountDown { get { return _isCountdown; } set { SetValue(ref _isCountdown, value); } }
+        public string IsCountDownLabel { get { if (!IsCountDown) return "Use CD"; return "Stop CD"; } }
+
 
         //Firebase
+        public string FireBaseID { get; set; }
         public string StartTimeString { get; set; }
         public string EndTimeString { get; set; }
         public string DateString { get; set; }

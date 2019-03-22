@@ -29,6 +29,8 @@ namespace SHHS.iOS
             CarouselViewRenderer.Init();
             FFImageLoading.Forms.Platform.CachedImageRenderer.Init();
             Rg.Plugins.Popup.Popup.Init();
+            UIApplication.SharedApplication.ApplicationIconBadgeNumber = -1;
+
 
             if (UIDevice.CurrentDevice.CheckSystemVersion(10, 0))
             {

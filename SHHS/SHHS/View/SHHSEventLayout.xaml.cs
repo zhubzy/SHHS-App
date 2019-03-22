@@ -21,22 +21,8 @@ namespace SHHS.View
             InitializeComponent();
 
 
-            if (Device.RuntimePlatform == Device.iOS)
-                RelativeView.Children.Add(iOSConfirmButton,
-            Constraint.RelativeToParent((parent) =>
-            {
-                return parent.Width/2 - (parent.Width / 6);
-            }),
-            Constraint.RelativeToParent((parent) =>
-            {
+          
 
-                return parent.Height - 40;
-            }), Constraint.RelativeToParent((parent) =>
-            {
-
-                return parent.Width / 2;
-            })
-            );
 
             EventNameEntry.Text = e.Title;
             LoacationEntry.Text = e.Location;
@@ -52,22 +38,8 @@ namespace SHHS.View
         {
             InitializeComponent();
 
-            if (Device.RuntimePlatform == Device.iOS)
-                RelativeView.Children.Add(iOSConfirmButton,
-            Constraint.RelativeToParent((parent) =>
-            {
-                return parent.Width * 0.5 - 100;
-            }),
-            Constraint.RelativeToParent((parent) =>
-            {
-               
-                return parent.Height -40;
-            }), Constraint.RelativeToParent((parent) =>
-            {
+      
 
-                return parent.Width / 2;
-            })
-            );
 
 
                 if (((App)Application.Current).isAdmin)
@@ -78,17 +50,23 @@ namespace SHHS.View
         void DiscardChanges(object sender, System.EventArgs e)
         {
             PopupNavigation.Instance.PopAsync(true);
+            ((App)Application.Current).shhsCalender.GetListView().SelectedItem = null;
+
         }
         async void SaveEvent(object sender, System.EventArgs e)
         {
-           await AddEvent(false);
+
+              await AddEvent(false);
+            ((App)Application.Current).shhsCalender.GetListView().SelectedItem = null;
 
         }
 
         async void SaveEventOnline(object sender, System.EventArgs e)
         {
+        
+              await AddEvent(true);
+            ((App)Application.Current).shhsCalender.GetListView().SelectedItem = null;
 
-           await AddEvent(true);
 
 
         }
@@ -140,6 +118,12 @@ namespace SHHS.View
                 if (eventEditing != null)
                 {
 
+                    if (eventEditing.IsOnline)
+                    {
+                        await DisplayAlert("Failure to Edit", "You cannot edit SHHS Events.", "OK");
+                        return;
+                    }
+
                     eventEditing.Title = EventNameEntry.Text;
                     eventEditing.Location = LoacationEntry.Text;
                     eventEditing.StartDate = StartDateEntry.Date;
@@ -163,6 +147,7 @@ namespace SHHS.View
                     {
                         eventEditing.LocationText += "\n@ " + LoacationEntry.Text;
                     }
+                   
 
 
 
@@ -202,7 +187,6 @@ namespace SHHS.View
 
                             a.IsOnline = true;
                             var annoucements = await firebase.Child("South Hills Events").PostAsync(a);
-
                             //a.StartTimeString = a.StartDate.ToString();
                             //a.EndTimeString = a.EndDate.ToString();
 

@@ -1,52 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<pages:PopupPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="SHHS.View.SHHSEventLayout" xmlns:animations="clr-namespace:Rg.Plugins.Popup.Animations;assembly=Rg.Plugins.Popup" xmlns:pages="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup">
+<pages:PopupPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="SHHS.View.SHHSEventLayout" xmlns:animations="clr-namespace:Rg.Plugins.Popup.Animations;assembly=Rg.Plugins.Popup" xmlns:pages="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup" BackgroundColor="#E5EDCD">
     <pages:PopupPage.Animation>
         <animations:ScaleAnimation DurationIn="200" DurationOut="150" EasingIn="SinOut" EasingOut="SinIn" HasBackgroundAnimation="True" PositionIn="Center" PositionOut="Center" ScaleIn="1.2" ScaleOut="0.8" />
     </pages:PopupPage.Animation>
     
-          <Frame x:Name="AndriodConfirmButton" RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=0.5,Constant=-100}"
-                       RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=1, Constant= -40}" RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width,Factor=0.5}"
-                       HeightRequest="50" CornerRadius="30">
-                        
   
-                        
-                                <Button Clicked="SaveEvent" Text="Save Events" FontSize="Medium" TextColor="#2B7251">
-                                    <Label.FontFamily>
-                                        <OnPlatform x:TypeArguments="x:String">
-                                        <On Platform="iOS" Value="OpenSans-Bold" />
-                                        <On Platform="Android" Value="OpenSans-Bold.ttf#OpenSans-Bold" />
-                                        </OnPlatform>
-                                    </Label.FontFamily>
-                                </Button>
-                             </Frame>
     
     
     
-    
-          <Frame x:Name="iOSConfirmButton" RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=0.5,Constant=-100}"
-                       RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=1, Constant= -40}" RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width,Factor=0.5}"
-                       HeightRequest="20" WidthRequest="200" CornerRadius="30">
-                        
-  
-                        
-                                <Button Clicked="SaveEvent" Text="Save Events" FontSize="Medium" TextColor="#2B7251">
-                                    <Label.FontFamily>
-                                        <OnPlatform x:TypeArguments="x:String">
-                                        <On Platform="iOS" Value="OpenSans-Bold" />
-                                        <On Platform="Android" Value="OpenSans-Bold.ttf#OpenSans-Bold" />
-                                        </OnPlatform>
-                                    </Label.FontFamily>
-                                </Button>
-                             </Frame>
-    
+        
+
     
     
     <StackLayout VerticalOptions="Center">
         <ScrollView BackgroundColor="White" x:Name="frameView" VerticalScrollBarVisibility="Default" RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=1}" RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=1}">
-            <StackLayout Spacing="30" VerticalOptions="Center" RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=1}" RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=1}">
-               <RelativeLayout x:Name="RelativeView" HeightRequest="540">
+            <StackLayout Spacing="0" VerticalOptions="Center" RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=1}" RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=1}">
                 <Frame Margin="10" HasShadow="false" RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=1}" BackgroundColor="White" Opacity="0.75">
-                        <StackLayout Orientation="Vertical" Spacing="20" Margin="0,0,0,40">
+                        <StackLayout Orientation="Vertical" Spacing="20" Margin="0,0,0,0">
                         <StackLayout Orientation="Vertical" Spacing="20">
                             <StackLayout Spacing="20" Orientation="Horizontal">
                                 <StackLayout Orientation="Vertical">
@@ -132,10 +102,10 @@
                                     <TimePicker x:Name="EndTimeEntry" HorizontalOptions="Fill" />
                                 </StackLayout>
                             </StackLayout>
-                            <StackLayout Spacing="20" Orientation="Horizontal">
+                            <StackLayout Spacing="20" HorizontalOptions="CenterAndExpand" Orientation="Horizontal">
                                
-                                    <Switch Toggled="Handle_Toggled" x:Name="AllDaySwitch" Margin="55,0,0,0" />
-                                    <Label  Text="All day event" VerticalOptions="Center" >
+                                    <Switch Toggled="Handle_Toggled" HorizontalOptions="StartAndExpand" x:Name="AllDaySwitch" />
+                                    <Label  Text="All day event" HorizontalOptions="FillAndExpand" VerticalOptions="Center" >
                                             <Label.FontFamily>
                                                 <OnPlatform x:TypeArguments="x:String">
                                                 <On Platform="iOS" Value="OpenSans-Light" />
@@ -152,12 +122,34 @@
                         
                     </StackLayout>
                 </Frame>
+                     <StackLayout x:Name="iOSConfirmButton">
+          <Frame HorizontalOptions="CenterAndExpand" CornerRadius="30">
+                        
+  
+                        
+                                <Button Clicked="SaveEvent" Text="Save Events" FontSize="Medium" TextColor="#2B7251">
+                                    <Label.FontFamily>
+                                        <OnPlatform x:TypeArguments="x:String">
+                                        <On Platform="iOS" Value="OpenSans-Bold" />
+                                        <On Platform="Android" Value="OpenSans-Bold.ttf#OpenSans-Bold" />
+                                        </OnPlatform>
+                                    </Label.FontFamily>
+                                </Button>
+                             </Frame>
                     
-          
+                      <Frame.IsVisible>
+                              <OnPlatform x:TypeArguments="x:Boolean">
+                                <On Platform="iOS" Value="true" />
+                                <On Platform="Android" Value="false" />
+                                </OnPlatform>
+                          
                             
-                </RelativeLayout>   
-                     <StackLayout Padding="0,0,0,0" RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width,Factor=1}" RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=0.92}">
-                         <Button  Clicked="SaveEvent"  HorizontalOptions="Center" Text="Save" TextColor="#2B7251">
+                        </Frame.IsVisible>
+                </StackLayout>   
+          
+                     
+                     <StackLayout HorizontalOptions="CenterAndExpand" Padding="0,0,0,0" RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width,Factor=1}" RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=0.92}">
+                         <Button  Clicked="SaveEvent"  HorizontalOptions="CenterAndExpand" Text="Save" TextColor="#2B7251">
                             <Label.FontFamily>
                                 <OnPlatform x:TypeArguments="x:String">
                                 <On Platform="iOS" Value="OpenSans-Bold" />
@@ -176,7 +168,7 @@
                              
                         </Button>
                     
-                            <Button Clicked="DiscardChanges" HorizontalOptions="Center" Text="Cancel and discard changes" TextColor="#2B7251" BackgroundColor="Transparent" >
+                            <Button Clicked="DiscardChanges" Text="Cancel and discard changes" TextColor="#2B7251" BackgroundColor="Transparent" >
                             <Label.FontFamily>
                                 <OnPlatform x:TypeArguments="x:String">
                                 <On Platform="iOS" Value="OpenSans-Bold" />
@@ -187,7 +179,12 @@
                    
                    </StackLayout>
                         <Button x:Name = "adSetting" Text="Sync To All" FontSize="Medium" HorizontalOptions="Center" Clicked="SaveEventOnline" IsVisible="false"/>
-            </StackLayout>
+        
+            
+            
+            
+          </StackLayout >   
+
         </ScrollView>
     </StackLayout>
 </pages:PopupPage>

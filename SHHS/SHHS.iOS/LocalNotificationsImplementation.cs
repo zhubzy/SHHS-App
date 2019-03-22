@@ -5,7 +5,7 @@ using UIKit;
 using UserNotifications;
 using Plugin.LocalNotifications;
 using Plugin.LocalNotifications.Abstractions;
-
+using SHHS.Model;
 
 [assembly: Xamarin.Forms.Dependency(typeof(LocalNotificationsImplementation))]
 namespace Plugin.LocalNotifications
@@ -63,7 +63,7 @@ namespace Plugin.LocalNotifications
                     AlertBody = body,
                     UserInfo = NSDictionary.FromObjectAndKey(NSObject.FromObject(id), NSObject.FromObject(NotificationKey)),
                     SoundName = hasSound ? UILocalNotification.DefaultSoundName : null
-                    
+
 
                 };
 
@@ -96,7 +96,8 @@ namespace Plugin.LocalNotifications
             }
         }
 
-        public void CancelAll() {
+        public void CancelAll()
+        {
 
             if (UIDevice.CurrentDevice.CheckSystemVersion(10, 0))
             {
@@ -107,7 +108,7 @@ namespace Plugin.LocalNotifications
             {
 
                 UIApplication.SharedApplication.CancelAllLocalNotifications();
-                
+
 
             }
 
@@ -118,6 +119,23 @@ namespace Plugin.LocalNotifications
         // Show local notifications using the UNUserNotificationCenter using a notification trigger (iOS 10+ only)
         void ShowUserNotification(string title, string body, int id, bool hasSound, UNNotificationTrigger trigger)
         {
+
+
+
+            var action = UNNotificationAction.FromIdentifier("IDYes", "Keep sending me notification today", UNNotificationActionOptions.None);
+            var action2 = UNNotificationAction.FromIdentifier("IDNo", "Stop sending me notification today", UNNotificationActionOptions.None);
+            var action3 = UNTextInputNotificationAction.FromIdentifier("IDInput", "Keep sending me but different time", UNNotificationActionOptions.None, "OK", "#of minutes to warn");
+
+            // Create category
+            var categoryID = "Reminder";
+            var actions = new UNNotificationAction[] { action, action2 , action3};
+            var intentIDs = new string[] { };
+            var categoryOptions = new UNNotificationCategoryOptions[] { };
+            var category = UNNotificationCategory.FromIdentifier(categoryID, actions, intentIDs, UNNotificationCategoryOptions.CustomDismissAction);
+
+            // Register category
+            var categories = new UNNotificationCategory[] { category };
+            UNUserNotificationCenter.Current.SetNotificationCategories(new NSSet<UNNotificationCategory>(categories));
             if (!UIDevice.CurrentDevice.CheckSystemVersion(10, 0))
             {
                 return;
@@ -127,14 +145,23 @@ namespace Plugin.LocalNotifications
             {
                 Title = title,
                 Body = body,
-                Sound = hasSound ? UNNotificationSound.Default : null
+                Sound = hasSound ? UNNotificationSound.Default : null,
+                CategoryIdentifier = categoryID,
+                Subtitle = "Swipe to view more options", Badge = null
 
             };
-            
-            var request = UNNotificationRequest.FromIdentifier(id.ToString(), content, trigger);
 
+            var request = UNNotificationRequest.FromIdentifier(id.ToString(), content, trigger);
+            Console.WriteLine(request.Content.Body);
             UNUserNotificationCenter.Current.AddNotificationRequest(request, (error) => { });
+
+           
+   
+           
         }
+
+
+
 
         NSDateComponents GetNSDateComponentsFromDateTime(DateTime dateTime)
         {
@@ -152,3 +179,7 @@ namespace Plugin.LocalNotifications
 
     }
 }
+
+   
+     
+

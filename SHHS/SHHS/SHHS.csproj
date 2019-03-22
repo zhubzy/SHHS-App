@@ -3,7 +3,7 @@
   <PropertyGroup>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <ReleaseVersion>2.0.1</ReleaseVersion>
+    <ReleaseVersion>2.4</ReleaseVersion>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -24,6 +24,7 @@
     <PackageReference Include="FirebaseStorage.net" Version="1.0.3" />
     <PackageReference Include="FirebaseAuthentication.net" Version="3.2.0" />
     <PackageReference Include="Xam.Plugin.DeviceInfo" Version="4.1.1" />
+    <PackageReference Include="TweetinviAPI" Version="4.0.0" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="View\" />

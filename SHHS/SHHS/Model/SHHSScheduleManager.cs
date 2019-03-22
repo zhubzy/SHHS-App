@@ -263,8 +263,23 @@ namespace SHHS.Model
             }
 
             return tommorowScheduleName;
+        }
 
+        public int GetScheduleForDay(DateTime d)
+        {
+            int tommorowShedule = FindScheduleType(d);
+            string tommorowScheduleName;
+            if (tommorowShedule < 0)
+            {
+                tommorowScheduleName = "No School";
+            }
+            else
+            {
 
+                tommorowScheduleName = ScheduleList[tommorowShedule].ScheduleName;
+            }
+
+            return tommorowShedule;
         }
 
 
@@ -299,31 +314,46 @@ namespace SHHS.Model
         public void PushLocalNotifications()
         {
 
-            var app = Application.Current as App;
+
             
-            var mins = 2;
-            Int32.TryParse(app.MinutesToSendNotification, out mins);
-                            CrossLocalNotifications.Current.CancelAll();
+
+            var app = Application.Current as App;
+
+            int mins;
+            if(int.TryParse(app.MinutesToSendNotification, out mins) == false) {
+
+                mins = 2;
+            }
+            CrossLocalNotifications.Current.CancelAll();
+
+            var notID = 0;
+
+            for (int i = 0; i < 14; i++)
+            {
+                DateTime date = DateTime.Today.AddDays(i * 1.0);
+                int scheduleIndex = GetScheduleForDay(date);
+
+                if (scheduleIndex != -1 && app.NotificationEnabled && (!date.ToString().Equals(app.RemindToday)))
+                {
 
 
-            if (ScheduleOfTheDay != -1 && app.NotificationEnabled) {
 
+                    foreach (var s in ScheduleList[scheduleIndex].Schedule)
+                    {
+                        DateTime notDate = new DateTime(date.Year, date.Month, date.Day, s.EndDateTime.Hour, s.EndDateTime.Minute,0);
+                        if (DateTime.Compare(DateTime.Now, notDate) < 0)
+                        {
+                            
+                            if (app.SoundEnabled)
+                                CrossLocalNotifications.Current.Show(mins + " Minute Warning!", s.PeriodName + " is about to end in " + mins + " minutes", notID, notDate.AddMinutes(-1.0 * mins), true, true);
+                            else
+                                CrossLocalNotifications.Current.Show(mins + " Minute Warning!", s.PeriodName + " is about to end in " + mins + " minutes", notID, notDate.AddMinutes(-1.0 * mins), false, false);
 
-                var notID = 0;
-
-                foreach(var s in ScheduleList[ScheduleOfTheDay].Schedule) {
-
-                    if(DateTime.Compare(DateTime.Now,s.EndDateTime) < 0){
-
-                        if(app.SoundEnabled)
-                    CrossLocalNotifications.Current.Show(mins + " Minute Warning!", s.PeriodName + " is about to end in " + mins +  " minutes", notID, s.EndDateTime.AddMinutes(-1.0 * mins) ,true, true);
-                        else
-                        CrossLocalNotifications.Current.Show(mins + " Minute Warning!", s.PeriodName + " is about to end in " + mins + " minutes", notID, s.EndDateTime.AddMinutes(-1.0 * mins), false, false);
-
-                        notID++;
+                            notID++;
+                        }
                     }
-                }
 
+                }
             }
 
 

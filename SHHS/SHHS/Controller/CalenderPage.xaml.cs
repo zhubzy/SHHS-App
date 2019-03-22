@@ -8,6 +8,7 @@ using SHHS.View;
 using Rg.Plugins.Popup.Services;
 using Plugin.DeviceOrientation;
 using Plugin.DeviceOrientation.Abstractions;
+using System.Threading;
 
 namespace SHHS.Controller
 {
@@ -229,7 +230,7 @@ namespace SHHS.Controller
 
         void DateClicked(object sender, System.EventArgs e){
 
-             
+
             if (currentSelected != 0) {
                 int daysNeedToBeDisplayFromPreviousMonth = (int)new DateTime(currentYear, currentMonth, 1).DayOfWeek - 1;
                 var lb = (Button)((StackLayout)(Calendar.Children[currentSelected + daysNeedToBeDisplayFromPreviousMonth - 1])).Children[0];
@@ -332,6 +333,18 @@ namespace SHHS.Controller
             var shhsEvent = menuItem.CommandParameter as SHHSEvent;
             await ((App)Application.Current).shhsEventManager.RemoveEvent(shhsEvent);
         }
+
+        async void SetAsCountdown(object sender, System.EventArgs e)
+        {
+            var menuItem = sender as MenuItem;
+            var shhsEvent = menuItem.CommandParameter as SHHSEvent;
+            shhsEvent.IsCountDown = !shhsEvent.IsCountDown;
+            ((App)Application.Current).RefreshCountdown();
+
+            await ((App)Application.Current).shhsEventManager.UpdateEvent();
+
+
+        }
         //async void MakeFavorite(object sender, System.EventArgs e)
         //{
 
@@ -412,13 +425,21 @@ namespace SHHS.Controller
             }
 
         }
-            void EditEvent(object sender, Xamarin.Forms.ItemTappedEventArgs e)
+            void EditEvent(object sender, Xamarin.Forms.SelectedItemChangedEventArgs e)
         {
-            var shhsEvent = (e.Item as SHHSEvent);
-             PopupNavigation.Instance.PushAsync(new SHHSEventLayout(shhsEvent));
-            AnnoucementList.SelectedItem = null;
+            if(e.SelectedItem != null){
+                var shhsEvent = (e.SelectedItem as SHHSEvent);
+                PopupNavigation.Instance.PushAsync(new SHHSEventLayout(shhsEvent));
+            }
+        }
+
+        public ListView GetListView()
+        {
+
+            return AnnoucementList;
         }
     }
+   
 }
 
 

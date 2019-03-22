@@ -7,9 +7,9 @@ namespace SHHS.View
 {
     public partial class SettingPage : ContentPage
     {
+      
         public SettingPage()
         {
-
             InitializeComponent();
             BindingContext = Application.Current;
         }

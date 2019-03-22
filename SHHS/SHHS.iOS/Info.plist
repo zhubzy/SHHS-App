@@ -44,11 +44,11 @@
 	<false/>
 	<key>UIStatusBarStyle</key>
 	<string>UIStatusBarStyleLightContent</string>
-	<key>CFBundleVersion</key>
-	<string>19</string>
 	<key>CFBundleShortVersionString</key>
-	<string>2.3</string>
+	<string>2.5</string>
 	<key>UIMainStoryboardFile</key>
 	<string>LaunchScreen</string>
+	<key>CFBundleVersion</key>
+	<string>26</string>
 </dict>
 </plist>

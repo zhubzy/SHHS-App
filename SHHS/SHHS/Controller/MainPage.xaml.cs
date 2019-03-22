@@ -16,7 +16,7 @@ namespace SHHS.Controller
         public SHHSScheduleManager scheduleManager;
         SHHSTimer timer;
         CarouselViewControl myCarousel;
-        SHHSCountDown countdown;
+        public SHHSCountDown countdown;
 
         public SHHSAnnouncementManager announcementManager;
         public SHHSAnnouncementManager countdownManager;
@@ -27,7 +27,8 @@ namespace SHHS.Controller
         {
             InitializeComponent();
             timer = new SHHSTimer();
-            countdown = new SHHSCountDown(new DateTime(2019,4,9,8,0,0),"School Day SAT");
+
+            countdown = new SHHSCountDown(new DateTime(DateTime.Today.Year + 1,1,1),"New Year");
             countdownManager = new SHHSAnnouncementManager();
             announcementManager = new SHHSAnnouncementManager();
             addAnnouncement = new ImageButton { BackgroundColor = Color.Transparent, WidthRequest = 50, Opacity = 0.75, Source = "Add.png", Aspect = Aspect.AspectFit, HorizontalOptions = LayoutOptions.CenterAndExpand, IsVisible = false };
@@ -119,17 +120,17 @@ namespace SHHS.Controller
 
 
 
-           //   HomePage.Children.Add(addAnnouncement, null,Constraint.RelativeToParent((parent) =>
-           // {
+              HomePage.Children.Add(addAnnouncement, null,Constraint.RelativeToParent((parent) =>
+            {
               
-           //     return myCarousel.Y + myCarousel.Height + 30;
-           // }),
-           // Constraint.RelativeToParent((parent) =>
-           // {
+                return myCarousel.Y + myCarousel.Height + 30;
+            }),
+            Constraint.RelativeToParent((parent) =>
+            {
                
-           //     return parent.Width;
-           // })
-           //);
+                return parent.Width;
+            })
+           );
 
       
 
